@@ -17,8 +17,7 @@ style='color:black'><o:p></o:p></span></h2>
 </div>
 
 <div id="frm" class="centerpiece">
-<form name=msgform method=POST action="<?php echo htmlspecialchars($_SERVER['PHP_SE
-LF'])?>">
+<form name=msgform method=POST action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
 
 <table>
 <tr>
