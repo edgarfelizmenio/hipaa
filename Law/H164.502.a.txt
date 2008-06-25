@@ -1,0 +1,32 @@
+
+(a) Standard: A covered entity may not use or
+disclose protected health information, except as
+permitted or required by this subpart or by subpart C
+of part 160 of this subchapter.
+    (1) Permitted uses and disclosures. A covered
+entity is permitted to use or disclose protected health
+information as follows:
+        (i) To the individual;
+        (ii) For treatment, payment, or health care
+operations, as permitted by and in compliance with
+§164.506;
+        (iii) Incident to a use or disclosure otherwise
+permitted or required by this subpart, provided that
+the covered entity has complied with the applicable
+requirements of §164.502(b), §164.514(d), and
+§164.530(c) with respect to such otherwise permitted
+or required use or disclosure;
+        (iv) Pursuant to and in compliance with a valid
+authorization under §164.508;
+        (v) Pursuant to an agreement under, or as
+otherwise permitted by, §164.510; and
+        (vi) As permitted by and in compliance with this
+section, §164.512, or §164.514(e), (f), or (g).
+    (2) Required disclosures. A covered entity is
+required to disclose protected health information:
+        (i) To an individual, when requested under, and
+required by §164.524 or §164.528; and
+        (ii) When required by the Secretary under subpart
+C of part 160 of this subchapter to investigate or
+determine the covered entity's compliance with this
+subpart.

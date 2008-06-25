@@ -1,0 +1,25 @@
+#!/bin/bash
+
+time 
+for mTo in hcch hcp hoa pha hcao hp hii ghp gahp ce ce2 ba doctor nurse patient assistant lawyer cop thief teen kid mom dad dead;
+do
+  for mFrom in ce ce2 ba doctor nurse patient assistant lawyer cop thief teen kid mom dad dead;
+  do
+    for mAbout in doctor nurse patient assistant lawyer cop thief teen kid mom dad dead;
+    do
+      for mPurpose in healthCare_operations payment treatment incident_to_use create_deidentified_info create_protected_health_info receive_deidentified_info requested_by_Individual investigate definition_healthCare_operations healthCare_fraud_abuse_detection compliance determining_legal_options standards_faliure_misconduct;
+      do
+        STR="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null))."
+        echo Running $STR
+        echo Running $STR >> out
+        echo $STR | ~/bin/XSB/bin/xsb -e "['testCases.pl']." >> out
+      done
+    done
+  done
+done
+
+#grep -B1 -w 'Running' out > outBasic 
+#grep -w 'yes' -B2 outBasic > outYes
+#grep -v 'payment' outYes > outNonPayment
+#grep -B1 -w 'Running' outNonPayment > outNoPayment
+
