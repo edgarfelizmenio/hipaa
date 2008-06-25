@@ -5,8 +5,7 @@
 </head>
 
 
-<form name=fileform method=GET action="<?php echo htmlspecialchars($_SERVER['PHP_SE
-LF'])?>">
+<form name=fileform method=GET action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
  <FRAMESET cols="50%,50%">
    <?php 
       $fp = $_GET['fname'];
