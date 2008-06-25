@@ -1,5 +1,6 @@
 <?php
 include_once ('db.php');
+include_once ('functions.php');
 
 class Message {
 
@@ -10,8 +11,11 @@ class Message {
 
   /**
    * Retrieves ones mail
+   * @param recipient string name of recipient
    */
   function getRecipientMail($recipient) {
+    $recipient = addslashes($recipient);
+
     $query = "SELECT * FROM `hipaa_msg`
               WHERE msg_to='" . $recipient . "'
               AND consented='1'
@@ -26,6 +30,8 @@ class Message {
   function getConsents($consenter) {
     if(empty($consenter))
       return null;
+    $consenter = addslahes($consenter);
+
     $query = "SELECT * FROM `hipaa_msg`
               WHERE consent='" . $consenter . "'
              ";
@@ -37,6 +43,9 @@ class Message {
    * Sets the consented value for a message
    */
   function setConsent($msg_id, $consented='1') {
+    $msg_id = intval($msg_id);
+    $consented = addslashes($consented);
+
     $query = "UPDATE `hipaa_msg`
               SET consented='" . $consented . "'
               WHERE msg_id='" . $msg_id . "'
@@ -63,6 +72,7 @@ class Message {
 
 
   function getMessage($msg_id) {
+    $msg_id = intval($msg_id);
     $query = "SELECT * FROM `hipaa_msg`
               WHERE msg_id='" . $msg_id . "'
              ";
@@ -70,11 +80,22 @@ class Message {
     return $results;
   }
 
+  function getAllMessages() {
+    $query = "SELECT *
+              FROM `hipaa_msg`";
+    
+    $this->db->query($query);
+    
+    $this->db->debug();
+
+  }
+
 
   /**
    * Retrieves the history of a message
    */
   function getHistory($msg_id) {
+    $msg_id = intval($msg_id);
     $ancestors = $this->getAncestors($msg_id);
 
     $ids = implode(',', $ancestors);
@@ -87,6 +108,7 @@ class Message {
    * Retrieves all ancestors of this message
    */
   function getAncestors($msg_id) {
+    $msg_id = intval($msg_id);
     $idtree = array();
     $idtree[] = $msg_id;
     while (true) {
@@ -111,7 +133,19 @@ class Message {
     if ($consent_required == 'true')
       $consented = '0';
     else $consented = '1';
+    $msg_to = addslahses($msg_to);
+    $msg_from = addslashes($msg_from);
+    $msg_about = addslashes($msg_about);
+    $type = addslashes($type);
+    $purpose = addslashes($purpose);
+    $consent = addslashes($consent);
+    $belief = addslashes($belief);
+    $message = addslashes($message);
+    $parent_id = addslashes($parent_id);
 
+
+    /* Below is code mostly lifted from existing 'message_checker.php'
+     script */
     $mTo = htmlspecialchars($msg_to);
     $mFrom = htmlspecialchars($msg_from);
     $mAbout = htmlspecialchars($msg_about);
@@ -162,11 +196,6 @@ class Message {
                 )";
 
     $this->db->query($query);
-
-
-
-
-
 
   }
 
