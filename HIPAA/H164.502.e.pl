@@ -43,7 +43,7 @@ excluded_164_502_e_1_ii_b(A) :-
   %to plan sponsor
   (is_from_healthInsuranceIssuer(A);
    is_from_groupHealthPlan(A)),
-  permitted_by_165_504_f(A),
+  permitted_by_164_504_f(A),
   writeln('HIPAA rule 164_502_e_1_ii_b;').
 % "with respect to a group health plan" could be represented by storing group health plan in type or purpose? 
   
