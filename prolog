@@ -5,6 +5,7 @@ cd ./HIPAA
 str=`echo $1 | ../XSB/bin/xsb -e "['shh.pl']." 2>&1`
 
 #basic shell script
+#basic shell script
 # have used | as delimiter so depends on the position of ans wrt to | ?-
 aa=`echo $str | awk -F'|' '/End XSB/ {print $5}'`
 ans=`echo $aa | awk '/ / {print $NF}'`
