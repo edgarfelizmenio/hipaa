@@ -1,6 +1,7 @@
 :- ['constant-message-wrapper.pl'].
 :- ['debug.pl'].
 :- ['H164.502.pl'].
+:- ['H164.506.pl'].
 
 %%% HIPAA
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -64,6 +65,7 @@
 %%permitted_by_HIPAA(A):-
 pbh(A):-
   (permitted_by_164_502(A);
+   permitted_by_164_506(A);
   %permitted_by_self(A);
   fail).
 

@@ -136,7 +136,7 @@ is_for_createProtectedHealthInfo(A) :-
   has_msg_purpose(A, create_protected_health_info).
 
 is_for_receiveProtectedHealthInfo(A) :-
-  has_msg_purpose(A, receive_deidentified_info).
+  has_msg_purpose(A, receive_protected_health_info).
 
 is_for_investigation(A) :-
    has_msg_purpose(A, investigate).
