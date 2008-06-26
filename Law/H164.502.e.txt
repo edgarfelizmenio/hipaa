@@ -32,7 +32,13 @@ functions by the health plan and the agency other than
 the agency administering the health plan.
         (iii) A covered entity that violates the satisfactory
 assurances it provided as a business associate of
-another covered entity will be in noncompliance with the standards, implementation specifications, and requirements of this paragraph and §164.504(e). 
+another covered entity will be in noncompliance with the standards,
+implementation specifications, and requirements of this paragraph
+ and §164.504(e). 
 
-(2) Implementation specification: documentation. A covered entity must document the satisfactory assurances required by paragraph (e)(1) of this section through a written contract or other written agreement or arrangement with the business associate that meets the applicable requirements of §164.504(e). 
+(2) Implementation specification: documentation. A covered entity
+ must document the satisfactory assurances required by paragraph
+(e)(1) of this section through a written contract or other 
+written agreement or arrangement with the business associate that
+ meets the applicable requirements of §164.504(e). 
 
