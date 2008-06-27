@@ -133,7 +133,7 @@ class Message {
     if ($consent_required == 'true')
       $consented = '0';
     else $consented = '1';
-    $msg_to = addslahses($msg_to);
+    $msg_to = addslashes($msg_to);
     $msg_from = addslashes($msg_from);
     $msg_about = addslashes($msg_about);
     $type = addslashes($type);
