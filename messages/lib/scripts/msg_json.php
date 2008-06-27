@@ -38,10 +38,8 @@ $toEvaluate = implode(',',$evalVars);
 
 
 $prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)),L).\"";
-echo $prologCall;
 // results will return properly formatted return value for use
 
-#$results = shell_exec("pwd");
 $results = shell_exec("sh ./getJSON $prologCall");
 
 // give the JSON values back to caller
