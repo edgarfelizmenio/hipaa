@@ -30,7 +30,7 @@ class Message {
   function getConsents($consenter) {
     if(empty($consenter))
       return null;
-    $consenter = addslahes($consenter);
+    $consenter = addslashes($consenter);
 
     $query = "SELECT * FROM `hipaa_msg`
               WHERE consent='" . $consenter . "'
