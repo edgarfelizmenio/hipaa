@@ -1,4 +1,4 @@
-    <script type="text/javascript" src="http://www.stanford.edu/~stevetan/cgi-bin/hipaa/messages/lib/dojo-release-1.1.1/dojo/dojo.js"
+    <script type="text/javascript" src="lib/dojo-release-1.1.1/dojo/dojo.js"
 	    djConfig="parseOnLoad: true">
     </script>
     <style type="text/css">
