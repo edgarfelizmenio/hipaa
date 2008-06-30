@@ -127,12 +127,16 @@ class Message {
     return $idtree;
   }
 
+  // TODO change function to take array of values instead of long bunch of args
   function addMessage($msg_to, $msg_from, $msg_about, $type, $purpose,
 		      $consent, $belief, $message, $consent_required, $parent_id=-1) {
+    global $_POST;
 
-    if ($consent_required == 'true')
+    $consented = '1'; // by default a message is consented/allowed
+    if ($consent_required == 'true') // unless consent is required
       $consented = '0';
-    else $consented = '1';
+
+
     $msg_to = addslashes($msg_to);
     $msg_from = addslashes($msg_from);
     $msg_about = addslashes($msg_about);
@@ -150,7 +154,15 @@ class Message {
     $mFrom = htmlspecialchars($msg_from);
     $mAbout = htmlspecialchars($msg_about);
     $mPurpose = htmlspecialchars($purpose);
-   
+    $mBelief = 'null';
+    $mReplyto = 'null';
+    if (empty($consent)) {
+      $mConsent ='null';  // by default consent isn't filled in, so change
+                         // to null for prolog query
+    } else {
+      $mConsent = $consent;
+    }
+
     if (true) { // using prolog?
       if(!$mTo || empty($mTo)) {
 	die("You must supply the recipients name");
@@ -160,9 +172,26 @@ class Message {
 	die("You must supply the subjects name");
       } else if(!$mPurpose || empty($mPurpose))
 	die("You must supply the purpose");
+
+    if ($belief == '1') {
+      $babout = $_POST['babout'];
+      $bbelief = $_POST['bbelief'];
+      $bfrom = $_POST['bfrom'];
+      if (empty ($babout) || empty($bbelief) || empty($bfrom))
+	die('Please fill out all belief fields');
+      $mBelief = "b($babout,$bbelief,$bfrom)";
+    }
+
+
     
-    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
+      $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief).\"";
+echo $STR;
+    // reply to, consented, belief
+    //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
+    // b(ce,unlawful,Carla) # Carla believes that the covered entity is unlawful
     //$STR="\"pbh(a(patient, ce, patient, phi, null, null, null,null)).\"";
+    // b(ce, unlawful, Carla)
+    // where is consented by?
     $crap = shell_exec("sh ../prolog2 $STR");
     echo $crap;
     if (strpos($crap, "yes") === false)
