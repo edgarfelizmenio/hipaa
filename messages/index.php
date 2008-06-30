@@ -3,9 +3,9 @@
  <head>
    <?php include('tpl/header.php'); ?>
    <script type="text/javascript">
-     window.onload = function() {
+    /*  window.onload = function() {
      dynamicSelect("pda-brand", "pda-type");
-     }
+     }*/
      </script>
  </head>
  <body>
@@ -13,7 +13,7 @@
 
 
 
-
+<!--
    <h3> Testing values </h3>
 
    <form action="#">
@@ -45,7 +45,7 @@
        More input fields based on selection
      </div>
      </form>
-
+-->
 
  </body>
 </html>
