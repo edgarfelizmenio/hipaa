@@ -28,10 +28,10 @@ $msg = $hmsg->getMessage($msg_id);
   </tr>
   <tr>
     <th>About</th>
-    <td><?php echo $msg->msg_about; ?></td>
+    <td><?php echo $msg->about; ?></td>
   </tr>
   <tr>
-    <th>Content</th>
+    <th colspan="2">Content</th>
   </tr>
   <tr>
     <td colspan=2><?php echo $msg->message; ?></td>
