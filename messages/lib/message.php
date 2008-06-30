@@ -163,7 +163,7 @@ class Message {
     
     $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
     //$STR="\"pbh(a(patient, ce, patient, phi, null, null, null,null)).\"";
-    $crap = shell_exec("sh ../prolog $STR");
+    $crap = shell_exec("sh ../prolog2 $STR");
     echo $crap;
     if (strpos($crap, "yes") === false)
       die('not allowed');
