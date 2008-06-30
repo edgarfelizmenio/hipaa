@@ -17,13 +17,13 @@ $msg = $hmsg->getMessage($msg_id);
 <form method="post" action="writereply.php">
   <div>
   <label>From:</label>
-    <input type="text" name="from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
+    <input type="text" name="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
 </select>
   </div>
 
   <div>
     <label>To:</label>
-    <input type="text" name="to" readonly="readonly" value="<?php echo $msg->msg_from ?>" />
+    <input type="text" name="msg_to" readonly="readonly" value="<?php echo $msg->msg_from ?>" />
   </div>
 
   <div>
