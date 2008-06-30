@@ -64,36 +64,9 @@ $msg = $hmsg->getMessage($msg_id);
     <label>Reply-to:</label>
     <input type="text" name="replyto">
 -->
-  <div>
-    <label>Belief:</label>
-    <input type="checkbox" name="belief" value="1" />
-  </div>
-
-
-  <div>
-    <label>Message:</label>
-    <textarea name="message"></textarea>
-  </div>
-
-      <div>
-	<label>Requires Consent?</label>
-	<input name="consent_required" value="true" type="checkbox" rel="permission">
-
-      </div>
-
-      <div rel="permission">
-	<label>Consented by:</label>
-		<select name="consent">
-          <option VALUE="">-- Choose consent -- </option>
-	  <?php
-	     include ('tpl/recipients.php');
-
-	     ?>
-	</select>
-
-      </div>
-
-  
+<?php
+   include ('tpl/msg_footer.php');
+?>
 
   <div>
     <input type="hidden" name="msg_id" value="<?php echo $msg_id; ?>"/>
