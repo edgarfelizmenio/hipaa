@@ -4,7 +4,8 @@ dojo.addOnLoad(init);
 
 var formFields = ["msg_from", 
 		  "msg_to",
-		  "msg_about"];
+		  "msg_about",
+                  "msg_purpose"];
 
 
 function init() {
@@ -61,12 +62,12 @@ function updateFields() {
   input1 = dijit.byId('msg_from');
   input2 = dijit.byId('msg_to');
   input3 = dijit.byId('msg_about');
-
+  input4 = dijit.byId('msg_purpose');
   // determine parameters to pass to prolog/php script
   param1 = (input1.optionChosen) ? input1.getDisplayedValue() : null;
   param2 = (input2.optionChosen) ? input2.getDisplayedValue() : null;
   param3 = (input3.optionChosen) ? input3.getDisplayedValue() : null;
-
+  param4 = (input4.optionChosen) ? input3.getDisplayedValue() : null;
 
   var parameters = new Object();
 //fill in parameters to be called by ajax script
@@ -116,6 +117,15 @@ function updateFields() {
 		      input3.store = new dojo.data.ItemFileReadStore({data: response.Mabout});
 		}
 	      }
+
+	      if (response.Mpurpose) {
+		if (!input4.optionChosen) {
+		  if (response.Mpurpose.items[0].name != 'anything')
+		      input4.store = new dojo.data.ItemFileReadStore({data: response.Mpurpose});
+		}
+	      }
+
+
 	      return response; // Ã¢ÂÂ
 	  },
 
