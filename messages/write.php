@@ -56,7 +56,7 @@
 		name="msg_purpose"
 		dojoType="dijit.form.FilteringSelect"
 		autocomplete="false"
-		onChange="fieldChanged('msg_about');">
+		onChange="fieldChanged('msg_purpose');">
 	  <?php
 	     include ('tpl/purpose.php');
 	     ?>
