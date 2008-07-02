@@ -28,7 +28,7 @@ function fieldChanged(select) {
 
 
   $.ajax({
-    url: 'ajax.php',
+    url: 'lib/scripts/msg_json.php',
 	type: 'GET',
 	data: args,
 	dataType: 'json',
