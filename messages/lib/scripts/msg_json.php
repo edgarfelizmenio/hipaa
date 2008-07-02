@@ -9,25 +9,25 @@
 // fill in
 
 $evalVars = array();
-if (isset($_GET['msg_to'])) {
+if (isset($_GET['msg_to']) && $_GET['msg_to'] != 'null') {
   $mTo = $_GET['msg_to'];
  } else {
   $mTo = 'Mto';
   $evalVars[] = $mTo;
  }
-if (isset($_GET['msg_from'])) {
+if (isset($_GET['msg_from']) && $_GET['msg_from'] != 'null') {
   $mFrom = $_GET['msg_from'];
  } else {
   $mFrom = 'Mfrom';
   $evalVars[] = $mFrom;
  }
-if (isset($_GET['msg_purpose'])) {
+if (isset($_GET['msg_purpose']) && $_GET['msg_purpose'] != 'null') {
   $mPurpose = $_GET['msg_purpose'];
  } else {
   $mPurpose = 'Mpurpose';
   $evalVars[] = $mPurpose;
  }
-if (isset($_GET['msg_about'])) {
+if (isset($_GET['msg_about']) && $_GET['msg_about'] != 'null') {
   $mAbout = $_GET['msg_about'];
  } else {
   $mAbout = 'Mabout';
