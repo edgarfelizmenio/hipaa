@@ -2,7 +2,7 @@
   <head>
     <?php include('tpl/header.php'); ?>
   </head>
-  <body id="body" class="tundra">
+  <body>
     <?php include('tpl/msg_menu.php'); ?>
     <h2>Write Message</h2>
     <form method="post" action="writemsg.php">
@@ -11,8 +11,7 @@
 
 	<select id="msg_from"
 		name="msg_from"
-		dojoType="dijit.form.FilteringSelect"
-		onChange="fieldChanged('msg_from');"
+		onChange="fieldChanged(this);"
 		autocomplete="false">
 <?php	     include ('tpl/recipients.php');	     ?>
 	</select>
@@ -23,9 +22,7 @@
 	<label>To:</label>
 	<select name="msg_to"
 		id="msg_to"
-		dojoType="dijit.form.FilteringSelect"
-		autocomplete="false"
-		onChange="fieldChanged('msg_to');"
+	onChange="fieldChanged(this);"
 	    name="First Name">
 	  <?php	     include ('tpl/recipients.php');	     ?>
 	</select>
@@ -36,9 +33,7 @@
 	<label>About:</label>
 	<select name="msg_about"
 		id="msg_about"
-		dojoType="dijit.form.FilteringSelect"
-		autocomplete="false"
-		onChange="fieldChanged('msg_about');">
+	onChange="fieldChanged(this);">
 	  <?php
 	     include ('tpl/about.php');
 	     ?>
@@ -54,10 +49,7 @@
 	<label>Purpose:</label>
 	<select id="msg_purpose"
 		name="msg_purpose"
-		dojoType="dijit.form.FilteringSelect"
-		autocomplete="false"
-		onChange="fieldChanged('msg_purpose');">
-	  <?php
+	onChange="fieldChanged(this);"   >
 	     include ('tpl/purpose.php');
 	     ?>
 	</select>
