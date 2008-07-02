@@ -4,6 +4,8 @@
 % Belief is also a list with the following list
 % b(about, what, believed by)
 % One for the person and one for the role.
+%consented by is a tuple : (person,consent_type)
+ 
 
 msg_to(a(X,_,_,_,_,_,_,_), X).
 
@@ -39,7 +41,10 @@ has_msg_purpose(a(_,_,_,_,X,_,_,_), X).
 
 is_msg_replyto(a(_,_,_,_,_,X,_,_),X).
 
-is_msg_consentedby(a(_,_,_,_,_,_,X,_),X).
+is_msg_consented(a(_,_,_,_,_,_,(X,consented),_),X).
+
+is_msg_consent_opp_given(a(_,_,_,_,_,_,(X,opp_given),_),X).
+
 
 msg_belief(a(_,_,_,_,_,_,_,b(X,Y,Z)), X,Y,Z).
 
