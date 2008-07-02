@@ -50,7 +50,7 @@
 	<select id="msg_purpose"
 		name="msg_purpose"
 	onChange="fieldChanged(this);"   >
-	     include ('tpl/purpose.php');
+	     <?php include ('tpl/purpose.php');
 	     ?>
 	</select>
       </div>
