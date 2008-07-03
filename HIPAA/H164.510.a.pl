@@ -4,7 +4,7 @@ permitted_by_164_510_a(A) :-
 permitted_by_164_510_a_1(A),
 (permitted_by_164_510_a_2(A) ; excluded_164_510_a_3(A)).
 
-permitted_by_164_502_a_1(A):- 
+permitted_by_164_510_a_1(A):- 
 (is_for_directory_purp(A), is_nam_loc_or_condition(A),
 %need to implement "asked by name"
  fail); 
