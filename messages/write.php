@@ -13,6 +13,7 @@
 		name="msg_from"
 		onChange="fieldChanged(this);"
 		autocomplete="false">
+<option value="null"> -- From -- </option>
 <?php	     include ('tpl/recipients.php');	     ?>
 	</select>
 
@@ -24,6 +25,7 @@
 		id="msg_to"
 	onChange="fieldChanged(this);"
 	    name="First Name">
+<option value="null"> -- To -- </option>
 	  <?php	     include ('tpl/recipients.php');	     ?>
 	</select>
 
@@ -34,6 +36,7 @@
 	<select name="msg_about"
 		id="msg_about"
 	onChange="fieldChanged(this);">
+<option value="null"> -- About -- </option>
 	  <?php
 	     include ('tpl/about.php');
 	     ?>
@@ -50,6 +53,7 @@
 	<select id="msg_purpose"
 		name="msg_purpose"
 	onChange="fieldChanged(this);"   >
+<option value="null"> -- Purpose -- </option>
 	     <?php include ('tpl/purpose.php');
 	     ?>
 	</select>
