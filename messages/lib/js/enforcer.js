@@ -80,8 +80,22 @@ function fieldChanged(select) {
 }
 
 
-function updateFields(json) {
+/* Removes all stylings from each option form field */
+function refreshFields() {
+  for (var i in formFields) {
+    var field = document.getElementById(formFields[i]);
+    var options = field.options;
+    var optLen = options.length;
+    for (var j=0; j<optLen; j++) {
+      var curOpt = options[j];
+      $(curOpt).removeClass();
+    }
+  }
+}
 
+
+function updateFields(json) {
+  refreshFields();
 
   for (param in json) {
     var allowedOptions = json[param].items;
