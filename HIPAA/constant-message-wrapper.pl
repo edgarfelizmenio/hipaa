@@ -145,7 +145,8 @@ is_about_was_given_consent_opp(A):-
 
 is_msg_consented(a(_,_,_,_,_,_,(X,consented),_),X).
 
-is_msg_consent_opp_given(a(_,_,_,_,_,_,(X,opp_given),_),X).
+is_msg_consent_opp_given(a(_,_,_,_,_,_,(X,opp_given),_),X). 
+% opp_given means opp to decline was given but did not decline
 
 
 

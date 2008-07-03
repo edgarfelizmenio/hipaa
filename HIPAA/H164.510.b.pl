@@ -29,11 +29,11 @@ is_for_notification_fam_personalrep_respons_of_death(A)).
 %currently they fail
 
 permitted_by_164_510_b_2(A):-
-((not(is_about_present(A)),not(is_about_avail_for_consent(A)));
-(is_about_in_capac_to_make_dec(A));
+(is_about_present(A);is_about_avail_for_consent(A)),
+(is_about_in_capac_to_make_dec(A)),
 (is_consentedby_about(A);
-(is_about_was_given_consent_opp(A), is_msg_consented(A));
-is_belief_best_interest(A)).
+ is_about_was_given_consent_opp(A);
+ is_belief_best_interest(A)).
 
 permitted_by_164_510_b_3(A):- 
 (is_about_present(A));
