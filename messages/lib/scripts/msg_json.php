@@ -12,25 +12,25 @@ $evalVars = array();
 if (isset($_GET['msg_to']) && $_GET['msg_to'] != 'null') {
   $mTo = $_GET['msg_to'];
  } else {
-  $mTo = 'Mto';
+  $mTo = 'Msg_to';
   $evalVars[] = $mTo;
  }
 if (isset($_GET['msg_from']) && $_GET['msg_from'] != 'null') {
   $mFrom = $_GET['msg_from'];
  } else {
-  $mFrom = 'Mfrom';
+  $mFrom = 'Msg_from';
   $evalVars[] = $mFrom;
  }
 if (isset($_GET['msg_purpose']) && $_GET['msg_purpose'] != 'null') {
   $mPurpose = $_GET['msg_purpose'];
  } else {
-  $mPurpose = 'Mpurpose';
+  $mPurpose = 'Msg_purpose';
   $evalVars[] = $mPurpose;
  }
 if (isset($_GET['msg_about']) && $_GET['msg_about'] != 'null') {
   $mAbout = $_GET['msg_about'];
  } else {
-  $mAbout = 'Mabout';
+  $mAbout = 'Msg_about';
   $evalVars[] = $mAbout;
  }
 
