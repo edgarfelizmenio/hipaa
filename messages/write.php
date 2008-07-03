@@ -71,6 +71,7 @@
 
       <div>
 	<input type="submit"  value="Send message" />
+   <input type="reset" value="Reset" onclick="refreshFields()" />
       </div>
       
       
