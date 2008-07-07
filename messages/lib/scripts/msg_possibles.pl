@@ -95,7 +95,7 @@ for ($i=0; $i<@vars; $i++) {
     print ", \n";
   }
   $previous = 1;
-  print $vars[$i] . ": {identifier: \"name\",\n  items: [  \n";
+  print '"' . $vars[$i] .'"' .  ": {\"identifier\": \"name\",\n  \"items\": [  \n";
   $hashName = $vars[$i];
   $varName = $vars[$i];
 
@@ -109,7 +109,7 @@ for ($i=0; $i<@vars; $i++) {
         print ", \n";
       }
       $prev = 1;
-      print '      {name: "' . $key . '"}';
+      print '      {"name": "' . $key . '"}';
     }
 
   print "\n   ]}";
