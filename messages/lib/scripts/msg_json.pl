@@ -50,14 +50,15 @@ $line = substr $line, $start + 5;
 $end = index($line, ']');
 $line = substr $line, 0, $end;
 
-# take off the first 't' since we use it in split
-$line = substr $line, 1;
+# take off the first 't(' since we use it in split
+$line = substr $line, 2;
 
-# tokenized!
-@predicates = split(/,t/, $line);
+# tokenized! by the ',t('
+@predicates = split(/,t\(/, $line);
+
 for my $predicate (@predicates) {
   # strip beginning and ending parentheses
-  $predicate = substr $predicate, 1, length($predicate)-2;
+  $predicate = substr $predicate, 0, length($predicate)-1;
 #  print $predicate . "\n";
 
   @values = split(/,/, $predicate);
