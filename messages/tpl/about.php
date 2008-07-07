@@ -10,7 +10,7 @@
           <option VALUE="j"<?php if ($_POST['msg_about'] == "j") echo " selected"; ?>>Janitor
           <option VALUE="lavern"<?php if ($_POST['msg_about'] == "lavern") echo " selected"; ?>>Lavern (secretary)
           <option VALUE="jordon"<?php if ($_POST['msg_about'] == "jordon") echo " selected"; ?>>Jordon (Board Member) -->
-          <option VALUE="patient"<?php if ($_POST['msg_about'] == "patient") echo " selected"; ?>>(patient)</option>
+<!--          <option VALUE="patient"<?php if ($_POST['msg_about'] == "patient") echo " selected"; ?>>(patient)</option>
           <option VALUE="thief"<?php if ($_POST['msg_about'] == "thief") echo " selected"; ?>>(thief)</option>
           <option VALUE="cop"<?php if ($_POST['msg_about'] == "cop") echo " selected"; ?>>(cop)</option>
           <option VALUE="teen"<?php if ($_POST['msg_about'] == "teen") echo " selected"; ?>>(teenager)</option>
@@ -18,3 +18,22 @@
           <option VALUE="mom"<?php if ($_POST['msg_about'] == "mom") echo " selected"; ?>>(mom)</option>
           <option VALUE="dad"<?php if ($_POST['msg_about'] == "dad") echo " selected"; ?>>(dad)</option>
           <option VALUE="dead"<?php if ($_POST['msg_about'] == "dead") echo " selected"; ?>>(dead person)</option>
+-->
+
+
+<?php
+
+$json_values = shell_exec("cd lib/scripts/; cat allpossibles | perl msg_possibles.pl");
+$options = json_decode($json_values);
+
+
+$recipients = $options->Msg_about->items;
+
+foreach($recipients as $recipient) {
+  $value = $recipient->name;
+
+  echo "<option value='$value'> $value </option>\n";
+
+}
+
+?>

@@ -1,4 +1,4 @@
-          <option VALUE="healthCare_operations"<?php if ($_POST['msg_purpose'] == "healthCare_operations") echo " selected"; ?>>Health care operations</option>
+<!--          <option VALUE="healthCare_operations"<?php if ($_POST['msg_purpose'] == "healthCare_operations") echo " selected"; ?>>Health care operations</option>
           <option VALUE="payment"<?php if ($_POST['msg_purpose'] == "payment") echo " selected"; ?>>Payment</option>
           <option VALUE="treatment"<?php if ($_POST['msg_purpose'] == "treatment") echo " selected"; ?>>Treatment</option>
           <option VALUE="create_deidentified_info"<?php if ($_POST['msg_purpose'] == "create_deidentified_info") echo " selected"; ?>>Create De-identified Information</option>
@@ -12,3 +12,20 @@
           <option VALUE="healthCare_fraud_abuse_detection"<?php if ($_POST['msg_purpose'] == "healthCare_fraud_abuse_detection") echo " selected"; ?>>Detect health care fraud abuse</option>
           <option VALUE="determining_legal_options"<?php if ($_POST['msg_purpose'] == "determining_legal_options") echo " selected"; ?>>Determine legal options</option>
           <option VALUE="standards_faliure_misconduct"<?php if ($_POST['msg_purpose'] == "standards_failure_misconduct") echo " selected"; ?>>Standards failure and misconduct</option>
+-->
+<?php
+
+$json_values = shell_exec("cd lib/scripts/; cat allpossibles | perl msg_possibles.pl");
+$options = json_decode($json_values);
+
+
+$recipients = $options->Msg_purpose->items;
+
+foreach($recipients as $recipient) {
+  $value = $recipient->name;
+
+  echo "<option value='$value'> $value </option>\n";
+
+}
+
+?>
