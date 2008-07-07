@@ -30,6 +30,11 @@ $end = index($varString, ' =', $start);
 while ($end != -1 && $start != -1) {
   $count++;
   $var = trim(substr($varString, $start, $end - $start));
+  $sleeptime = 0;
+  while($sleeptime--){
+      sleep(1);
+  }
+#  print "pushing $var\n";
   push (@vars, $var);
   $start = index($varString, ' ', $end + 3);
   $end = index($varString, ' =', $start);
@@ -50,15 +55,18 @@ $line = substr $line, $start + 5;
 $end = index($line, ']');
 $line = substr $line, 0, $end;
 
-# take off the first 't' since we use it in split
-$line = substr $line, 1;
+# take off the first 't(' since we use it in split
+$line = substr $line, 2;
 
-# tokenized!
-@predicates = split(/,t/, $line);
+# tokenized! by the ',t('
+@predicates = split(/,t\(/, $line);
+
 for my $predicate (@predicates) {
-  # strip beginning and ending parentheses
-  $predicate = substr $predicate, 1, length($predicate)-2;
-#  print $predicate . "\n";
+  # strip ending parentheses
+#  print "Before: " . $predicate . "\n";
+  $predicate = substr $predicate, 0, length($predicate)-1;
+#  print "After:  " . $predicate . "\n";
+
 
   @values = split(/,/, $predicate);
 
@@ -79,6 +87,15 @@ for my $predicate (@predicates) {
         # only if any_var not set, then add to set
         if (!$$boolName) {
           $$hashName{$values[$i]} = 1;
+	  $sleeptime = 0;
+	  while($sleeptime--){
+	      sleep(1);
+	  }
+#	  print "pushing $values[$i]\n";
+	  if ($values[$i] eq "dr_kels") {
+	      print "help \n";
+
+          }
         }
       }
 
