@@ -14,7 +14,7 @@
 		onChange="fieldChanged(this);"
 		autocomplete="false">
 <option value="null"> -- From -- </option>
-<?php	     include ('tpl/recipients.php');	     ?>
+<?php	     include ('tpl/from.php');	     ?>
 	</select>
 
       </div>
@@ -26,7 +26,7 @@
 	onChange="fieldChanged(this);"
 	    name="First Name">
 <option value="null"> -- To -- </option>
-	  <?php	     include ('tpl/recipients.php');	     ?>
+	  <?php	     include ('tpl/to.php');	     ?>
 	</select>
 
       </div>
