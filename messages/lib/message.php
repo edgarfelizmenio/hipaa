@@ -239,7 +239,7 @@ private function getMsgVars() {
   $msg_vars['msg_type'] = true;
   $msg_vars['msg_purpose'] = true;
   $msg_vars['msg_belief'] = false;
-  $msg_vars['msg_message'] = true;
+  $msg_vars['msg_message'] = false;
   $msg_vars['msg_consent'] = false;        
   return $msg_vars;
 }
