@@ -1,6 +1,6 @@
 <?php include_once('lib/common.php'); ?>
 <?php include('tpl/header_top.php'); ?>
-<title>Read Message</title>
+<title>Forward Message</title>
 <?php include('tpl/header_bot.php'); ?>
 
 
@@ -21,29 +21,32 @@ $msg_id = intval($_GET['msg_id']);
 $msg = $hmsg->getMessage($msg_id);
 
 ?>
+<div id="prolog">
+  <h3>Prolog calls</h3>
+    <div id="prologquery"></div>
+
+    <div id="prologanswer"></div>
+</div>
 
 <form method="post" action="">
   <div>
   <label>From:</label>
-    <input type="text" name="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
+    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
 </select>
   </div>
 
   <div>
     <label>To:</label>
-    <select name="msg_to">
-      <option VALUE="">-- Select the recipient -- </option>
-      <?php
-	 include ('tpl/recipients.php');
-	 
-	 ?>
+    <select name="msg_to" id="msg_to" onChange="fieldChanged(this);">
+      <option value="null"> -- To -- </option>
+      <?php	     include ('tpl/to.php');	     ?>
     </select>
     
   </div>
 
   <div>
     <label>About:</label>
-    <select name="msg_about">
+    <select name="msg_about" id="msg_about" onChange="fieldChanged(this);">
     <?php
       include ('tpl/about.php');
     ?>
@@ -53,13 +56,14 @@ $msg = $hmsg->getMessage($msg_id);
   
   <div>
     <label>Type:</label>
-    <input type="text" name="msg_type" value="<?php echo $msg->type ?>"
+    <input type="text" name="msg_type" id="msg_type"
+    onChange="fieldChanged(this);" value="<?php echo $msg->type ?>"
     readonly="readonly" />
   </div>
 
   <div>
     <label>Purpose:</label>
-   <select name="msg_purpose">
+   <select name="msg_purpose" onChange="fieldChanged(this);" id="msg_purpose">
     <?php
       include ('tpl/purpose.php');
     ?>
@@ -70,7 +74,7 @@ $msg = $hmsg->getMessage($msg_id);
 
 <!--  <div>
     <label>Reply-to:</label>
-    <input type="text" name="replyto">
+    <input type="text" name="replyto" id="replyto">
 -->
 <?php
    include ('tpl/msg_footer.php');
