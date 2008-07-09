@@ -1,0 +1,77 @@
+body,h1 {
+    margin: 0em;
+    padding: 0em;
+}
+
+body {
+    background-color: #EFEBDE;
+
+}
+
+#head {
+    background-color: #990000;
+    padding: 10px 1em 0px;
+
+
+}
+
+#content {
+    padding: 1em;
+}
+
+
+#prolog {
+    float: right;
+    width: 50%;
+    background-color: #E7D19A;
+    border: 1px solid #3C3623;
+
+}
+#prolog h3 {
+    text-align: center;
+}
+
+/* Table coloring */
+table.striped, table.unstriped{ 
+                background-color: #ffffff;
+              }
+
+table.striped th, table.unstriped th { 
+    background-color: rgb(61,131,201);
+    color: #ffffff;
+ }
+
+tr.alt { 
+    background-color: #ecf6fc;
+}
+/* Begin Navigation */
+#navbar ul
+{
+    margin-left: 0;
+    padding-left: 0;
+    white-space: nowrap;
+
+}
+
+#navbar li
+{
+    display: inline;
+    list-style-type: none;
+
+}
+
+#navbar a { padding: 3px 10px; }
+
+#navbar a:link, #navbar a:visited
+{
+    color: #000;
+    background-color: #E7D19A;
+    text-decoration: none;
+}
+
+#navbar a:hover
+{
+    color: #fff;
+    background-color: #369;
+    text-decoration: none;
+}
