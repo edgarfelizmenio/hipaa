@@ -37,7 +37,7 @@ $msg = $hmsg->getMessage($msg_id);
 
   <div>
     <label>About:</label>
-    <select name="msg_about" id="msg_about" onChange="fieldChanged(this);>
+    <select name="msg_about" id="msg_about" onChange="fieldChanged(this)";>
       <option value="null"> -- About -- </option>
     <?php
       include ('tpl/about.php');
@@ -54,7 +54,7 @@ $msg = $hmsg->getMessage($msg_id);
 
   <div>
     <label>Purpose:</label>
-   <select name="msg_purpose" id="msg_purpose" onChange="fieldChanged(this);>
+   <select name="msg_purpose" id="msg_purpose" onChange="fieldChanged(this)";>
       <option value="null"> -- Purpose -- </option>
     <?php
       include ('tpl/purpose.php');
