@@ -12,6 +12,10 @@
 
    <script type="text/javascript">
    $(document).ready(function() {
+       // only fire fieldChanged if there is a prolog box to show the queries
+       if ($('#prolog').length > 0) {
+	 fieldChanged(null);
+       }
        $(".striped tr:even").addClass("alt");
        $('.stripeMe tr').addClass('alt');
      });
