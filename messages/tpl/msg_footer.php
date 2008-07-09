@@ -1,27 +1,27 @@
       <div>
 	<label>Belief:</label>
-	<input type="checkbox" rel="belief_present" name="belief" value="1" />
+	<input type="checkbox" rel="belief_present" name="msg_belief" value="1" />
       </div>
 
 <div rel="belief_present">
 <div>
   <label>About</label>
-  <input type="text" name="babout" />
+  <input type="text" name="b_about" />
 </div>
 <div>
   <label>Belief</label>
-  <input type="text" name="bbelief" />
+  <input type="text" name="b_belief" />
 </div>
 <div>
   <label>From</label>
-  <input type="text" name="bfrom" />
+  <input type="text" name="b_from" />
 </div>
 </div>
 
 
       <div>
 	<label>Message:</label>
-	<textarea name="message"></textarea>
+	<textarea name="msg_message"></textarea>
       </div>
 
       <div>
@@ -32,7 +32,7 @@
 
       <div rel="permission">
 	<label>Consented by:</label>
-		<select name="consent">
+		<select name="msg_consent">
           <option VALUE="">-- Choose consent -- </option>
 	  <?php
 	     include ('tpl/recipients.php');

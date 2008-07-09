@@ -1,20 +1,24 @@
+<?php include_once('lib/common.php'); ?>
+<?php include('tpl/header_top.php'); ?>
+<title>Read Message</title>
+<?php include('tpl/header_bot.php'); ?>
+
 <?php
-include_once('lib/common.php');
+$action = $_POST['action'];
+
+if($action == 'process') {  
+  include('process/writereply.php');
+
+ } else {
+
 if (!isset($_GET['msg_id']) || empty($_GET['msg_id']))
   die ('unknown message id');
 $msg_id = intval($_GET['msg_id']);
 $msg = $hmsg->getMessage($msg_id);
 
 ?>
-<html>
-  <head>
-    <?php include('tpl/header.php'); ?>
-  </head>
-  <body>
-    <?php include('tpl/msg_menu.php'); ?>
 
-
-<form method="post" action="writereply.php">
+<form method="post" action="">
   <div>
   <label>From:</label>
     <input type="text" name="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
@@ -38,7 +42,7 @@ $msg = $hmsg->getMessage($msg_id);
   
   <div>
     <label>Type:</label>
-    <input type="text" name="type" value="<?php echo $msg->type ?>"
+    <input type="text" name="msg_type" value="<?php echo $msg->type ?>"
     readonly="readonly" />
   </div>
 
@@ -63,6 +67,7 @@ $msg = $hmsg->getMessage($msg_id);
 
 
   <div>
+    <input type="hidden" name="action" value="process" />
     <input type="hidden" name="msg_id" value="<?php echo $msg_id; ?>"/>
     <input type="submit"  value="Send Reply" />
   </div>
@@ -77,7 +82,7 @@ $msg = $hmsg->getMessage($msg_id);
 if ($mailbag) {
 ?>
 
-<table border=1>
+<table class="striped" border=1>
   <tr>
     <th>To</th>
     <th>From</th>
@@ -107,11 +112,11 @@ if ($mailbag) {
   }
   echo "</table>";
  }
+ }
 ?>
 
 
-</body>
-</html>
+<?php include('tpl/footer.php'); ?>
 
 
 

@@ -1,19 +1,15 @@
-<?php
-   include_once('lib/common.php');
-   ?>
-<html>
-  <head>
-    <?php include('tpl/header.php'); ?>
-  </head>
-  <body>
-    <?php include('tpl/msg_menu.php'); ?>
+<?php include_once('lib/common.php');?>
+<?php include('tpl/header_top.php'); ?>
+<title>Inbox</title>
+<?php include('tpl/header_bot.php'); ?>
 
+<h2>Inbox</h2>
     <label>Check which person's mail</label>
-    <form method="get">
+    <form method="get" action="">
       <select name="recipient">
 	<?php
 	   $recipients = $hmsg->getRecipients();
-	   print_r($recipients);
+
 	   echo '<option> -- select mailbox -- </option>';
 	   foreach ($recipients as $recipient) {
 	     echo '<option value="' . $recipient->name . '">' . $recipient->name . '</option>';
@@ -31,7 +27,7 @@
 if ($mailbag) {
 ?>
 
-<table border=1>
+<table class="striped">
   <tr>
     <th>Read</th>
     <th>To</th>
@@ -52,7 +48,7 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo '<td><a href="read.php?msg_id=' . $msg->msg_id . '">Read</a>';
+     echo '<td><a href="read.php?msg_id=' . $msg->msg_id . '">Read</a></td>';
      echo "<td>" . $msg->msg_to . "</td>";
      echo "<td>" . $msg->msg_from . "</td>";
      echo "<td>" . $msg->about . "</td>";
@@ -61,8 +57,8 @@ if ($mailbag) {
      echo "<td>" . $msg->consent . "</td>";
      echo "<td>" . $msg->consented . "</td>";
      echo "<td>" . $msg->message . "</td>";
-     echo '<td><a href="forward.php?msg_id=' . $msg->msg_id . '">Forward</a>';
-     echo '<td><a href="reply.php?msg_id=' . $msg->msg_id . '">Reply</a>';
+     echo '<td><a href="forward.php?msg_id=' . $msg->msg_id . '">Forward</a></td>';
+     echo '<td><a href="reply.php?msg_id=' . $msg->msg_id . '">Reply</a></td>';
      echo "</tr>";
   }
   echo "</table>";
@@ -71,6 +67,4 @@ if ($mailbag) {
 }
 
 ?> 
-</body>
-
-</html>
+<?php include('tpl/footer.php'); ?>

@@ -395,22 +395,22 @@
 			// Start outup buffering
 			ob_start();
 
-			echo "<p><table><tr><td bgcolor=ffffff><blockquote><font color=000090>";
+			echo "<p><table><tr><td bgcolor='#ffffff'><blockquote><font color='#000090'>";
 			echo "<pre><font face=arial>";
 
 			if ( ! $this->vardump_called )
 			{
-				echo "<font color=800080><b>ezSQL</b> (v".EZSQL_VERSION.") <b>Variable Dump..</b></font>\n\n";
+				echo "<font color='#800080'><b>ezSQL</b> (v".EZSQL_VERSION.") <b>Variable Dump..</b></font>\n\n";
 			}
 
 			$var_type = gettype ($mixed);
-			print_r(($mixed?$mixed:"<font color=red>No Value / False</font>"));
+			print_r(($mixed?$mixed:"<font color='red'>No Value / False</font>"));
 			echo "\n\n<b>Type:</b> " . ucfirst($var_type) . "\n";
 			echo "<b>Last Query</b> [$this->num_queries]<b>:</b> ".($this->last_query?$this->last_query:"NULL")."\n";
 			echo "<b>Last Function Call:</b> " . ($this->func_call?$this->func_call:"None")."\n";
 			echo "<b>Last Rows Returned:</b> ".count($this->last_result)."\n";
 			echo "</font></pre></font></blockquote></td></tr></table>".$this->donation();
-			echo "\n<hr size=1 noshade color=dddddd>";
+			echo "\n<hr size=1 noshade color='#dddddd'>";
 
 			// Stop output buffering and capture debug HTML
 			$html = ob_get_contents();
@@ -454,23 +454,23 @@
 			// Only show ezSQL credits once..
 			if ( ! $this->debug_called )
 			{
-				echo "<font color=800080 face=arial size=2><b>ezSQL</b> (v".EZSQL_VERSION.") <b>Debug..</b></font><p>\n";
+				echo "<font color='#800080' face=arial size=2><b>ezSQL</b> (v".EZSQL_VERSION.") <b>Debug..</b></font><p>\n";
 			}
 
 			if ( $this->last_error )
 			{
-				echo "<font face=arial size=2 color=000099><b>Last Error --</b> [<font color=000000><b>$this->last_error</b></font>]<p>";
+				echo "<font face=arial size=2 color='#000099'><b>Last Error --</b> [<font color='#000000'><b>$this->last_error</b></font>]<p>";
 			}
 
 			if ( $this->from_disk_cache )
 			{
-				echo "<font face=arial size=2 color=000099><b>Results retrieved from disk cache</b></font><p>";
+				echo "<font face=arial size=2 color='#000099'><b>Results retrieved from disk cache</b></font><p>";
 			}
 
-			echo "<font face=arial size=2 color=000099><b>Query</b> [$this->num_queries] <b>--</b> ";
-			echo "[<font color=000000><b>$this->last_query</b></font>]</font><p>";
+			echo "<font face=arial size=2 color='#000099'><b>Query</b> [$this->num_queries] <b>--</b> ";
+			echo "[<font color='#000000'><b>$this->last_query</b></font>]</font><p>";
 
-				echo "<font face=arial size=2 color=000099><b>Query Result..</b></font>";
+				echo "<font face=arial size=2 color='#000099'><b>Query Result..</b></font>";
 				echo "<blockquote>";
 
 			if ( $this->col_info )
@@ -479,13 +479,13 @@
 				// =====================================================
 				// Results top rows
 
-				echo "<table cellpadding=5 cellspacing=1 bgcolor=555555>";
-				echo "<tr bgcolor=eeeeee><td nowrap valign=bottom><font color=555599 face=arial size=2><b>(row)</b></font></td>";
+				echo "<table cellpadding=5 cellspacing=1 bgcolor='#555555'>";
+				echo "<tr bgcolor='#eeeeee'><td nowrap valign=bottom><font color='#555599' face=arial size=2><b>(row)</b></font></td>";
 
 
 				for ( $i=0; $i < count($this->col_info); $i++ )
 				{
-					echo "<td nowrap align=left valign=top><font size=1 color=555599 face=arial>{$this->col_info[$i]->type} {$this->col_info[$i]->max_length}</font><br><span style='font-family: arial; font-size: 10pt; font-weight: bold;'>{$this->col_info[$i]->name}</span></td>";
+					echo "<td nowrap align=left valign=top><font size=1 color='#555599' face=arial>{$this->col_info[$i]->type} {$this->col_info[$i]->max_length}</font><br><span style='font-family: arial; font-size: 10pt; font-weight: bold;'>{$this->col_info[$i]->name}</span></td>";
 				}
 
 				echo "</tr>";
@@ -500,7 +500,7 @@
 				foreach ( $this->get_results(null,ARRAY_N) as $one_row )
 				{
 					$i++;
-					echo "<tr bgcolor=ffffff><td bgcolor=eeeeee nowrap align=middle><font size=2 color=555599 face=arial>$i</font></td>";
+					echo "<tr bgcolor='#ffffff'><td bgcolor='#eeeeee' nowrap align=middle><font size=2 color='#555599' face=arial>$i</font></td>";
 
 					foreach ( $one_row as $item )
 					{
@@ -513,7 +513,7 @@
 			} // if last result
 			else
 			{
-				echo "<tr bgcolor=ffffff><td colspan=".(count($this->col_info)+1)."><font face=arial size=2>No Results</font></td></tr>";
+				echo "<tr bgcolor='#ffffff'><td colspan=".(count($this->col_info)+1)."><font face=arial size=2>No Results</font></td></tr>";
 			}
 
 			echo "</table>";
@@ -524,7 +524,7 @@
 				echo "<font face=arial size=2>No Results</font>";
 			}
 
-			echo "</blockquote></blockquote>".$this->donation()."<hr noshade color=dddddd size=1>";
+			echo "</blockquote></blockquote>".$this->donation()."<hr noshade color='#dddddd' size=1>";
 
 			// Stop output buffering and capture debug HTML
 			$html = ob_get_contents();
@@ -548,7 +548,7 @@
 
 		function donation()
 		{
-			return "<font size=1 face=arial color=000000>If ezSQL has helped <a href=\"https://www.paypal.com/xclick/business=justin%40justinvincent.com&item_name=ezSQL&no_note=1&tax=0\" style=\"color: 0000CC;\">make a donation!?</a> &nbsp;&nbsp;<!--[ go on! you know you want to! ]--></font>";
+			return "<font size=1 face=arial color='#000000'>If ezSQL has helped <a href=\"https://www.paypal.com/xclick/business=justin%40justinvincent.com&item_name=ezSQL&no_note=1&tax=0\" style=\"color: '#0000CC';\">make a donation!?</a> &nbsp;&nbsp;<!--[ go on! you know you want to! ]--></font>";
 		}
 
 	}

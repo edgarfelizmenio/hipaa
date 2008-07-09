@@ -1,11 +1,12 @@
-<?php include('lib/common.php'); ?>
-<html>
- <head>
-   <?php include('tpl/header.php'); ?>
- </head>
- <body>
-   <?php include('tpl/msg_menu.php'); ?>
-    <label>Check which person's consents?</label>
+<?php include_once('lib/common.php');?>
+<?php include('tpl/header_top.php'); ?>
+<title>Messaging Demo</title>
+<?php include('tpl/header_bot.php'); ?>
+
+<h2>Consents</h2>
+
+
+  <label>Check which person's consents?</label>
     <form method="get">
       <select name="consenter">
 	<?php
@@ -20,8 +21,6 @@
       <input type="submit" value="View consents" />
     </form>
 
-
-
 <?php
    $consenter = htmlspecialchars($_GET['consenter']);
    echo "<h1>" . $consenter . " consents</h1>";
@@ -30,7 +29,7 @@
 if ($mailbag) {
 
 ?>
-<table border=1>
+<table class='striped'>
   <tr>
     <th>To</th>
     <th>From</th>
@@ -66,5 +65,4 @@ if ($mailbag) {
 
 
 
-</body>
-</html>
+<?php include('tpl/footer.php'); ?>

@@ -3,8 +3,6 @@ var formFields = ["msg_from",
 		  "msg_about",
 		  "msg_purpose"];
 function debug(msg) {
-  // returns to turn off debugging messages
-  return;
     // If we haven't already created a box within which to display
     // our debugging messages, then do so now. Note that to avoid
     // using another global variable, we store the box node as
@@ -65,6 +63,7 @@ function fieldChanged(select) {
   }
 
 
+  updatePrologQuery(args);
 
   $.ajax({
     url: 'lib/scripts/msg_json.php',
@@ -77,6 +76,51 @@ function fieldChanged(select) {
       },
 	success: updateFields
 	});
+}
+
+
+function updatePrologQuery(args) {
+  $('#prologquery').empty();
+  //  debug(args);
+  var queries = new Array();
+  $('#prologquery').append("<dl><dt>Given the following values:</dt>");
+  for (var param in args) {
+    var value = $('#'+param).attr('value');
+    if (value != 'null') {
+      $('#prologquery').append('<dd>' + param + ' = ' + value + '</dd>');
+    } else {
+      queries.push(param);
+    }
+  }
+  $('#prologquery').append("</dl>");
+  
+  $('#prologquery').append("What are acceptable values for: " +
+			   queries.join(', ') + '?<br />');
+    
+}
+
+function updatePrologAnswer(field, values) {
+  $('#prologanswer').empty();
+  //  $('#prologanswer').append("<em>Acceptable values are: "</em>');
+  //  $('#prologanswer').append("<dl><dt>Prolog answer:</dt>");
+
+  $('#prologanswer').append('<dl id="prolog_' + field + '"><dt>' + field + ":</dt></dl>");
+
+
+  $('#prolog_'+field+ ' dt').append('<input type="submit" id="prologb_' + field +
+  '" value="Show/Hide"/>');
+
+  $('#prologb_'+field).click(function(){
+      $('#prolog_' + field).find("dd").toggle();
+    });
+  
+
+  for(i in values) {
+    $('#prolog_'+field).append('<dd style="display: none">' + values[i] + "</dd>");
+  }
+
+
+  //  $('#prologanswer').append("</dl>");
 }
 
 
@@ -107,35 +151,49 @@ function updateFields(json) {
       continue;
     }
     // msg_to_hash = new Array();
-    debug(param + '_hash = new Array()');
+    //    debug(param + '_hash = new Array()');
     eval(param + '_hash = new Array()');
     
     // fill hash with allowed values
     for (var i =0; i< allowedLen; i++) {
       // msg_to_hash['carla'] = 1;
-      debug(param + '_hash["' + allowedOptions[i].name + '"] = 1');
+      //      debug(param + '_hash["' + allowedOptions[i].name + '"] = 1');
       eval(param + '_hash["' + allowedOptions[i].name + '"] = 1');
     }
-    if (allowedLen == 1 && allowedOptions[0].name == 'anything') continue;
-    
+
+    var keys = new Array();
+    for (var key in eval(param + '_hash')) {
+      keys.push(key);
+    }
+
+    updatePrologAnswer(param, keys);
+
+    if (allowedLen == 1 && allowedOptions[0].name == 'anything') {
+      //      updatePrologAnswer(param, 'anything');
+      continue;
+    }    
     
     var curOptions = document.getElementById(param).options;
     var curLen = curOptions.length;
     for (var j = 0; j<curLen; j++) {
 
       curOption = curOptions[j].value;
-      debug ("Current param: " + param + " option testing: " + curOption);
+      //      debug ("Current param: " + param + " option testing: " + curOption);
       // var allowed = typeof(msg_to_hash[curOption]) != "undefined";
-      debug('EVAL:' + 'var allowed = typeof(' + param + '_hash["' + curOption + '"]) != "undefined"');
-      debug('EVAL: ' + param + '_hash["' + curOption + '"]');
-      debug('....: ' + eval(param + '_hash["' + curOption + '"]')  );
+      //      debug('EVAL:' + 'var allowed = typeof(' + param + '_hash["' + curOption + '"]) != "undefined"');
+      //      debug('EVAL: ' + param + '_hash["' + curOption + '"]');
+      //      debug('....: ' + eval(param + '_hash["' + curOption + '"]')  );
       //      debug('typeof: ' + 
       eval('var allowed = typeof(' + param + '_hash[curOption]) != "undefined"');
-      debug((allowed) ? 'true' : 'false');
+      //      debug((allowed) ? 'true' : 'false');
       if (!allowed) {
 	$(curOptions[j]).removeClass();
 	$(curOptions[j]).addClass('invalid');
       }
+
+
+
+
     }
 
     
@@ -143,3 +201,5 @@ function updateFields(json) {
 
 
 }
+
+

@@ -1,23 +1,20 @@
+<?php include_once('lib/common.php'); ?>
+<?php include('tpl/header_top.php'); ?>
+<title>Read Message</title>
+<?php include('tpl/header_bot.php'); ?>
+
 <?php
-include_once('lib/common.php');
 if (!isset($_GET['msg_id']) || empty($_GET['msg_id']))
   die ('unknown message id');
 $msg_id = intval($_GET['msg_id']);
 $msg = $hmsg->getMessage($msg_id);
 
 ?>
-<html>
-  <head>
-    <?php include('tpl/header.php'); ?>
-  </head>
-  <body>
-    <?php include('tpl/msg_menu.php'); ?>
-
      <a href="forward.php?msg_id=<?php echo $msg->msg_id?>">Forward</a>
      <a href="reply.php?msg_id=<?php echo $msg->msg_id?>">Reply</a>
 
 
-<table border=1>
+  <table class="unstriped" border="1" width="400px">
   <tr>
     <th>To</th>
     <td><?php echo $msg->msg_to; ?></td>
@@ -45,7 +42,7 @@ $msg = $hmsg->getMessage($msg_id);
 if ($mailbag) {
 ?>
 
-<table border=1>
+<table class="striped" border=1>
   <tr>
     <th>To</th>
     <th>From</th>
@@ -77,6 +74,4 @@ if ($mailbag) {
  }
 ?>
 
-
-</body>
-</html>
+<?php include('tpl/footer.php'); ?>

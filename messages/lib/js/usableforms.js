@@ -158,6 +158,7 @@ function intoMainForm(relation)
 {
 	if (relation == 'none') return;
 	var Elements = hiddenFormFieldsPointers[relation];
+	if(!Elements) return;
 	for (var i=0;i<Elements.length;i++)
 	{
 		var insertPoint = document.getElementById(relation+i);

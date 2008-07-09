@@ -1,12 +1,14 @@
 <?php
 include_once ('db.php');
 include_once ('functions.php');
+require_once ('xsbprolog.php');
 
 class Message {
 
   private $db;
   function __construct() {
-      $this->db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
+    $this->db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
+    $this->prolog = new Xsbprolog();
   }
 
   /**
@@ -127,79 +129,72 @@ class Message {
     return $idtree;
   }
 
-  // TODO change function to take array of values instead of long bunch of args
-  function addMessage($msg_to, $msg_from, $msg_about, $type, $purpose,
-		      $consent, $belief, $message, $consent_required, $parent_id=-1) {
+  function addMessage($consent_required, $parent_id=-1) {
     global $_POST;
+
+    // make variables local and check for missing fields
+    $msg_vars = $this->getMsgVars();
+    foreach($msg_vars as $msg_var => $required) {
+      $$msg_var = htmlspecialchars(addslashes($_POST[$msg_var]));
+      if ($required && ($$msg_var == 'null' || empty($$msg_var))) {
+	$errors[] = $msg_var;
+      }
+    }
+
+    // if they believe something, make sure they fill out all belief fields
+    if ($msg_belief == '1') {
+      $b_about = $_POST['b_about'];
+      $b_belief = $_POST['b_belief'];
+      $b_from = $_POST['b_from'];
+      if (empty ($b_about) || empty($b_belief) || empty($b_from))
+	$errors[] = 'Please fill out all belief fields';
+      $mBelief = "b($b_about,$b_belief,$b_from)";
+    }
+    
+    // exit out if required fields not filled in
+    if (!empty($errors)) {
+      echo "<h4>Please fill in the following:</h4>\n";
+      echo '<ul id="errors">' . "\n";
+      foreach ($errors as $error) {
+	echo "<li>$error</li>\n";
+      }
+      echo '</ul>' . "\n";
+      return;
+    }
 
     $consented = '1'; // by default a message is consented/allowed
     if ($consent_required == 'true') // unless consent is required
       $consented = '0';
 
+    $parent_id = intval($_POST['parent_id']);
 
-    $msg_to = addslashes($msg_to);
-    $msg_from = addslashes($msg_from);
-    $msg_about = addslashes($msg_about);
-    $type = addslashes($type);
-    $purpose = addslashes($purpose);
-    $consent = addslashes($consent);
-    $belief = addslashes($belief);
-    $message = addslashes($message);
-    $parent_id = addslashes($parent_id);
-
-
-    /* Below is code mostly lifted from existing 'message_checker.php'
-     script */
-    $mTo = htmlspecialchars($msg_to);
-    $mFrom = htmlspecialchars($msg_from);
-    $mAbout = htmlspecialchars($msg_about);
-    $mPurpose = htmlspecialchars($purpose);
-    $mBelief = 'null';
+    /* Variables to be passed to prolog */
+    $mTo = $msg_to;
+    $mFrom = $msg_from;
+    $mAbout = $msg_about;
+    $mPurpose = $msg_purpose;
+    /* not implemented yet */
     $mReplyto = 'null';
-    if (empty($consent)) {
-      $mConsent ='null';  // by default consent isn't filled in, so change
-                         // to null for prolog query
-    } else {
-      $mConsent = $consent;
-    }
+    $mConsent = 'null';
+    $mBelief = 'null';
 
-    if (true) { // using prolog?
-      if(!$mTo || empty($mTo)) {
-	die("You must supply the recipients name");
-      } else if(!$mFrom || empty($mFrom)) {
-	die("You must supply the senders name");
-      } else if(!$mAbout || empty($mAbout)) {
-	die("You must supply the subjects name");
-      } else if(!$mPurpose || empty($mPurpose))
-	die("You must supply the purpose");
+    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief).";
 
-    if ($belief == '1') {
-      $babout = $_POST['babout'];
-      $bbelief = $_POST['bbelief'];
-      $bfrom = $_POST['bfrom'];
-      if (empty ($babout) || empty($bbelief) || empty($bfrom))
-	die('Please fill out all belief fields');
-      $mBelief = "b($babout,$bbelief,$bfrom)";
-    }
-
-
-    
-      $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief).\"";
-echo $STR;
     // reply to, consented, belief
     //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
     // b(ce,unlawful,Carla) # Carla believes that the covered entity is unlawful
     //$STR="\"pbh(a(patient, ce, patient, phi, null, null, null,null)).\"";
     // b(ce, unlawful, Carla)
     // where is consented by?
-    $crap = shell_exec("sh ../prolog2 $STR");
-    echo $crap;
-    if (strpos($crap, "yes") === false)
-      die('not allowed');
-    }
-    if (empty($parent_id))
-      $parent_id = -1;
-    $query = "INSERT INTO `hipaa_msg` 
+    $response = $this->prolog->askHIPAA($query);
+
+    echo $response;
+    if (strpos($response, "yes") === false)
+      return false;
+  
+  if (empty($parent_id) || $parent_id==0)
+    $parent_id = -1;
+  $query = "INSERT INTO `hipaa_msg` 
                 ( `msg_to` 
                 , `msg_from`
                 , `about` 
@@ -212,21 +207,41 @@ echo $STR;
                 , `parent_id` 
                 )
               VALUES 
-                ( '" . $mTo . "'
-                , '" . $mFrom . "'
-                , '" . $mAbout . "'
-                , '" . $type . "'
-                , '" . $mPurpose . "'
-                , '" . $consent . "'
+                ( '" . $msg_to . "'
+                , '" . $msg_from . "'
+                , '" . $msg_about . "'
+                , '" . $msg_type . "'
+                , '" . $msg_purpose . "'
+                , '" . $msg_consent . "'
                 , '" . $consented . "'
-                , '" . $belief . "'
-                , '" . $message . "'
+                , '" . $msg_belief . "'
+                , '" . $msg_message . "'
                 , '" . $parent_id . "'
                 )";
 
-    $this->db->query($query);
+  if(!$this->db->query($query)) {
+    echo "Error in query";
+  }
+
+  return true;
 
   }
 
+/**
+ * Returns an associative array with variable name as the key and a
+ * boolean telling whether the variable is required for a message or not
+ */
+private function getMsgVars() {
+  $msg_vars = array();
+  $msg_vars['msg_to'] = true;
+  $msg_vars['msg_from'] = true;
+  $msg_vars['msg_about'] = true;
+  $msg_vars['msg_type'] = true;
+  $msg_vars['msg_purpose'] = true;
+  $msg_vars['msg_belief'] = false;
+  $msg_vars['msg_message'] = true;
+  $msg_vars['msg_consent'] = false;        
+  return $msg_vars;
+}
 }
 ?>

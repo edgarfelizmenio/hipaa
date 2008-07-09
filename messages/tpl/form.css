@@ -1,11 +1,16 @@
 form div div { 
-               padding-left: 20px;
-
- }
+    padding-left: 20px;
+    
+}
 
 form div label { 
-  display: block;
-  float: left;
-  width: 150px;
-  clear: left;
-  }
+    display: block;
+    float: left;
+    width: 150px;
+    clear: left;
+}
+
+option.invalid {
+    color: red;
+    background-color: pink;
+}
