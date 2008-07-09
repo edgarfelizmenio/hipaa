@@ -110,16 +110,24 @@ function updatePrologAnswer(field, values) {
   $('#prologanswer').append('<dl id="prolog_' + field + '"><dt>' + field + ":</dt></dl>");
 
 
-  $('#prolog_'+field+ ' dt').append('<input type="submit" id="prologb_' + field +
+  $('#prolog_'+field+ ' dt').append('<input style="display:none;" type="submit" id="prologb_' + field +
   '" value="Show/Hide"/>');
 
   $('#prologb_'+field).click(function(){
       $('#prolog_' + field).find("dd").toggle();
     });
-  
+
+
 
   for(i in values) {
     $('#prolog_'+field).append('<dd style="display: none">' + values[i] + "</dd>");
+  }
+
+  if (values.length > 5) {
+    $('#prologb_' + field).show();
+  } else {
+    $('#prolog_' + field).find("dd").show();
+
   }
 
 
