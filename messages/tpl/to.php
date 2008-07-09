@@ -1,15 +1,15 @@
 <?php
-
-$json_values = shell_exec("cd lib/scripts/; cat allpossibles | perl msg_possibles.pl");
-$options = json_decode($json_values);
-
+$filename = 'lib/scripts/allpossiblesserialized.php';
+$fh = fopen($filename, 'r');
+$string = fread($fh, filesize($filename));
+$options = unserialize($string);
 
 $recipients = $options->Msg_to->items;
 
 foreach($recipients as $recipient) {
   $value = $recipient->name;
-
-  echo "<option value='$value'> $value </option>\n";
+  $selected = ($_POST['msg_to'] == $value) ? 'selected="selected"' : '';
+  echo "<option value='$value' $selected> $value </option>\n";
 
 }
 
