@@ -97,9 +97,13 @@ function updatePrologQuery(args) {
 
   $('#prologquery').append("</dl>");
   
+  if (queries.length ==0 ){
+  $('#prologquery').append("All values filled in; no queries to ask.<br />");
+
+  } else {
   $('#prologquery').append("What are acceptable values for: " +
 			   queries.join(', ') + '?<br />');
-    
+  }
 }
 
 function updatePrologAnswer(field, values) {
