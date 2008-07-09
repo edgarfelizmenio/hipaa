@@ -82,6 +82,7 @@ function updatePrologQuery(args) {
   
 
   $('#prologquery').empty();
+  $('#prologanswer').empty();
   //  debug(args);
   var queries = new Array();
   $('#prologquery').append("<dl><dt>Given the following values:</dt>");
@@ -102,7 +103,7 @@ function updatePrologQuery(args) {
 }
 
 function updatePrologAnswer(field, values) {
-  $('#prologanswer').empty();
+
   //  $('#prologanswer').append("<em>Acceptable values are: "</em>');
   //  $('#prologanswer').append("<dl><dt>Prolog answer:</dt>");
 
