@@ -178,7 +178,7 @@ class Message {
     $mConsent = 'null';
     $mBelief = 'null';
 
-    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief).";
+    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
 
     // reply to, consented, belief
     //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
