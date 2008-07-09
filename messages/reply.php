@@ -1,6 +1,6 @@
 <?php include_once('lib/common.php'); ?>
 <?php include('tpl/header_top.php'); ?>
-<title>Read Message</title>
+<title>Reply To Message</title>
 <?php include('tpl/header_bot.php'); ?>
 
 <?php
@@ -17,22 +17,28 @@ $msg_id = intval($_GET['msg_id']);
 $msg = $hmsg->getMessage($msg_id);
 
 ?>
+<div id="prolog">
+  <h3>Prolog calls</h3>
+    <div id="prologquery"></div>
+
+    <div id="prologanswer"></div>
+</div>
 
 <form method="post" action="">
   <div>
   <label>From:</label>
-    <input type="text" name="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
+    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
 </select>
   </div>
 
   <div>
     <label>To:</label>
-    <input type="text" name="msg_to" readonly="readonly" value="<?php echo $msg->msg_from ?>" />
+    <input type="text" name="msg_to" id="msg_to" readonly="readonly" value="<?php echo $msg->msg_from ?>" />
   </div>
 
   <div>
     <label>About:</label>
-    <select name="msg_about">
+    <select name="msg_about" id="msg_about">
     <?php
       include ('tpl/about.php');
     ?>
@@ -42,13 +48,13 @@ $msg = $hmsg->getMessage($msg_id);
   
   <div>
     <label>Type:</label>
-    <input type="text" name="msg_type" value="<?php echo $msg->type ?>"
+    <input type="text" name="msg_type" id="msg_type" value="<?php echo $msg->type ?>"
     readonly="readonly" />
   </div>
 
   <div>
     <label>Purpose:</label>
-   <select name="msg_purpose">
+   <select name="msg_purpose" id="msg_purpose">
     <?php
       include ('tpl/purpose.php');
     ?>
@@ -59,7 +65,7 @@ $msg = $hmsg->getMessage($msg_id);
 
 <!--  <div>
     <label>Reply-to:</label>
-    <input type="text" name="replyto">
+    <input type="text" name="replyto" id="replyto">
 -->
 <?php
    include ('tpl/msg_footer.php');
