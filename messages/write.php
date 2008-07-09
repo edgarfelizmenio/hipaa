@@ -5,8 +5,16 @@
 <?php
 $action = $_POST['action'];
 if($action == 'process') {  
-  include('process/writemsg.php');
- } else {
+  if ($hmsg->addMessage($_POST['consent_required'])) {
+    echo "<p>Messaged added successfully</p>";
+    echo '<a href="viewmsg.php">View messages</a>';
+    include('tpl/footer.php');
+    exit;
+  }
+  echo '<div class="warning"><p>The query was not allowed</p></div>';
+ }
+
+
 ?>
 
 <h2>Write Message</h2>
@@ -93,5 +101,5 @@ if($action == 'process') {
 
 </form>
 
-     <?php } ?>
+     
 <?php include('tpl/footer.php'); ?>
