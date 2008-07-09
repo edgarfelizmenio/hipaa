@@ -7,14 +7,24 @@
 $action = $_POST['action'];
 
 if($action == 'process') {  
-  include('process/writereply.php');
+  if ($hmsg->addMessage($_POST['consent_required'], $_POST['msg_id'])) {
+    echo "<p>Messaged added successfully</p>";
+    include('tpl/footer.php');
+    exit;
+  } 
+  echo '<div class="warning"><p>The query was not allowed</p></div>';
 
- } else {
-
+ }
 if (!isset($_GET['msg_id']) || empty($_GET['msg_id']))
   die ('unknown message id');
 $msg_id = intval($_GET['msg_id']);
 $msg = $hmsg->getMessage($msg_id);
+if(empty($_POST['msg_about'])) {
+    $_POST['msg_about'] = $msg->about;
+  }
+if(empty($_POST['msg_purpose'])) {
+    $_POST['msg_purpose'] = $msg->purpose;
+  }
 
 ?>
 <div id="prolog">
@@ -119,7 +129,7 @@ if ($mailbag) {
   }
   echo "</table>";
  }
- }
+
 ?>
 
 
