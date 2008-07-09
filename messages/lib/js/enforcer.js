@@ -41,18 +41,17 @@ function debug(msg) {
 }
 
 function fieldChanged(select) {
-  select.optionChosen = true;
   var args = new Object();
   
-  // input_msg_to = dijit.byId("msg_to");
+  // input_msg_to = document.getElementById("msg_to");
   for ( var i in formFields ) {
     var str = 'input_' + formFields[i] + ' = document.getElementById("' + formFields[i] + '")';
     eval(str);
   }
-  
-  // msg_to = (input_msg_to.optionChosen) ? input_msg_to.getDisplayedValue() : null;
+  // just pulls value now...
+  // msg_to = input_msg_to.value
   for ( var i in formFields ) {
-    var str = formFields[i] + ' = (input_' + formFields[i] + '.optionChosen) ? input_' + formFields[i] + '.value : null';
+    var str = formFields[i] + ' = input_' + formFields[i] + '.value';
     eval(str);
   }
       
@@ -80,6 +79,8 @@ function fieldChanged(select) {
 
 
 function updatePrologQuery(args) {
+  
+
   $('#prologquery').empty();
   //  debug(args);
   var queries = new Array();
@@ -92,6 +93,7 @@ function updatePrologQuery(args) {
       queries.push(param);
     }
   }
+
   $('#prologquery').append("</dl>");
   
   $('#prologquery').append("What are acceptable values for: " +
@@ -129,6 +131,7 @@ function refreshFields() {
   for (var i in formFields) {
     var field = document.getElementById(formFields[i]);
     var options = field.options;
+    if (options == undefined) continue;
     var optLen = options.length;
     for (var j=0; j<optLen; j++) {
       var curOpt = options[j];
@@ -174,6 +177,7 @@ function updateFields(json) {
     }    
     
     var curOptions = document.getElementById(param).options;
+    if (curOptions == undefined) continue; // filed isn't a select option
     var curLen = curOptions.length;
     for (var j = 0; j<curLen; j++) {
 
