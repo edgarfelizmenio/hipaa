@@ -153,12 +153,14 @@ class Message {
     
     // exit out if required fields not filled in
     if (!empty($errors)) {
+      echo '<div id="errors">';
       echo "<h4>Please fill in the following:</h4>\n";
-      echo '<ul id="errors">' . "\n";
+      echo '<ul>' . "\n";
       foreach ($errors as $error) {
 	echo "<li>$error</li>\n";
       }
       echo '</ul>' . "\n";
+      echo '</div>';
       return;
     }
 
@@ -188,7 +190,7 @@ class Message {
     // where is consented by?
     $response = $this->prolog->askHIPAA($query);
 
-    echo $response;
+    echo '<div class="confirmed">' . $response . '</div>';
     if (strpos($response, "yes") === false)
       return false;
   
