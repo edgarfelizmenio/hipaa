@@ -6,7 +6,7 @@
 $action = $_POST['action'];
 if($action == 'process') {  
   if ($hmsg->addMessage($_POST['consent_required'])) {
-    echo "<p>Messaged added successfully</p>";
+    echo "<p>Message added successfully</p>";
     echo '<a href="viewmsg.php">View messages</a>';
     include('tpl/footer.php');
     exit;

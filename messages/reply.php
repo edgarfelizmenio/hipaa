@@ -8,7 +8,7 @@ $action = $_POST['action'];
 
 if($action == 'process') {  
   if ($hmsg->addMessage($_POST['consent_required'], $_POST['msg_id'])) {
-    echo "<p>Messaged added successfully</p>";
+    echo "<p>Reply successfully sent</p>";
     include('tpl/footer.php');
     exit;
   } 
