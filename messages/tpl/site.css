@@ -44,12 +44,21 @@ div.warning {
 
  }
 
+div.code { 
+           background-color: black;
+           color: white;
 
+ }
+
+div.body { 
+width: 600px;
+
+ }
 div.info { 
 padding: 1em;
 padding-left: 30px;
            margin: 0em auto;
-width: 600px;           
+width: 75%;           
 background: url('information.gif') no-repeat 10px 10px #D8E4F1;
 border: 1px solid #000000;
  }
