@@ -1,18 +1,42 @@
 <?php include_once('lib/common.php');?>
 <?php include('tpl/header_top.php'); ?>
 <title>Compose Message</title>
+<script>
+   $(document).ready(function() {
+       $('#showinfo').click( function() {
+	   $('.info').toggle();
+
+	 });
+     });
+
+</script>
 <?php include('tpl/header_bot.php'); ?>
 <?php
 $action = $_POST['action'];
 
 if($action != 'process') {
+
   echo '<div class="info">';
   echo <<< END
     <p>Each time a selection is chosen in the form, a query is sent to prolog to
   determine the allowable values for each unselected item.  The items that
   aren't allowed are then highlighted red to indicate that choosing them
   would violate HIPAA in some way.</p>
+  <p>When the form is submitted, instead of adding the message directly to the
+  database, a query is made to prolog to check if it is allowed.  The
+  following code (similar, but not actual!) shows the process </p>
+<div class="code">
+<xmp>
+// construct query from parameters
+\$query="pbh(a(\$mTo,\$mFrom,\$mAbout,phi,\$mPurpose,\$mReplyto,\$mConsent,\$mBelief)).";
+\$response = \$this->prolog->askHIPAA(\$query);
+if(allowed(\$response)) 
+  // add to database
+else
+  // report failure
 
+</xmp>
+</div>
 END;
 
   echo '</div>';
