@@ -44,6 +44,16 @@ div.warning {
 
  }
 
+
+div.info { 
+padding: 1em;
+padding-left: 30px;
+           margin: 0em auto;
+width: 600px;           
+background: url('information.gif') no-repeat 10px 10px #D8E4F1;
+border: 1px solid #000000;
+ }
+
 #errors { 
   background-color: rgb(255,255,206);
   border: 1px solid #000000; 
