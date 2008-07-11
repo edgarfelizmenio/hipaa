@@ -4,6 +4,21 @@
 <?php include('tpl/header_bot.php'); ?>
 <?php
 $action = $_POST['action'];
+
+if($action != 'process') {
+  echo '<div class="info">';
+  echo <<< END
+    <p>Each time a selection is chosen in the form, a query is sent to prolog to
+  determine the allowable values for each unselected item.  The items that
+  aren't allowed are then highlighted red to indicate that choosing them
+  would violate HIPAA in some way.</p>
+
+END;
+
+  echo '</div>';
+
+ }
+
 if($action == 'process') {  
   if ($hmsg->addMessage($_POST['consent_required'])) {
     echo "<p>Message added successfully</p>";
@@ -11,7 +26,8 @@ if($action == 'process') {
     include('tpl/footer.php');
     exit;
   }
-  echo '<div class="warning"><p>The query was not allowed</p></div>';
+  echo '<div class="warning"><p>The query was not allowed.  Prolog could
+  not find a matching rule</p></div>';
  }
 
 
@@ -94,7 +110,7 @@ if($action == 'process') {
   <div>
     <input type="hidden" name="action" value="process" />
     <input type="submit"  value="Send message" />
-    <input type="reset" value="Reset" onclick="refreshFields()" />
+    <input type="reset" value="Reset" onclick="rebootFields(true)" />
   </div>
   
   
