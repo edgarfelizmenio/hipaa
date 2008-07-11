@@ -138,9 +138,13 @@ function updatePrologAnswer(field, values) {
   //  $('#prologanswer').append("</dl>");
 }
 
-
 /* Removes all stylings from each option form field */
 function refreshFields() {
+  rebootFields(false);
+}
+
+/* Removes all stylings and attribute selected based on boolean */
+function rebootFields(removeSelected) {
   for (var i in formFields) {
     var field = document.getElementById(formFields[i]);
     var options = field.options;
@@ -148,11 +152,15 @@ function refreshFields() {
     var optLen = options.length;
     for (var j=0; j<optLen; j++) {
       var curOpt = options[j];
+
       $(curOpt).removeClass();
+      if (removeSelected) {
+      $(curOpt).removeAttr('selected');
+      }
     }
   }
-}
 
+}
 
 function updateFields(json) {
   refreshFields();
