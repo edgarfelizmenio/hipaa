@@ -3,7 +3,9 @@
 <title>Compose Message</title>
 <script>
    $(document).ready(function() {
+       $('.info').hide();
        $('#showinfo').click( function() {
+
 	   $('.info').toggle();
 
 	 });
@@ -15,7 +17,7 @@
 $action = $_POST['action'];
 
 if($action != 'process') {
-
+  echo'<button id="showinfo">Show/Hide Info</button>';
   echo '<div class="info">';
   echo <<< END
     <p>Each time a selection is chosen in the form, a query is sent to prolog to
