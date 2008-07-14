@@ -362,3 +362,8 @@ t_164_506_c_4 :-
   true,
   writeln('t_164_506_c_4 passed').
 
+%test
+t_164_510 :-
+  %pbh(a(null, ce, null, phi, healthCare_operations, null, null,null)), 
+  true,
+  writeln('t_164_506_c_4 passed').
