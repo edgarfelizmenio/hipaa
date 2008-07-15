@@ -13,6 +13,7 @@ inRole(thief, suspected_crime_perpetrator).
 inRole(doctor, healthCare_provider).
 inRole(nurse, healthCare_provider).
 
+
 inRole(hcp, healthCare_provider).
 inRole(gahp, government_agency_health_plan).
 inRole(kid, unemancipated_minor).
@@ -21,6 +22,7 @@ inRole(hp, health_plan).
 inRole(hoa, health_oversight_agency).
 inRole(pha, public_health_authority).
 inRole(hcao, healthCare_accreditation_organization).
+inRole(clergy_mem,clergy).
 
 employee_of(doctor, ce).
 employee_of(nurse, ce).
@@ -45,7 +47,8 @@ t :-
 
 test :-
   t_164_502,
-  t_164_506.
+  t_164_506,
+  t_164_510.
 
 t_164_502 :-
   t_164_502_a_1_i,
@@ -105,6 +108,8 @@ t_164_506 :-
   t_164_506_c_3a,
   t_164_506_c_3b,
   t_164_506_c_4.
+
+
 
 
 
@@ -361,9 +366,7 @@ t_164_506_c_4 :-
   %pbh(a(null, ce, null, phi, healthCare_operations, null, null,null)), 
   true,
   writeln('t_164_506_c_4 passed').
-
-%test
+ 
 t_164_510 :-
-  %pbh(a(null, ce, null, phi, healthCare_operations, null, null,null)), 
-  true,
-  writeln('t_164_506_c_4 passed').
+ pbh(a(clergy_mem, null, patient, phi, null, null, (patient,opp_given),null)), 
+ writeln('t_164_510 passed').
