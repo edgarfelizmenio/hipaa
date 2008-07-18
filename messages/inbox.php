@@ -48,17 +48,17 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo '<td><a href="read.php?msg_id=' . $msg->msg_id . '">Read</a></td>';
-     echo "<td>" . $msg->msg_to . "</td>";
-     echo "<td>" . $msg->msg_from . "</td>";
+     echo '<td><a href="read.php?message_id=' . $msg->message_id . '">Read</a></td>';
+     echo "<td>" . $msg->to . "</td>";
+     echo "<td>" . $msg->from . "</td>";
      echo "<td>" . $msg->about . "</td>";
      echo "<td>" . $msg->type . "</td>";
      echo "<td>" . $msg->purpose . "</td>";
      echo "<td>" . $msg->consent . "</td>";
      echo "<td>" . $msg->consented . "</td>";
      echo "<td>" . $msg->message . "</td>";
-     echo '<td><a href="forward.php?msg_id=' . $msg->msg_id . '">Forward</a></td>';
-     echo '<td><a href="reply.php?msg_id=' . $msg->msg_id . '">Reply</a></td>';
+     echo '<td><a href="forward.php?message_id=' . $msg->message_id . '">Forward</a></td>';
+     echo '<td><a href="reply.php?message_id=' . $msg->message_id . '">Reply</a></td>';
      echo "</tr>";
   }
   echo "</table>";
