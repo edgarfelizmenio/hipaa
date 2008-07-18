@@ -251,8 +251,7 @@ class Message {
     $response = $this->prolog->askHIPAA($query);
 
     echo '<div class="confirmed"><p>' . $response . '</p><p>Prolog query:
-    ' . $query . '</p>';
-</div>';
+    ' . $query . '</p></div>';
     if (strpos($response, "yes") === false)
       return false;
   
