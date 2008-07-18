@@ -31,4 +31,9 @@ foreach($recipients as $recipient) {
 
 }
 
+$value = 'requested_by_Individual';
+$selected = ($_POST['msg_purpose'] == $value) ? 'selected="selected"' : '';
+echo "<option value='$value' $selected> $value </option>\n";
+
+
 ?>
