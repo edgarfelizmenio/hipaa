@@ -6,7 +6,7 @@
 $action = $_POST['action'];
 
 if($action == 'process') {  
-  if ($hmsg->addMessage($_POST['consent_required'], $_POST['msg_id'])) {
+  if ($hmsg->addMessage($_POST['message_id'])) {
     echo "<p>Forwarded message successfully</p>";
     include('tpl/footer.php');
     exit;
@@ -14,10 +14,10 @@ if($action == 'process') {
   echo '<div class="warning"><p>The query was not allowed</p></div>';
  }
 
-if (!isset($_GET['msg_id']) || empty($_GET['msg_id']))
+if (!isset($_GET['message_id']) || empty($_GET['message_id']))
   die ('unknown message id');
-$msg_id = intval($_GET['msg_id']);
-$msg = $hmsg->getMessage($msg_id);
+$message_id = intval($_GET['message_id']);
+$msg = $hmsg->getMessage($message_id);
 if(empty($_POST['msg_about'])) {
     $_POST['msg_about'] = $msg->about;
   }
@@ -35,7 +35,7 @@ if(empty($_POST['msg_purpose'])) {
 <form method="post" action="">
   <div>
   <label>From:</label>
-    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->msg_to ?>" />
+    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->to ?>" />
 
   </div>
 
@@ -88,7 +88,7 @@ if(empty($_POST['msg_purpose'])) {
 
   <div>
     <input type="hidden" name="action" value="process" />
-    <input type="hidden" name="msg_id" value="<?php echo $msg_id; ?>"/>
+    <input type="hidden" name="message_id" value="<?php echo $message_id; ?>"/>
     <input type="submit"  value="Forward Message" />
   </div>
   
@@ -99,7 +99,7 @@ if(empty($_POST['msg_purpose'])) {
 <h2>History</h2>
 
 <?php
-  $mailbag = $hmsg->getHistory($msg_id);
+  $mailbag = $hmsg->getHistory($message_id);
 if ($mailbag) {
 ?>
 
@@ -121,8 +121,8 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo "<td>" . $msg->msg_to . "</td>";
-     echo "<td>" . $msg->msg_from . "</td>";
+     echo "<td>" . $msg->to . "</td>";
+     echo "<td>" . $msg->from . "</td>";
      echo "<td>" . $msg->about . "</td>";
      echo "<td>" . $msg->type . "</td>";
      echo "<td>" . $msg->purpose . "</td>";
