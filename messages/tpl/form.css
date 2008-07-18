@@ -10,7 +10,7 @@ form div label {
     clear: left;
 }
 
-option.invalid {
+.invalid {
     color: red;
     background-color: pink;
 }
