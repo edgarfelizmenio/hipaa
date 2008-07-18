@@ -3,6 +3,8 @@ include_once ('db.php');
 include_once ('functions.php');
 require_once ('xsbprolog.php');
 
+define('MSG_DB', 'hipaa_message');
+
 class Message {
 
   private $db;
@@ -18,9 +20,8 @@ class Message {
   function getRecipientMail($recipient) {
     $recipient = addslashes($recipient);
 
-    $query = "SELECT * FROM `hipaa_msg`
-              WHERE msg_to='" . $recipient . "'
-              AND consented='1'
+    $query = "SELECT * FROM " . MSG_DB . "
+              WHERE `to`='" . $recipient . "'
              ";
 
     return $this->db->get_results($query);
@@ -34,7 +35,7 @@ class Message {
       return null;
     $consenter = addslashes($consenter);
 
-    $query = "SELECT * FROM `hipaa_msg`
+    $query = "SELECT * FROM " . MSG_DB . "
               WHERE consent='" . $consenter . "'
              ";
     return $this->db->get_results($query);
@@ -44,13 +45,13 @@ class Message {
   /**
    * Sets the consented value for a message
    */
-  function setConsent($msg_id, $consented='1') {
-    $msg_id = intval($msg_id);
+  function setConsent($message_id, $consented='1') {
+    $message_id = intval($message_id);
     $consented = addslashes($consented);
 
-    $query = "UPDATE `hipaa_msg`
+    $query = "UPDATE " . MSG_DB . "
               SET consented='" . $consented . "'
-              WHERE msg_id='" . $msg_id . "'
+              WHERE message_id='" . $message_id . "'
              ";
 
     $this->db->query($query);
@@ -60,7 +61,7 @@ class Message {
    * Retrieve all recipients of mail
    */
   function getRecipients() {
-    $query = "SELECT DISTINCT msg_to AS name from hipaa_msg";
+    $query = "SELECT DISTINCT `to` AS name from " . MSG_DB;
     return $this->db->get_results($query);
   }
 
@@ -68,15 +69,15 @@ class Message {
    * Retrieves all people who need to consent
    */
   function getConsenters() {
-    $query = "SELECT DISTINCT consent AS name from hipaa_msg WHERE consented='0'";
+    $query = "SELECT DISTINCT consent AS name from " . MSG_DB . " WHERE consented='0'";
     return $this->db->get_results($query);
   }
 
 
-  function getMessage($msg_id) {
-    $msg_id = intval($msg_id);
-    $query = "SELECT * FROM `hipaa_msg`
-              WHERE msg_id='" . $msg_id . "'
+  function getMessage($message_id) {
+    $message_id = intval($message_id);
+    $query = "SELECT * FROM " . MSG_DB . "
+              WHERE message_id='" . $message_id . "'
              ";
     $results = $this->db->get_row($query);
     return $results;
@@ -84,7 +85,7 @@ class Message {
 
   function getAllMessages() {
     $query = "SELECT *
-              FROM `hipaa_msg`";
+              FROM " . MSG_DB;
     
     $this->db->query($query);
     
@@ -96,32 +97,32 @@ class Message {
   /**
    * Retrieves the history of a message
    */
-  function getHistory($msg_id) {
-    $msg_id = intval($msg_id);
-    $ancestors = $this->getAncestors($msg_id);
+  function getHistory($message_id) {
+    $message_id = intval($message_id);
+    $ancestors = $this->getAncestors($message_id);
 
     $ids = implode(',', $ancestors);
 
-    $query = "SELECT * FROM hipaa_msg WHERE msg_id IN(" . $ids . ")";
+    $query = "SELECT * FROM " . MSG_DB . " WHERE message_id IN(" . $ids . ")";
     return $this->db->get_results($query);
   }
 
   /**
    * Retrieves all ancestors of this message
    */
-  function getAncestors($msg_id) {
-    $msg_id = intval($msg_id);
+  function getAncestors($message_id) {
+    $message_id = intval($message_id);
     $idtree = array();
-    $idtree[] = $msg_id;
+    $idtree[] = $message_id;
     while (true) {
       $query = "SELECT parent_id 
-              FROM hipaa_msg
-              WHERE msg_id='" . $msg_id . "'
+              FROM " . MSG_DB . "
+              WHERE message_id='" . $message_id . "'
               ";
       $parent_id = $this->db->get_var($query);
       if ($parent_id != -1) {
 	$idtree[] = $parent_id;
-	$msg_id = $parent_id;
+	$message_id = $parent_id;
       } else {
 	break;
       }
@@ -129,9 +130,10 @@ class Message {
     return $idtree;
   }
 
-  function addMessage($consent_required, $parent_id=-1) {
+  function addMessage($parent_id=-1) {
     global $_POST;
-
+    echo '<b>';echo $parent_id;echo '</b>';
+    echo 'here';
     // make variables local and check for missing fields
     $msg_vars = $this->getMsgVars();
     foreach($msg_vars as $msg_var => $required) {
@@ -141,14 +143,39 @@ class Message {
       }
     }
 
+    $mConsent = 'null';
+    if ($consent_required == '1') {
+      if ($msg_consent == null)
+	$errors[] = 'Please fill out consent field';
+      $mConsent = $_POST['msg_consent'];
+    }
+
+    $mBelief = 'null';
     // if they believe something, make sure they fill out all belief fields
     if ($msg_belief == '1') {
-      $b_about = $_POST['b_about'];
-      $b_belief = $_POST['b_belief'];
-      $b_from = $_POST['b_from'];
-      if (empty ($b_about) || empty($b_belief) || empty($b_from))
+      $b_about = $_POST['belief_about'];
+      $b_what = $_POST['belief_what'];
+      $b_by = $_POST['belief_by'];
+      if (empty ($b_about) || empty($b_about) || empty($b_by))
 	$errors[] = 'Please fill out all belief fields';
-      $mBelief = "b($b_about,$b_belief,$b_from)";
+      $mBelief = "b($b_about,$b_what,$b_by)";
+    }
+
+    $mReplyto = 'null';
+    if ($msg_reply == '1') {
+      $rmsg = $this->getMessage($_POST['message_id']);
+      
+      $rto = empty($rmsg->to) ? 'null' : $rmsg->to;
+      $rfrom = empty($rmsg->from) ? 'null' : $rmsg->from;
+      $rabout = empty($rmsg->about) ? 'null' : $rmsg->about;
+      $rtype = empty($rmsg->type) ? 'null' : $rmsg->type;
+      $rpurpose = empty($rmsg->purpose) ? 'null' : $rmsg->purpose;
+      $rreply_to = empty($rmsg->reply_to) ? 'null' : $rmsg->reply_to;
+      $rconsent_by = empty($rmsg->consent_by) ? 'null' : $rmsg->consent_by;
+      $rbelief = empty($rmsg->belief) ? 'null' : $rmsg->belief;
+
+      $mReplyto = "a($rto,$rfrom,$rabout,$rtype,$rpurpose,$rreply_to,$rconsent_by,$rbelief)";
+
     }
     
     // exit out if required fields not filled in
@@ -161,26 +188,64 @@ class Message {
       }
       echo '</ul>' . "\n";
       echo '</div>';
-      return;
+
+      echo '<script type="text/javascript">';
+      foreach ($errors as $error) {
+	echo '$(document).ready(function() {';
+	echo '$("#' . $error . '").parent().css("background-color", "rgb(255,255,206)");' . "\n";
+	echo '});';
+      }
+      echo '</script>';
+
+
+      return false;
     }
-
-    $consented = '1'; // by default a message is consented/allowed
-    if ($consent_required == 'true') // unless consent is required
-      $consented = '0';
-
-    $parent_id = intval($_POST['parent_id']);
 
     /* Variables to be passed to prolog */
     $mTo = $msg_to;
     $mFrom = $msg_from;
     $mAbout = $msg_about;
     $mPurpose = $msg_purpose;
-    /* not implemented yet */
-    $mReplyto = 'null';
-    $mConsent = 'null';
-    $mBelief = 'null';
+
+
+
 
     $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
+    echo $query;
+  if (empty($parent_id) || $parent_id==0)
+    $parent_id = -1;
+
+
+  $sqlquery = "INSERT INTO " . MSG_DB . " 
+                ( `to` 
+                , `from`
+                , `about` 
+                , `type` 
+                , `purpose` 
+                , `consent_by`
+                , `consent_type`
+                , `belief_about` 
+                , `belief_what` 
+                , `belief_by` 
+                , `message`
+                , `parent_id` 
+                )
+              VALUES 
+                ( '" . $msg_to . "'
+                , '" . $msg_from . "'
+                , '" . $msg_about . "'
+                , '" . $msg_type . "'
+                , '" . $msg_purpose . "'
+                , NULL
+                , NULL
+                , NULL
+                , NULL
+                , NULL
+                , '" . $msg_message . "'
+                , '" . $parent_id . "'
+                )";
+
+  echo $sqlquery;
 
     // reply to, consented, belief
     //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
@@ -194,34 +259,7 @@ class Message {
     if (strpos($response, "yes") === false)
       return false;
   
-  if (empty($parent_id) || $parent_id==0)
-    $parent_id = -1;
-  $query = "INSERT INTO `hipaa_msg` 
-                ( `msg_to` 
-                , `msg_from`
-                , `about` 
-                , `type` 
-                , `purpose` 
-                , `consent`
-                , `consented`
-                , `belief` 
-                , `message`
-                , `parent_id` 
-                )
-              VALUES 
-                ( '" . $msg_to . "'
-                , '" . $msg_from . "'
-                , '" . $msg_about . "'
-                , '" . $msg_type . "'
-                , '" . $msg_purpose . "'
-                , '" . $msg_consent . "'
-                , '" . $consented . "'
-                , '" . $msg_belief . "'
-                , '" . $msg_message . "'
-                , '" . $parent_id . "'
-                )";
-
-  if(!$this->db->query($query)) {
+  if(!$this->db->query($sqlquery)) {
     echo "Error in query";
   }
 
@@ -243,7 +281,14 @@ private function getMsgVars() {
   $msg_vars['msg_belief'] = false;
   $msg_vars['msg_message'] = false;
   $msg_vars['msg_consent'] = false;        
+  $msg_vars['consent_required'] = false;        
+  $msg_vars['msg_reply'] = false;        
   return $msg_vars;
 }
+
+ public function debug() {
+   echo MSG_DB;
+ }
+
 }
 ?>
