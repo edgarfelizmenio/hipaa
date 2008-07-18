@@ -42,8 +42,12 @@ permitted_by_164_510_b_3(A):-
 (is_relevant_to_payment_or_care_involvement(A);
 is_msg_type(A,prescription))).
 
-permitted_by_164_510_b_4(A): 
-permitted_by_164_510_b_1_ii(A), 
-(is_to_privateEntity(A);is_to_publicEntity(A)), 
-(is_to_authorizedByLaw_to_assist_disasterRelief(A);is_to_authorizedByCharter_to_assist_disasterRelief(A)),
-((permitted_by_164_510_b_2(A),permitted_by_164_510_b_3(A));is_belief_not_disclosing_would_interfere_with_emergResponse(A)).
+permitted_by_164_510_b_4(A):-
+  permitted_by_164_510_b_1_ii(A), 
+  (is_to_privateEntity(A);
+   is_to_publicEntity(A)), 
+  (is_to_authorizedByLaw_to_assist_disasterRelief(A);
+   is_to_authorizedByCharter_to_assist_disasterRelief(A)),
+  ((permitted_by_164_510_b_2(A),
+    permitted_by_164_510_b_3(A));
+   is_belief_not_disclosing_would_interfere_with_emergResponse(A)).
