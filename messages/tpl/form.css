@@ -3,6 +3,10 @@ form div div {
     
 }
 
+form div { 
+    clear: left;
+}
+
 form div label { 
     display: block;
     float: left;
