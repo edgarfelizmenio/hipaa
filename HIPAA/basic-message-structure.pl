@@ -28,6 +28,13 @@ is_msg_from_role(A, Y) :-
   %in_role(X, Y).
   in_role_closures(X, Y).
 
+msg_from_concerned(a(_,X,X,_,_,_,_,_), X).
+
+is_msg_from_concerned_role(A, Y):-
+  msg_from_concerned(A, X),
+  %in_role(X, Y).
+  in_role_closures(X, Y).
+
 msg_about(a(_,_,X,_,_,_,_,_), X).
 
 is_msg_about_role(A, Y):-

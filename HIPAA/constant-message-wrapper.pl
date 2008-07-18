@@ -19,6 +19,9 @@ is_from_businessAssociateOf(A, Y) :-
   msg_from(A, X),
   business_associate(X, Y).
 
+is_from_concernedIndividual(A) :-
+  is_msg_from_concerned_role(A, individual).
+
 is_from_healthCareProvider(A) :-
   is_msg_from_role(A, healthCare_provider).
   %is_from_employeeOf(A, Y),

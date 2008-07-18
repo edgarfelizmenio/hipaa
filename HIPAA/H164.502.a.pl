@@ -25,7 +25,8 @@ permitted_by_164_502_a_1(A):-
   permitted_by_164_502_a_1_vi(A).
 
 permitted_by_164_502_a_1_i(A):-
-  is_to_concernedIndividual(A),
+  (is_to_concernedIndividual(A);
+  is_from_concernedIndividual(A)),
   writeln('HIPAA rule 164_502_a_1_i;').
 
 permitted_by_164_502_a_1_ii(A):-
