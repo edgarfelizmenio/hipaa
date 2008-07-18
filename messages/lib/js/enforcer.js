@@ -40,6 +40,10 @@ function debug(msg) {
     debug.box.appendChild(p);
 }
 
+function initUpdate() {
+  fieldChanged(null);
+}
+
 function fieldChanged(select) {
   var args = new Object();
   
