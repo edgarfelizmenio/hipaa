@@ -132,8 +132,6 @@ class Message {
 
   function addMessage($parent_id=-1) {
     global $_POST;
-    echo '<b>';echo $parent_id;echo '</b>';
-    echo 'here';
     // make variables local and check for missing fields
     $msg_vars = $this->getMsgVars();
     foreach($msg_vars as $msg_var => $required) {
@@ -211,7 +209,6 @@ class Message {
 
 
     $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
-    echo $query;
   if (empty($parent_id) || $parent_id==0)
     $parent_id = -1;
 
@@ -245,8 +242,6 @@ class Message {
                 , '" . $parent_id . "'
                 )";
 
-  echo $sqlquery;
-
     // reply to, consented, belief
     //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
     // b(ce,unlawful,Carla) # Carla believes that the covered entity is unlawful
@@ -255,7 +250,9 @@ class Message {
     // where is consented by?
     $response = $this->prolog->askHIPAA($query);
 
-    echo '<div class="confirmed">' . $response . '</div>';
+    echo '<div class="confirmed"><p>' . $response . '</p><p>Prolog query:
+    ' . $query . '</p>';
+</div>';
     if (strpos($response, "yes") === false)
       return false;
   
