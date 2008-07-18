@@ -4,24 +4,24 @@
 <?php include('tpl/header_bot.php'); ?>
 
 <?php
-if (!isset($_GET['msg_id']) || empty($_GET['msg_id']))
+if (!isset($_GET['message_id']) || empty($_GET['message_id']))
   die ('unknown message id');
-$msg_id = intval($_GET['msg_id']);
-$msg = $hmsg->getMessage($msg_id);
+$message_id = intval($_GET['message_id']);
+$msg = $hmsg->getMessage($message_id);
 
 ?>
-     <a href="forward.php?msg_id=<?php echo $msg->msg_id?>">Forward</a>
-     <a href="reply.php?msg_id=<?php echo $msg->msg_id?>">Reply</a>
+     <a href="forward.php?message_id=<?php echo $msg->message_id?>">Forward</a>
+     <a href="reply.php?message_id=<?php echo $msg->message_id?>">Reply</a>
 
 
   <table class="unstriped" border="1" width="400px">
   <tr>
     <th>To</th>
-    <td><?php echo $msg->msg_to; ?></td>
+    <td><?php echo $msg->to; ?></td>
   </tr>
   <tr>
     <th>From</th>
-    <td><?php echo $msg->msg_from; ?></td>
+    <td><?php echo $msg->from; ?></td>
   </tr>
   <tr>
     <th>About</th>
@@ -38,7 +38,7 @@ $msg = $hmsg->getMessage($msg_id);
 
 
 <?php
-  $mailbag = $hmsg->getHistory($msg_id);
+  $mailbag = $hmsg->getHistory($message_id);
 if ($mailbag) {
 ?>
 
@@ -49,8 +49,6 @@ if ($mailbag) {
     <th>About</th>
     <th>Type</th>
     <th>Purpose</th>
-    <th>Consent</th>
-    <th>Consented</th>
     <th>Message</th>
   </tr>
 
@@ -60,13 +58,11 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo "<td>" . $msg->msg_to . "</td>";
-     echo "<td>" . $msg->msg_from . "</td>";
+     echo "<td>" . $msg->to . "</td>";
+     echo "<td>" . $msg->from . "</td>";
      echo "<td>" . $msg->about . "</td>";
      echo "<td>" . $msg->type . "</td>";
      echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->consent . "</td>";
-     echo "<td>" . $msg->consented . "</td>";
      echo "<td>" . $msg->message . "</td>";
      echo "</tr>";
   }
