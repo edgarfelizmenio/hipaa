@@ -18,7 +18,10 @@ if($action == 'process') {
 if (!isset($_GET['message_id']) || empty($_GET['message_id']))
   die ('unknown message id');
 $message_id = intval($_GET['message_id']);
+$replyto_id = intval($_GET['replyto_id']);
 $msg = $hmsg->getMessage($message_id);
+
+// to set default values
 if(empty($_POST['msg_about'])) {
     $_POST['msg_about'] = $msg->about;
   }
@@ -86,6 +89,7 @@ if(empty($_POST['msg_purpose'])) {
   <div>
     <input type="hidden" name="msg_reply" value="1" />
     <input type="hidden" name="action" value="process" />
+    <input type="hidden" name="replyto_id" value="<?php echo $replyto_id;?>"/>
   <input type="hidden" name="message_id" value="<?php echo $message_id; ?>"/>
     <input type="submit"  value="Send Reply" />
   </div>
