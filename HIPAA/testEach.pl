@@ -46,6 +46,8 @@ business_associate(ba, ce).
 
 in_relation(patient, ce3).
 
+relationship(mom,relative,teen).
+
 
 %%%%Test is not complete. It only checks for all the true conditions.
 t :-
@@ -396,6 +398,8 @@ t_164_510_a_1d:-
 %164_510_b2 fails since parts still need to be implemented
 
 %%% following 3 fail because the to field is in the role of covered entity 
+%%need to change belief tag 
+
 
 t_164_510_b_4a:-
  pbh(a(priv_relief_org,ce4, patient, phi, notification_fam_personalrep_respons_of_location, null,null,not_disclosing_would_interfere_with_emergResponse)), 
