@@ -110,8 +110,6 @@ if ($mailbag) {
     <th>About</th>
     <th>Type</th>
     <th>Purpose</th>
-    <th>Consent</th>
-    <th>Consented</th>
     <th>Message</th>
   </tr>
 
@@ -126,8 +124,6 @@ if ($mailbag) {
      echo "<td>" . $msg->about . "</td>";
      echo "<td>" . $msg->type . "</td>";
      echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->consent . "</td>";
-     echo "<td>" . $msg->consented . "</td>";
      echo "<td>" . $msg->message . "</td>";
      echo "</tr>";
   }
