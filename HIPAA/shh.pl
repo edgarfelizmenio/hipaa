@@ -71,6 +71,7 @@ inRole(dad, adult).
 inRole(dead, deceased_individual).
 inRole(dead, individual).
 inRole(dead, adult).
+inRole(clergy_mem,clergy).
 
 inRole(cop, law_enforcement_officer).
 inRole(government_official, government_secretary).
@@ -104,6 +105,8 @@ personal_representative(dad, mom).
 personal_representative(mom, dad).
 guardian(null, null).
 loco_parentis(null, null).
+
+
 
 
 test :-
