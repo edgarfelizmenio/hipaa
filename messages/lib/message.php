@@ -109,18 +109,27 @@ class Message {
 
   /**
    * Retrieves all ancestors of this message
+   * first go up tree by replyto_id and secondary by parent_id
    */
   function getAncestors($message_id) {
     $message_id = intval($message_id);
+    
+    
     $idtree = array();
     $idtree[] = $message_id;
     while (true) {
-      $query = "SELECT parent_id 
+      $query = "SELECT parent_id, replyto_id 
               FROM " . MSG_DB . "
               WHERE message_id='" . $message_id . "'
               ";
-      $parent_id = $this->db->get_var($query);
-      if ($parent_id != -1) {
+      $results = $this->db->get_row($query);
+      
+      $parent_id = $results->parent_id;
+      $replyto_id = $results->replyto_id;
+      if ($replyto_id != -1) {
+	$idtree[] = $replyto_id;
+	$message_id = $replyto_id;
+      } else if ($parent_id != -1) {
 	$idtree[] = $parent_id;
 	$message_id = $parent_id;
       } else {
@@ -145,7 +154,8 @@ class Message {
     if ($consent_required == '1') {
       if ($msg_consent == null)
 	$errors[] = 'Please fill out consent field';
-      $mConsent = $_POST['msg_consent'];
+      $msg_consent = $_POST['msg_consent'];
+      $mConsent = "($msg_consent,consented)";
     }
 
     $mBelief = 'null';
@@ -213,6 +223,13 @@ class Message {
     $parent_id = -1;
 
 
+  $replyto_field = '';
+  $replyto_id = '';
+  if (isset($_POST['replyto_id']) && !empty($_POST['replyto_id'])) {
+    $replyto_field = ', `replyto_id`';
+    $replyto_id = ",'" . intval($_POST['replyto_id']) . "'";
+  }
+
   $sqlquery = "INSERT INTO " . MSG_DB . " 
                 ( `to` 
                 , `from`
@@ -226,6 +243,7 @@ class Message {
                 , `belief_by` 
                 , `message`
                 , `parent_id` 
+              " . $replyto_field . "
                 )
               VALUES 
                 ( '" . $msg_to . "'
@@ -240,6 +258,7 @@ class Message {
                 , NULL
                 , '" . $msg_message . "'
                 , '" . $parent_id . "'
+              " . $replyto_id . "
                 )";
 
     // reply to, consented, belief
@@ -254,7 +273,7 @@ class Message {
     ' . $query . '</p></div>';
     if (strpos($response, "yes") === false)
       return false;
-  
+    
   if(!$this->db->query($sqlquery)) {
     echo "Error in query";
   }
