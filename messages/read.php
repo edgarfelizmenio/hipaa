@@ -50,20 +50,23 @@ if ($mailbag) {
     <th>Type</th>
     <th>Purpose</th>
     <th>Message</th>
+    <th>Reply-to</th>
   </tr>
 
 <?php
    
-   foreach ($mailbag as $msg) {
-     $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
+   foreach ($mailbag as $history) {
+     $history->consent = (empty($history->consent)) ? 'N/A' : $history->consent;
 
      echo "<tr>";
-     echo "<td>" . $msg->to . "</td>";
-     echo "<td>" . $msg->from . "</td>";
-     echo "<td>" . $msg->about . "</td>";
-     echo "<td>" . $msg->type . "</td>";
-     echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->message . "</td>";
+     echo "<td>" . $history->to . "</td>";
+     echo "<td>" . $history->from . "</td>";
+     echo "<td>" . $history->about . "</td>";
+     echo "<td>" . $history->type . "</td>";
+     echo "<td>" . $history->purpose . "</td>";
+     echo "<td>" . $history->message . "</td>";
+     echo "<td><a href='reply.php?message_id=" . $msg->message_id
+     . "&replyto_id=" . $history->message_id . "'>Reply</a></td>";
      echo "</tr>";
   }
   echo "</table>";
