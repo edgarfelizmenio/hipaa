@@ -67,6 +67,7 @@
 pbh(A):-
   (permitted_by_164_502(A);
    permitted_by_164_506(A);
+   permitted_by_164_510(A);
   %permitted_by_self(A);
   fail).
 
