@@ -3,6 +3,8 @@
 inRole(ce, covered_entity).
 inRole(ce2, covered_entity).
 inRole(ce3, covered_entity).
+inRole(ce4, covered_entity).
+
 
 inRole(patient, individual).
 inRole(patient, adult).
@@ -23,6 +25,10 @@ inRole(hoa, health_oversight_agency).
 inRole(pha, public_health_authority).
 inRole(hcao, healthCare_accreditation_organization).
 inRole(clergy_mem,clergy).
+inRole(priv_relief_org, privateEntity).
+inRole(pub_relieg_org, publicEntity).
+inRole(priv_relief_org,authorizedByLaw_to_assist_disasterRelief).
+inRole(pub_relief_org,authorizedByCharter_to_assist_disasterRelief).
 
 employee_of(doctor, ce).
 employee_of(nurse, ce).
@@ -335,7 +341,7 @@ t_164_506_ac3b :-
   writeln('t_164_506_ac3b passed').
 
 t_164_506_ac4 :-
-  pbh(a(ce3, ce, patient, phi, healthCare_operations, null, null,b(patient,minimum_necessary_to_purpose,ce))), 
+  pbh(a(ce3, h, patient, phi, healthCare_operations, null, null,b(patient,minimum_necessary_to_purpose,ce))), 
   writeln('t_164_506_ac4 passed').
 
 t_164_506_c_1a :-
@@ -367,6 +373,42 @@ t_164_506_c_4 :-
   true,
   writeln('t_164_506_c_4 passed').
  
-t_164_510 :-
- pbh(a(clergy_mem, null, patient, phi, null, null, (patient,opp_given),null)), 
- writeln('t_164_510 passed').
+t_164_510_a_1a:-
+ pbh(a(clergy_mem, null, patient, name, null, null, (patient,opp_given),null)), 
+ writeln('t_164_510_a_1a passed').
+
+t_164_510_a_1b:-
+ pbh(a(clergy_mem, null, patient, loc, null, null, (patient,opp_given),null)), 
+ writeln('t_164_510_a_1a passed').
+
+t_164_510_a_1c:-
+ pbh(a(clergy_mem, null, patient, cond, null, null, (patient,opp_given),null)), 
+ writeln('t_164_510_a_1a passed').
+
+t_164_510_a_1d:-
+ pbh(a(clergy_mem, null, patient, relig, null, null, (patient,opp_given),null)), 
+ writeln('t_164_510_a_1a passed').
+
+% 164_510_a_2 tests cases are covered by rest of 164_510_a
+
+%t_164_510_a_3  currently fails since "consistent with past" clause hasn't been implemented
+
+%164_510_b2 fails since parts still need to be implemented
+
+%%% following 3 fail because the to field is in the role of covered entity 
+
+t_164_510_b_4a:-
+ pbh(a(priv_relief_org,ce4, patient, phi, notification_fam_personalrep_respons_of_location, null,null,not_disclosing_would_interfere_with_emergResponse)), 
+ writeln('t_164_510_a_1a passed').
+
+%t_164_510_b_4a:-
+%pbh(a(priv_relief_org,ce,patient, phi, notification_fam_personalrep_respons_of_location,null,null,not_disclosing_would_interfere_with_emergResponse)), 
+%writeln('t_164_510_b_4a passed').
+
+t_164_510_b_4b:-
+ pbh(a(pub_relief_org, ce, patient, phi, notification_fam_personalrep_respons_of_gencond, null, null,not_disclosing_would_interfere_with_emergResponse)), 
+ writeln('t_164_510_b_4b passed').
+
+t_164_510_b_4c:-
+ pbh(a(pub_relief_org, ce, patient, phi, notification_fam_personalrep_respons_of_death, null, null,not_disclosing_would_interfere_with_emergResponse)), 
+ writeln('t_164_510_b_4c passed').
