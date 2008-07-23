@@ -42,7 +42,8 @@ is_msg_about_role(A, Y):-
   %in_role(X, Y).
   in_role_closures(X, Y).
 
-is_msg_type(a(_,_,_,X,_,_,_,_), X).
+is_msg_type(a(_,_,_,X,_,_,_,_), Y):-
+in_type_closures(X,Y).
 
 has_msg_purpose(a(_,_,_,_,X,_,_,_), X).
 
