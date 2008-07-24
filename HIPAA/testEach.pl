@@ -403,7 +403,7 @@ t_164_510_a_1d:-
 
 %164_510_b2 fails since parts still need to be implemented
 
-%%% following 3 fail because the to field is in the role of covered entity 
+
 %%need to change belief tag 
 
 
@@ -412,7 +412,7 @@ t_164_510_b_4a:-
  writeln('t_164_510_a_1a passed').
 
 t_164_510_b_4b:-
- pbh(a(pub_relief_org, ce, patient, phi, notification_fam_personalrep_respons_of_gencond, null, null,not_disclosing_would_interfere_with_emergResponse)), 
+ pbh(a(pub_relief_org, ce, patient, phi, notification_fam_personalrep_respons_of_gencond, null, null,b(patient, not_disclosing_would_interfere_with_emergResponse, ce))), 
  writeln('t_164_510_b_4b passed').
 
 t_164_510_b_4c:-
