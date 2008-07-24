@@ -43,7 +43,7 @@ excluded_164_502_b_2_v(A) :-
   required_by_164_512_a(A),
   writeln('HIPAA rule 164_502_b_2_v;').
    
-%Need to add all required types. Found only this.
+%Need to add all required types. Found only this.	
 excluded_164_502_b_2_vi(A) :-
   required_by_164_502_a_2(A),
   writeln('HIPAA rule 164_502_b_2_vi;').
