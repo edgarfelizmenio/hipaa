@@ -47,6 +47,7 @@ business_associate(ba, ce).
 in_relation(patient, ce3).
 
 relationship(mom,relative,teen).
+involved(dad,payment,kid). 
 
 
 %%%%Test is not complete. It only checks for all the true conditions.
@@ -117,7 +118,7 @@ t_164_506 :-
   t_164_506_c_3b,
   t_164_506_c_4.
 
-
+%ac4 is no
 
 
 
@@ -342,9 +343,14 @@ t_164_506_ac3b :-
   pbh(a(ce2, ce, patient, phi, payment, null, null,null)), 
   writeln('t_164_506_ac3b passed').
 
+%needs to be fixed
 t_164_506_ac4 :-
-  pbh(a(ce3, h, patient, phi, healthCare_operations, null, null,b(patient,minimum_necessary_to_purpose,ce))), 
+  pbh(a(ce3, ce2, patient, phi, healthCare_operations, null, null,b(patient,minimum_necessary_to_purpose,ce))), 
   writeln('t_164_506_ac4 passed').
+
+%t_164_506_ac4 :-
+%  pbh(a(ce3, h, patient, phi, healthCare_operations, null, null,b%(patient,minimum_necessary_to_purpose,ce))), 
+%  writeln('t_164_506_ac4 passed').
 
 t_164_506_c_1a :-
   pbh(a(doctor, nurse, patient, phi, treatment, null, null,null)), 
@@ -402,12 +408,8 @@ t_164_510_a_1d:-
 
 
 t_164_510_b_4a:-
- pbh(a(priv_relief_org,ce4, patient, phi, notification_fam_personalrep_respons_of_location, null,null,not_disclosing_would_interfere_with_emergResponse)), 
+ pbh(a(priv_relief_org,ce4, patient, phi, notification_fam_personalrep_respons_of_location, null,null,b(patient, in_indivs_best_interest, ce4))), 
  writeln('t_164_510_a_1a passed').
-
-%t_164_510_b_4a:-
-%pbh(a(priv_relief_org,ce,patient, phi, notification_fam_personalrep_respons_of_location,null,null,not_disclosing_would_interfere_with_emergResponse)), 
-%writeln('t_164_510_b_4a passed').
 
 t_164_510_b_4b:-
  pbh(a(pub_relief_org, ce, patient, phi, notification_fam_personalrep_respons_of_gencond, null, null,not_disclosing_would_interfere_with_emergResponse)), 
