@@ -53,7 +53,7 @@ permitted_by_164_510_b_3(A):-
 (is_about_present(A),
 (not(is_about_incapac(A)),not(is_about_emerg(A))));
 (is_belief_best_interest(A), 
-(is_relevant_to_payment_or_care_involvement(A);
+(is_relevant_to_payment_or_health_involvement(A);
 is_msg_type(A,pres_medsupp_xray_etc))),
 writeln('HIPAA rule 164_510_b_3').
 
