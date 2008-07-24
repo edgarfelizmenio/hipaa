@@ -19,9 +19,6 @@ is_from_businessAssociateOf(A, Y) :-
   msg_from(A, X),
   business_associate(X, Y).
 
-is_from_concernedIndividual(A) :-
-  is_msg_from_concerned_role(A, individual).
-
 is_from_healthCareProvider(A) :-
   is_msg_from_role(A, healthCare_provider).
   %is_from_employeeOf(A, Y),
@@ -37,6 +34,7 @@ is_from_healthInsuranceIssuer(A) :-
   %is_from_employeeOf(A, Y),
   %in_role(Y, health_insurance_issuer).
 
+
 is_from_groupHealthPlan(A) :-
   is_msg_from_role(A, group_health_plan).
   %is_from_employeeOf(A, Y),
@@ -46,6 +44,9 @@ is_from_governmentAgencyHealthPlan(A) :-
   is_msg_from_role(A, government_agency_health_plan).
   %is_from_employeeOf(A, Y),
   %in_role(Y, government_agency_health_plan).
+
+is_from_concernedIndividual(A) :-
+  is_msg_from_concerned_role(A, individual).
 
 %%%%%%%%%%% To
 is_to_coveredEntity(A) :-
@@ -175,6 +176,9 @@ is_about_in_capac_to_make_dec(A):- fail.
 is_phi(A) :-
   is_msg_type(A, phi).
 
+is_type_pres_medsupp_xray_etc(A):-
+  is_msg_type(A,pres_medsupp_xray_etc).
+
 %%%%%%%%%% PURPOSE
 is_for_eitherPurpose(A):-
   has_msg_purpose(A, healthCare_operations);
@@ -271,13 +275,21 @@ is_belief_from_about_pertainingToRelationship(A):-
   has_msg_belief(A, Y, minimum_necessary_to_purpose, X).
 
 is_belief_best_interest(A):-
-  is_msg_belief(A,in_indivs_best_interest).
+msg_from(A, X),
+msg_about(A,Y),
+has_msg_belief(A, Y, in_indivs_best_interest, X).
+%  is_msg_belief(A,in_indivs_best_interest).
 
 is_belief_not_disclosing_would_interfere_with_emergResponse(A):-
-  is_msg_belief(A,not_disclosing_would_interfere_with_emergResponse).
+msg_from(A, X),
+has_msg_belief(A, _, in_indivs_best_interest, X).
+%  is_msg_belief(A,not_disclosing_would_interfere_with_emergResponse).
 
 is_belief_can_be_inferred_indiv_wouldnt_object(A):-
-  is_msg_belief(A,can_be_inferred_indiv_wouldnt_object).
+msg_from(A, X),
+msg_about(A,Y),
+has_msg_belief(A, Y, can_be_inferred_indiv_wouldnt_object, X).
+%  is_msg_belief(A,can_be_inferred_indiv_wouldnt_object).
 
 
 
@@ -310,6 +322,27 @@ in_role(X,Y) :-
   inRole(X,Y).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% type heirarchy
+in_type(name, phi).
+in_type(loc,phi).
+in_type(cond,phi).
+in_type(relig,phi).
+in_tyoe(pres_medsupp_xray_etc,phi).
+
+
+in_type_closures(X,X).
+
+in_type_closures(X, Y) :-
+  in_type(X, Y).
+
+in_type_closures(X, Y) :-
+  in_type(X, Z),
+  in_type_closures(Z, Y).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %%transitive closure of basic relations.
 %%The terminal relation should be specified outside.
 
@@ -329,5 +362,6 @@ in_role_closures(X, Y) :-
 %in_relation(X, Y) :-
   %in_relation(X, Z),
   %in_relation(Z, Y).
+
 
 
