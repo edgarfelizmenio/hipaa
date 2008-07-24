@@ -14,7 +14,7 @@ permitted_by_164_510_b_1_i(A):-
 is_phi(A), 
 is_from_coveredEntity(A), 
 (is_to_relative(A);is_to_closeFriend(A);is_to_personIdentified(A)), 
-is_relevant_to_payment_or_care_involvement(A).
+is_relevant_to_payment_or_health_involvement(A).
 
 
 permitted_by_164_510_b_1_ii(A):- 
@@ -39,7 +39,7 @@ permitted_by_164_510_b_3(A):-
 (is_about_present(A));
 (not(is_about_incapac(A)),not(is_about_emerg(A)));
 (is_belief_best_interest(A), 
-(is_relevant_to_payment_or_care_involvement(A);
+(is_relevant_to_payment_or_health_involvement(A);
 is_msg_type(A,prescription))).
 
 permitted_by_164_510_b_4(A): 
