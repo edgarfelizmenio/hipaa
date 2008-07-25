@@ -282,7 +282,7 @@ has_msg_belief(A, Y, in_indivs_best_interest, X).
 
 is_belief_not_disclosing_would_interfere_with_emergResponse(A):-
 msg_from(A, X),
-has_msg_belief(A, _, in_indivs_best_interest, X).
+has_msg_belief(A, _,not_disclosing_would_interfere_with_emergResponse, X).
 %  is_msg_belief(A,not_disclosing_would_interfere_with_emergResponse).
 
 is_belief_can_be_inferred_indiv_wouldnt_object(A):-
