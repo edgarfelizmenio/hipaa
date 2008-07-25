@@ -1,3 +1,6 @@
+%all true cases for 510 have been written. need to test false cases.
+%all old 502, 506 cases are passing except for t_164_506_ac4 which needs to be fixed. 
+
 :- ['HIPAA.pl'].
 
 inRole(ce, covered_entity).
