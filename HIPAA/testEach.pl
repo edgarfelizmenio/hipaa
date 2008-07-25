@@ -26,7 +26,7 @@ inRole(pha, public_health_authority).
 inRole(hcao, healthCare_accreditation_organization).
 inRole(clergy_mem,clergy).
 inRole(priv_relief_org, privateEntity).
-inRole(pub_relieg_org, publicEntity).
+inRole(pub_relief_org, publicEntity).
 inRole(priv_relief_org,authorizedByLaw_to_assist_disasterRelief).
 inRole(pub_relief_org,authorizedByCharter_to_assist_disasterRelief).
 
