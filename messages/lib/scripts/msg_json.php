@@ -33,11 +33,20 @@ if (isset($_GET['msg_about']) && $_GET['msg_about'] != 'null') {
   $mAbout = 'Msg_about';
   $evalVars[] = $mAbout;
  }
+if (isset($_GET['consent_required']) && $_GET['consent_required'] == 'true') {
+if (isset($_GET['msg_consent']) && $_GET['msg_consent'] != 'null') {
+  $mConsent = '(Msg_consent,consented)';
+  $evalVars[] = 'Msg_consent';
+}
+
+} else {
+$mConsent = 'null';
+}
 
 $toEvaluate = implode(',',$evalVars);
 
 
-$prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)),L).\"";
+$prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,null)),L).\"";
 // results will return properly formatted return value for use
 
 $results = shell_exec("sh ./getJSON $prologCall");
