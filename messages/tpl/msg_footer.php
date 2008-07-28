@@ -11,15 +11,25 @@
 <div rel="belief_present">
 <div>
   <label>About</label>
-  <input type="text" name="belief_about" />
+  <select name="belief_about" id="belief_about" onChange="fieldChanged(this);">
+          <option VALUE="null">-- Choose about whom -- </option>
+	  <?php include ('tpl/belief_about.php'); ?>
+  </select>
+
 </div>
 <div>
   <label>What Belief</label>
-  <input type="text" name="belief_what" />
+  <select name="belief_what" id="belief_what" onChange="fieldChanged(this);">
+            <option VALUE="null">-- Choose belief -- </option>
+	  <?php include ('tpl/belief_what.php'); ?>
+  </select>
 </div>
 <div>
   <label>By/From</label>
-  <input type="text" name="belief_by" />
+  <select name="belief_by" id="belief_by" onChange="fieldChanged(this);">
+          <option VALUE="null">-- Choose whose belief -- </option>
+	  <?php include ('tpl/belief_by.php'); ?>
+  </select>
 </div>
 </div>
 
@@ -47,10 +57,7 @@
 		<select name="msg_consent" id="msg_consent"
 	    onChange="fieldChanged(this);">
           <option VALUE="null">-- Choose consent -- </option>
-	  <?php
-	     include ('tpl/consents.php');
-
-	     ?>
+	  <?php include ('tpl/consents.php'); ?>
 	</select>
 
       </div>
