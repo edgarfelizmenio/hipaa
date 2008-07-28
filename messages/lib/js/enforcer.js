@@ -56,6 +56,7 @@ function fieldChanged(select) {
   // just pulls value now...
   // msg_to = input_msg_to.value
   for ( var i in formFields ) {
+
     var str = formFields[i] + ' = input_' + formFields[i] + '.value';
     eval(str);
   }
@@ -94,7 +95,20 @@ function updatePrologQuery(args) {
   var queries = new Array();
   $('#prologquery').append("<dl><dt>Given the following values:</dt>");
   for (var param in args) {
-    var value = $('#'+param).attr('value');
+
+    // distinguish between checkbox and normal input fields
+    if ($('#'+param).attr('type') == 'checkbox') {
+
+      if ($('#'+param).attr('checked') == true) {
+	var value = 'true';       
+      } else {
+	var value = 'null';
+      }
+    } else {
+      var value = $('#'+param).attr('value');
+    } 
+
+
     if (value != 'null') {
       $('#prologquery').append('<dd>' + param + ' = ' + value + '</dd>');
     } else {
