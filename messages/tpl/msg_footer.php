@@ -4,6 +4,7 @@
 	   type="checkbox" 
 	   rel="belief_present" 
 	   name="msg_belief" 
+	   id="msg_belief"
 	   value="1" 
 	   <?php if($_POST['msg_belief']=='1') echo 'checked="checked"'; ?> />
       </div>
