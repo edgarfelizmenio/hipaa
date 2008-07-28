@@ -56,13 +56,12 @@ function fieldChanged(select) {
   // just pulls value now...
   // msg_to = input_msg_to.value
   for ( var i in formFields ) {
+    // if it doesn't exist, skip
+    if ( !eval('input_' + formFields[i]))      continue;
 
     var str = formFields[i] + ' = input_' + formFields[i] + '.value';
     eval(str);
-  }
-      
-      
-  for ( var i in formFields ) {
+
     var str = 'args.' + formFields[i] + '=' + formFields[i];
     eval(str);
   }
