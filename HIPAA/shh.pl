@@ -107,7 +107,7 @@ guardian(null, null).
 loco_parentis(null, null).
 
 relationship(mom, relative, teen).
-
+involved(dad,payment,kid). 
 
 
 test :-
