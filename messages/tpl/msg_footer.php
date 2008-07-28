@@ -33,17 +33,20 @@
 	<label>Requires Consent?</label>
 	<input 
 	 name="consent_required" 
+	 id="consent_required"
 	 value="1" 
 	 type="checkbox"
 	 rel="permission"
+	 onChange="fieldChanged(this);"
 	 <?php if($_POST['consent_required']=='1') echo 'checked="checked"'; ?>>
 
       </div>
 
       <div rel="permission">
 	<label>Consented by:</label>
-		<select name="msg_consent">
-          <option VALUE="">-- Choose consent -- </option>
+		<select name="msg_consent" id="msg_consent"
+	    onChange="fieldChanged(this);">
+          <option VALUE="null">-- Choose consent -- </option>
 	  <?php
 	     include ('tpl/consents.php');
 
