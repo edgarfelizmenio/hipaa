@@ -1,7 +1,8 @@
 var formFields = ["msg_from", 
 		  "msg_to",
 		  "msg_about",
-		  "msg_purpose"];
+		  "msg_purpose",
+		  "msg_consent"];
 function debug(msg) {
     // If we haven't already created a box within which to display
     // our debugging messages, then do so now. Note that to avoid
@@ -65,6 +66,8 @@ function fieldChanged(select) {
     eval(str);
   }
 
+  // add arg to see if consent_required
+  args.consent_required = $('#consent_required').attr('checked');
 
   updatePrologQuery(args);
 
