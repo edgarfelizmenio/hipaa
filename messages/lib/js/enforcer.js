@@ -154,18 +154,24 @@ function refreshFields() {
 function rebootFields(removeSelected) {
   for (var i in formFields) {
     var field = document.getElementById(formFields[i]);
+
+    if (!field)
+      continue;
+
     var options = field.options;
     if (options == undefined) continue;
     var optLen = options.length;
     for (var j=0; j<optLen; j++) {
       var curOpt = options[j];
-
+      
       $(curOpt).removeClass();
       if (removeSelected) {
-      $(curOpt).removeAttr('selected');
+	$(curOpt).removeAttr('selected');
       }
     }
-  }
+    
+}
+
 
 }
 
