@@ -132,6 +132,35 @@ for ($i=0; $i<@vars; $i++) {
   print "\n   ]}";
 }
 
+
+# the hashes we want to join together
+@hash_joins = ('Msg_to', 'Msg_from', 'Msg_about');
+
+for($i=0; $i<@hash_joins; $i++) {
+    $prev = 0;
+    for my $key (keys %{$hash_joins[$i]}) {
+        $unique_roles{$key} = 1;
+    }
+}
+
+# comma to end the line and start new variable
+print ", \n";
+
+# declare variable 
+print '"Msg_consent"' .  ": {\"identifier\": \"name\",\n  \"items\": [  \n";
+
+$prev = 0;
+for my $key ( keys %unique_roles ) {
+    if($prev) {
+        print ", \n";
+    }
+    $prev = 1;
+    print '      {"name": "' . $key . '"}';
+}
+
+print "\n   ]}";
+
+
 print "\n}\n";
 
 # %hash = (
