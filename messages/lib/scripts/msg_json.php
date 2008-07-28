@@ -33,14 +33,16 @@ if (isset($_GET['msg_about']) && $_GET['msg_about'] != 'null') {
   $mAbout = 'Msg_about';
   $evalVars[] = $mAbout;
  }
-if (isset($_GET['consent_required']) && $_GET['consent_required'] == 'true') {
-if (isset($_GET['msg_consent']) && $_GET['msg_consent'] != 'null') {
-  $mConsent = '(Msg_consent,consented)';
-  $evalVars[] = 'Msg_consent';
-}
 
+if (isset($_GET['consent_required']) && $_GET['consent_required'] == 'true') {
+  if (isset($_GET['msg_consent']) && $_GET['msg_consent'] != 'null') {
+    $mConsent = "(${_GET['msg_consent']},consented)";
+  } else {
+    $mConsent = '(Msg_consent,consented)';
+    $evalVars[] = 'Msg_consent';    
+  }
 } else {
-$mConsent = 'null';
+  $mConsent = 'null';  
 }
 
 $toEvaluate = implode(',',$evalVars);
