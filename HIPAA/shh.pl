@@ -106,6 +106,7 @@ personal_representative(mom, dad).
 guardian(null, null).
 loco_parentis(null, null).
 
+relationship(mom, relative, teen).
 
 
 
