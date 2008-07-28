@@ -25,7 +25,7 @@ is_from_coveredEntity(A),
 (is_for_notification_fam_personalrep_respons_of_location(A);
 is_for_notification_fam_personalrep_respons_of_gencond(A);
 is_for_notification_fam_personalrep_respons_of_death(A)),
-writeln('HIPAA rule 164_510_b_1_ii').
+writeln('HIPAA rule 164_510_b_1_ii;').
 
 %not sure how to implement these yet:
 %is_about_present,is_about_avail_for_consent,is_about_in_capac_to_make_dec
