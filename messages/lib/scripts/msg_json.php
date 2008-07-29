@@ -45,10 +45,44 @@ if (isset($_GET['consent_required']) && $_GET['consent_required'] == 'true') {
   $mConsent = 'null';  
 }
 
+
+if (isset($_GET['msg_belief']) && $_GET['msg_belief'] == 'true') {
+  if (isset($_GET['belief_about']) && $_GET['belief_about'] != 'null') {
+    $belief_about = $_GET['belief_about']; 
+  } else {
+    $belief_about = 'Belief_about';
+    $evalVars[] = $belief_about;    
+  }
+
+  if (isset($_GET['belief_what']) && $_GET['belief_what'] != 'null') {
+    $belief_what = $_GET['belief_what']; 
+  } else {
+    $belief_what = 'Belief_what';
+    $evalVars[] = $belief_what;    
+  }
+
+  if (isset($_GET['belief_by']) && $_GET['belief_by'] != 'null') {
+    $belief_by = $_GET['belief_by']; 
+  } else {
+    $belief_by = 'Belief_by';
+    $evalVars[] = $belief_by;    
+  }
+
+
+
+
+  $mBelief = "b($belief_about,$belief_what,$belief_by)";
+
+} else {
+  $mBelief = 'null';  
+}
+
+
+
 $toEvaluate = implode(',',$evalVars);
 
 
-$prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,null)),L).\"";
+$prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,$mBelief)),L).\"";
 // results will return properly formatted return value for use
 
 $results = shell_exec("sh ./getJSON $prologCall");
