@@ -83,7 +83,7 @@ if($action == 'process') {
   <div>
     <input type="hidden" name="action" value="process" />
     <input type="submit"  value="Send message" />
-    <input type="reset" value="Reset" onclick="rebootFields(true)" />
+    <input type="reset" value="Reset" onclick="rebootFields(true);" />
   </div>
 
 </form>
@@ -93,6 +93,11 @@ if($action == 'process') {
 $('#msg_to').val('doctor');
 $('#msg_from').val('nurse');
 $('#msg_about').val('patient');
+$('#msg_purpose').val('null');
+$('#consent_required').removeAttr('checked');
+$('#msg_belief').removeAttr('checked');
+prepareForm();
+
 $('#notice').html('<p>When sending messages, only certain purposes are allowed.  Check what options are available under <em>Purpose</em></p>'); 
 
 fieldChanged(null);
@@ -103,6 +108,11 @@ fieldChanged(null);
 $('#msg_to').val('nurse');
 $('#msg_from').val('nurse');
 $('#msg_about').val('patient');
+$('#msg_purpose').val('null');
+$('#consent_required').removeAttr('checked');
+$('#msg_belief').removeAttr('checked');
+prepareForm();
+
 $('#notice').html('<p>Notice how in the purpose option field that healthcare operations is highlighted red.' +  
 '<ul><li>' + 
 'Click the consent checkbox.  Notice how healthCare_operations is now allowed in <em>Purpose</em>.' +
@@ -118,6 +128,11 @@ fieldChanged(null);
 $('#msg_to').val('pha');
 $('#msg_from').val('carla');
 $('#msg_about').val('kid');
+$('#msg_purpose').val('null');
+$('#consent_required').removeAttr('checked');
+$('#msg_belief').removeAttr('checked');
+prepareForm();
+
 $('#notice').html('<p>Notice how in the purpose option field investigate is now allowed' +  
 '<ul><li>' + 
 'Click the belief checkbox.  Notice how investigate is now allowed in <em>Purpose</em>.' +
