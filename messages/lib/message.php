@@ -139,9 +139,42 @@ class Message {
     return $idtree;
   }
 
+  /**
+   * If the fields passed in through the POST fields are allowed, 
+   */
   function addMessage($parent_id=-1) {
     global $_POST;
-    // make variables local and check for missing fields
+
+    $query = $this->getPrologQuery();
+    if ($query === false)
+      return false;
+
+    $response = $this->prolog->askHIPAA($query);
+
+    // print out the query and response for debugging purposes
+    echo '<div class="confirmed"><p>' . $response . '</p><p>Prolog query:
+    ' . $query . '</p></div>';
+
+    
+    if ($this->allowed($response)) {
+      $sqlquery = $this->getSqlQuery($parent_id);
+      if(!$this->db->query($sqlquery)) {
+	echo "Error in query";
+      }
+      return true;
+    } 
+
+    return false;
+  }
+
+  /**
+   * Constructs the prolog query from POST fields
+   * @returns string prolog query, returns false on errors
+   */
+  private function getPrologQuery() {
+    global $_POST;
+
+    // check standard required fields filled in
     $msg_vars = $this->getMsgVars();
     foreach($msg_vars as $msg_var => $required) {
       $$msg_var = htmlspecialchars(addslashes($_POST[$msg_var]));
@@ -152,8 +185,8 @@ class Message {
 
     $mConsent = 'null';
     if ($consent_required == '1') {
-      if ($msg_consent == null)
-	$errors[] = 'Please fill out consent field';
+      if ($msg_consent == 'null')
+	$errors[] = 'msg_consent';
       $msg_consent = $_POST['msg_consent'];
       $mConsent = "($msg_consent,consented)";
     }
@@ -161,11 +194,17 @@ class Message {
     $mBelief = 'null';
     // if they believe something, make sure they fill out all belief fields
     if ($msg_belief == '1') {
+      echo "<h1 > all hell</h1>";
       $b_about = $_POST['belief_about'];
       $b_what = $_POST['belief_what'];
       $b_by = $_POST['belief_by'];
-      if (empty ($b_about) || empty($b_about) || empty($b_by))
-	$errors[] = 'Please fill out all belief fields';
+      if (empty ($b_about) || $b_about == 'null')
+	$errors[] = 'belief_about';
+      if (empty($b_what) || $b_what == 'null')
+	$errors[] = 'belief_what';
+      if (empty($b_by) || $b_by == 'null')
+	$errors[] = 'belief_by';
+
       $mBelief = "b($b_about,$b_what,$b_by)";
     }
 
@@ -216,21 +255,35 @@ class Message {
     $mPurpose = $msg_purpose;
 
 
-
-
     $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
-  if (empty($parent_id) || $parent_id==0)
-    $parent_id = -1;
+    return $query;
 
-
-  $replyto_field = '';
-  $replyto_id = '';
-  if (isset($_POST['replyto_id']) && !empty($_POST['replyto_id'])) {
-    $replyto_field = ', `replyto_id`';
-    $replyto_id = ",'" . intval($_POST['replyto_id']) . "'";
   }
 
-  $sqlquery = "INSERT INTO " . MSG_DB . " 
+
+  /**
+   * Generates the insert query for the submitted message from POST fields
+   * @returns string sql insert query for message
+   */
+  private function getSqlQuery($parent_id) {
+    global $_POST;
+    if (empty($parent_id) || $parent_id==0)
+      $parent_id = -1;
+
+    $msg_vars = $this->getMsgVars();
+    foreach($msg_vars as $msg_var => $required) {
+      $$msg_var = htmlspecialchars(addslashes($_POST[$msg_var]));
+    }
+
+    $replyto_field = '';
+    $replyto_id = '';
+    if (isset($_POST['replyto_id']) && !empty($_POST['replyto_id'])) {
+      $replyto_field = ', `replyto_id`';
+      $replyto_id = ",'" . intval($_POST['replyto_id']) . "'";
+    }
+
+
+    $sqlquery = "INSERT INTO " . MSG_DB . " 
                 ( `to` 
                 , `from`
                 , `about` 
@@ -251,59 +304,45 @@ class Message {
                 , '" . $msg_about . "'
                 , '" . $msg_type . "'
                 , '" . $msg_purpose . "'
-                , NULL
-                , NULL
-                , NULL
-                , NULL
-                , NULL
+                , '" . $msg_consent . "'
+                , '" . 'consented' . "'
+                , '" . $belief_about . "'
+                , '" . $belief_what . "'
+                , '" . $belief_by . "'
                 , '" . $msg_message . "'
                 , '" . $parent_id . "'
               " . $replyto_id . "
                 )";
 
-    // reply to, consented, belief
-    //    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
-    // b(ce,unlawful,Carla) # Carla believes that the covered entity is unlawful
-    //$STR="\"pbh(a(patient, ce, patient, phi, null, null, null,null)).\"";
-    // b(ce, unlawful, Carla)
-    // where is consented by?
-    $response = $this->prolog->askHIPAA($query);
-
-    echo '<div class="confirmed"><p>' . $response . '</p><p>Prolog query:
-    ' . $query . '</p></div>';
-    if (strpos($response, "yes") === false)
-      return false;
-    
-  if(!$this->db->query($sqlquery)) {
-    echo "Error in query";
+    return $sqlquery;
   }
 
-  return true;
-
+  /**
+   * Returns whether the prolog query was allowed
+   * @returns boolean query allowed or not
+   */
+  private function allowed($response) {
+    return (strpos($response, "yes") === false);
   }
 
-/**
- * Returns an associative array with variable name as the key and a
- * boolean telling whether the variable is required for a message or not
- */
-private function getMsgVars() {
-  $msg_vars = array();
-  $msg_vars['msg_to'] = true;
-  $msg_vars['msg_from'] = true;
-  $msg_vars['msg_about'] = true;
-  $msg_vars['msg_type'] = true;
-  $msg_vars['msg_purpose'] = true;
-  $msg_vars['msg_belief'] = false;
-  $msg_vars['msg_message'] = false;
-  $msg_vars['msg_consent'] = false;        
-  $msg_vars['consent_required'] = false;        
-  $msg_vars['msg_reply'] = false;        
-  return $msg_vars;
-}
-
- public function debug() {
-   echo MSG_DB;
- }
+  /**
+   * Returns an associative array with variable name as the key and a
+   * boolean telling whether the variable is required for a message or not
+   */
+  private function getMsgVars() {
+    $msg_vars = array();
+    $msg_vars['msg_to'] = true;
+    $msg_vars['msg_from'] = true;
+    $msg_vars['msg_about'] = true;
+    $msg_vars['msg_type'] = true;
+    $msg_vars['msg_purpose'] = true;
+    $msg_vars['msg_belief'] = false;
+    $msg_vars['msg_message'] = false;
+    $msg_vars['msg_consent'] = false;        
+    $msg_vars['consent_required'] = false;        
+    $msg_vars['msg_reply'] = false;        
+    return $msg_vars;
+  }
 
 }
 ?>
