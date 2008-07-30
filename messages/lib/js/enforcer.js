@@ -6,70 +6,40 @@ var formFields = ["msg_from",
 		  "belief_about",
 		  "belief_what",
 		  "belief_by"];
-function debug(msg) {
-    // If we haven't already created a box within which to display
-    // our debugging messages, then do so now. Note that to avoid
-    // using another global variable, we store the box node as
-    // a proprty of this function.
-    if (!debug.box) {
-        // Create a new <div> element
-        debug.box = document.createElement("pre");
-        // Specify what it looks like using CSS style attributes
-        debug.box.setAttribute("style", 
-                               "background-color: white; " +
-                               "font-family: monospace; " +
-                               "border: solid black 3px; " +
-                               "padding: 10px;");
-        
-        // Append our new <div> element to the end of the document
-        document.body.appendChild(debug.box);
 
-        // Now add a title to our <div>. Note that the innerHTML property is
-        // used to parse a fragment of HTML and insert it into the document.
-        // innerHTML is not part of the W3C DOM standard, but it is supported
-        // by Netscape 6 and Internet Explorer 4 and later. We can avoid 
-        // the use of innerHTML by explicitly creating the <h1> element,
-        // setting its style attribute, adding a Text node to it, and 
-        // inserting it into the document, but this is a nice shortcut.
-        debug.box.innerHTML = "<h1 style='text-align:center'>Debugging Output</h1>";
-    }
-
-    // When we get here, debug.box refers to a <div> element into which
-    // we can insert our debugging message.
-    // First create a <p> node to hold the message.
-    var p = document.createElement("p");
-    // Now create a text node containing the message, and add it to the <p>
-    p.appendChild(document.createTextNode(msg));
-    // And append the <p> node to the <div> that holds the debugging output
-    debug.box.appendChild(p);
-}
-
+/**
+ * Initialize the form for inputs already selected
+ */
 function initUpdate() {
   fieldChanged(null);
 }
 
+
+/**
+ * Pulls all the values from the form fields to be passed to the ajax call
+ */
 function fieldChanged(select) {
   var args = new Object();
   
-  // input_msg_to = document.getElementById("msg_to");
+
   for ( var i in formFields ) {
+    // get each element of the form field
     var str = 'input_' + formFields[i] + ' = document.getElementById("' + formFields[i] + '")';
     eval(str);
-  }
-  // just pulls value now...
-  // msg_to = input_msg_to.value
-  for ( var i in formFields ) {
-    // if it doesn't exist, skip
+
+    // if the element doesn't exist, skip
     if ( !eval('input_' + formFields[i]))      continue;
 
+    // retrieve the value of each form field
     var str = formFields[i] + ' = input_' + formFields[i] + '.value';
     eval(str);
 
+    // insert them into the args we will apss to the ajax call
     var str = 'args.' + formFields[i] + '=' + formFields[i];
     eval(str);
   }
 
-  // add arg to see if consent_required
+  // add additional args to see if consent_required and belief present
   args.consent_required = $('#consent_required').attr('checked');
   args.msg_belief = $('#msg_belief').attr('checked');
   updatePrologQuery(args);
@@ -79,7 +49,7 @@ function fieldChanged(select) {
 	type: 'GET',
 	data: args,
 	dataType: 'json',
-	timeout: 5000,
+	timeout: 7000,
 	error: function() {
 	alert('error loading json, maybe timeout?');
       },
@@ -88,12 +58,15 @@ function fieldChanged(select) {
 }
 
 
+/**
+ * Update the display to show what is being queried
+ */
 function updatePrologQuery(args) {
   
-
+  // clear existing display
   $('#prologquery').empty();
   $('#prologanswer').empty();
-  //  debug(args);
+
   var queries = new Array();
   $('#prologquery').append("<dl><dt>Given the following values:</dt>");
   for (var param in args) {
@@ -129,13 +102,13 @@ function updatePrologQuery(args) {
   }
 }
 
+/**
+ * Update the display to show what the answer to the query was for a
+ * specific field
+ */
 function updatePrologAnswer(field, values) {
 
-  //  $('#prologanswer').append("<em>Acceptable values are: "</em>');
-  //  $('#prologanswer').append("<dl><dt>Prolog answer:</dt>");
-
   $('#prologanswer').append('<dl id="prolog_' + field + '"><dt>' + field + ":</dt></dl>");
-
 
   $('#prolog_'+field+ ' dt').append('<input style="display:none;" type="submit" id="prologb_' + field +
   '" value="Show/Hide"/>');
@@ -143,7 +116,6 @@ function updatePrologAnswer(field, values) {
   $('#prologb_'+field).click(function(){
       $('#prolog_' + field).find("dd").toggle();
     });
-
 
 
   for(i in values) {
@@ -157,8 +129,6 @@ function updatePrologAnswer(field, values) {
 
   }
 
-
-  //  $('#prologanswer').append("</dl>");
 }
 
 /* Removes all stylings from each option form field */
@@ -170,7 +140,7 @@ function refreshFields() {
 function rebootFields(removeSelected) {
   for (var i in formFields) {
     var field = document.getElementById(formFields[i]);
-
+    
     if (!field)
       continue;
 
@@ -186,11 +156,15 @@ function rebootFields(removeSelected) {
       }
     }
     
+  }
+  
 }
 
 
-}
-
+/**
+ * Based on the return result of the prolog query, filter the options of
+ * the form fields so that unallowed options are highlighted red
+ */
 function updateFields(json) {
   refreshFields();
 
@@ -203,51 +177,40 @@ function updateFields(json) {
       alert('we have a null value? for: ' + param);
       continue;
     }
-    // msg_to_hash = new Array();
-    //    debug(param + '_hash = new Array()');
-    eval(param + '_hash = new Array()');
+
+    // initialize a set of allowed values
+    eval(param + '_set = new Array()');
     
-    // fill hash with allowed values
+    // fill set with allowed values
     for (var i =0; i< allowedLen; i++) {
-      // msg_to_hash['carla'] = 1;
-      //      debug(param + '_hash["' + allowedOptions[i].name + '"] = 1');
-      eval(param + '_hash["' + allowedOptions[i].name + '"] = 1');
+      eval(param + '_set["' + allowedOptions[i].name + '"] = 1');
     }
 
+    // put the allowed values into an array
     var keys = new Array();
-    for (var key in eval(param + '_hash')) {
+    for (var key in eval(param + '_set')) {
       keys.push(key);
     }
-
+    
+    // update display for the allowed values for that param
     updatePrologAnswer(param, keys);
 
+    // if anything is allowed, skip the highlight phase below
     if (allowedLen == 1 && allowedOptions[0].name == 'anything') {
-      //      updatePrologAnswer(param, 'anything');
       continue;
     }    
     
+    // go through the form field options, highlighting values that aren't allowed
     var curOptions = document.getElementById(param).options;
-    if (curOptions == undefined) continue; // filed isn't a select option
+    if (curOptions == undefined) continue; // skip fields that aren't select/options
     var curLen = curOptions.length;
     for (var j = 0; j<curLen; j++) {
-
       curOption = curOptions[j].value;
-      //      debug ("Current param: " + param + " option testing: " + curOption);
-      // var allowed = typeof(msg_to_hash[curOption]) != "undefined";
-      //      debug('EVAL:' + 'var allowed = typeof(' + param + '_hash["' + curOption + '"]) != "undefined"');
-      //      debug('EVAL: ' + param + '_hash["' + curOption + '"]');
-      //      debug('....: ' + eval(param + '_hash["' + curOption + '"]')  );
-      //      debug('typeof: ' + 
-      eval('var allowed = typeof(' + param + '_hash[curOption]) != "undefined"');
-      //      debug((allowed) ? 'true' : 'false');
+      eval('var allowed = typeof(' + param + '_set[curOption]) != "undefined"');
       if (!allowed) {
 	$(curOptions[j]).removeClass();
 	$(curOptions[j]).addClass('invalid');
       }
-
-
-
-
     }
 
     
