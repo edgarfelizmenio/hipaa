@@ -50,6 +50,18 @@ div.code {
 
  }
 
+div#notice { 
+
+             background-color: #DDFFDD;
+
+
+ }
+
+div#notice p { 
+               padding:10px;
+
+ }
+
 div.body { 
 width: 600px;
 
