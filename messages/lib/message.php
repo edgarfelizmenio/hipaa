@@ -339,7 +339,10 @@ class Message {
     $msg_vars['msg_belief'] = false;
     $msg_vars['msg_message'] = false;
     $msg_vars['msg_consent'] = false;        
-    $msg_vars['consent_required'] = false;        
+    $msg_vars['consent_required'] = false;       
+    $msg_vars['belief_about'] = false;        
+    $msg_vars['belief_what'] = false;        
+    $msg_vars['belief_by'] = false;        
     $msg_vars['msg_reply'] = false;        
     return $msg_vars;
   }
