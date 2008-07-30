@@ -322,7 +322,7 @@ class Message {
    * @returns boolean query allowed or not
    */
   private function allowed($response) {
-    return (strpos($response, "yes") === false);
+    return (strpos($response, "yes") !== false);
   }
 
   /**
