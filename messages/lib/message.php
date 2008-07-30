@@ -140,12 +140,13 @@ class Message {
   }
 
   /**
-   * If the fields passed in through the POST fields are allowed, 
+   * If the fields passed in through the POST fields are allowed, add the
+   * message
    */
   function addMessage($parent_id=-1) {
     global $_POST;
 
-    $query = $this->getPrologQuery();
+    $query = $this->generatePrologQuery();
     if ($query === false)
       return false;
 
@@ -171,7 +172,7 @@ class Message {
    * Constructs the prolog query from POST fields
    * @returns string prolog query, returns false on errors
    */
-  private function getPrologQuery() {
+  private function generatePrologQuery() {
     global $_POST;
 
     // check standard required fields filled in
