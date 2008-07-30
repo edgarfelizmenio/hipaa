@@ -113,9 +113,9 @@ $('#consent_required').removeAttr('checked');
 $('#msg_belief').removeAttr('checked');
 prepareForm();
 
-$('#notice').html('<p>Notice how in the purpose option field that healthcare operations is highlighted red.' +  
+$('#notice').html('<p>Notice how in the <em>Purpose</em> option field that healthcare operations is highlighted red.' +  
 '<ul><li>' + 
-'Click the consent checkbox.  Notice how healthCare_operations is now allowed in <em>Purpose</em>.' +
+'Click the <em>Requires Consent</em> checkbox.  Notice how healthCare_operations is now allowed in <em>Purpose</em>.' +
 '</li><li>' + 
 'Select healthCare_operations.  Notice how the <em>Consented by</em> option only allows the option patient now' + 
 '</li></ul></p>'); 
@@ -133,11 +133,11 @@ $('#consent_required').removeAttr('checked');
 $('#msg_belief').removeAttr('checked');
 prepareForm();
 
-$('#notice').html('<p>Notice how in the purpose option field investigate is now allowed' +  
+$('#notice').html('<p>Notice how in the <em>Purpose</em> option field investigate is now allowed' +  
 '<ul><li>' + 
-'Click the belief checkbox.  Notice how investigate is now allowed in <em>Purpose</em>.' +
+'Click the <em>Belief</em> checkbox.  Notice how investigate is now allowed in <em>Purpose</em>.' +
 '</li><li>' + 
-'Select investigate.  Notice how the belief fields show the only possible course belief fields allowed now' + 
+'Select investigate.  Notice how the <em>belief fields</em> show the only possible <em>belief fields</em> that are allowed' + 
 '</li></ul></p>'); 
 
 fieldChanged(null);
