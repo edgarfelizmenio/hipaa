@@ -6,6 +6,7 @@
 	   name="msg_belief" 
 	   id="msg_belief"
 	   value="1" 
+	   onChange="fieldChanged(this);"
 	   <?php if($_POST['msg_belief']=='1') echo 'checked="checked"'; ?> />
       </div>
 
