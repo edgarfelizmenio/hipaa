@@ -3,19 +3,6 @@
 <title>Compose Message</title>
 <?php include('tpl/header_bot.php'); ?>
 
-<?php
-$action = $_POST['action'];
-
-if($action == 'process') {  
-    if ($hmsg->addMessage($_POST['consent_required'])) {
-	echo "<p>Message added successfully</p>";
-	echo '<a href="viewmsg.php">View messages</a>';
-	include('tpl/footer.php');
-	exit;
-    }
-    echo '<div class="warning"><p>The query was not allowed.  Prolog could not find a matching rule</p></div>';
-} 
-?>
 <div id="notice"></div>
 <h2>Write Message</h2>
 
@@ -89,6 +76,20 @@ if($action == 'process') {
 </form>
 <hr />
 
+<?php
+$action = $_POST['action'];
+
+if($action == 'process') {  
+    if ($hmsg->addMessage($_POST['consent_required'])) {
+	echo "<p>Message added successfully</p>";
+	echo '<a href="viewmsg.php">View messages</a>';
+    } else {
+      echo '<div class="warning"><p>The query was not allowed.  Prolog could not find a matching rule</p></div>';
+    }
+} 
+?>
+
+
 <button id="consent_query" onclick=" 
 $('#msg_to').val('doctor');
 $('#msg_from').val('nurse');
@@ -96,8 +97,10 @@ $('#msg_about').val('patient');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
 $('#msg_belief').removeAttr('checked');
+$('#errors').hide();
+$('div.warning').hide();
 prepareForm();
-
+$('form div').css('background-color', 'transparent');
 $('#notice').html('<p>When sending messages, only certain purposes are allowed.  Check what options are available under <em>Purpose</em></p>'); 
 
 fieldChanged(null);
@@ -111,6 +114,9 @@ $('#msg_about').val('patient');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
 $('#msg_belief').removeAttr('checked');
+$('form div').css('background-color', 'transparent');
+$('#errors').hide();
+$('div.warning').hide();
 prepareForm();
 
 $('#notice').html('<p>Notice how in the <em>Purpose</em> option field that healthcare operations is highlighted red.' +  
@@ -131,6 +137,9 @@ $('#msg_about').val('kid');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
 $('#msg_belief').removeAttr('checked');
+$('form div').css('background-color', 'transparent');
+$('#errors').hide();
+$('div.warning').hide();
 prepareForm();
 
 $('#notice').html('<p>Notice how in the <em>Purpose</em> option field investigate is now allowed' +  
@@ -164,8 +173,9 @@ fieldChanged(null);
   <div class="code">
     <xmp>
       // construct query from parameters
-      $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
-      $response = $this->prolog->askHIPAA($query);
+      $query = generatePrologQuery();
+      $response = $prolog->askHIPAA($query);
+
       if(allowed($response)) 
         // add to database
       else
