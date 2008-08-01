@@ -107,6 +107,34 @@ table.striped th, table.unstriped th {
     color: #ffffff;
  }
 
+table.unstriped th { 
+
+width: 100px;
+text-align:right;
+
+ }
+
+table.unstriped { 
+margin-bottom: 1em;
+ }
+
+#history dt, #history dd { 
+display: inline;
+margin:0;
+padding:0;
+color: #666666;
+ }
+
+#history dt { 
+padding-right: 1em;
+ }
+
+#history dd span { 
+padding-left: 20px;
+color: #999999;
+
+ }
+
 tr.alt { 
     background-color: #ecf6fc;
 }
