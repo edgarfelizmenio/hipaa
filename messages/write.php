@@ -91,6 +91,7 @@ if($action == 'process') {
 
 
 <button id="consent_query" onclick=" 
+rebootFields(true);
 $('#msg_to').val('doctor');
 $('#msg_from').val('nurse');
 $('#msg_about').val('patient');
@@ -108,6 +109,7 @@ fieldChanged(null);
 
 
 <button id="consent_query" onclick=" 
+rebootFields(true);
 $('#msg_to').val('nurse');
 $('#msg_from').val('nurse');
 $('#msg_about').val('patient');
@@ -131,6 +133,7 @@ fieldChanged(null);
 
 
 <button id="consent_query" onclick=" 
+rebootFields(true);
 $('#msg_to').val('pha');
 $('#msg_from').val('carla');
 $('#msg_about').val('kid');
