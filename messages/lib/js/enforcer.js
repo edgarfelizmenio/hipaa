@@ -166,7 +166,7 @@ function rebootFields(removeSelected) {
  * the form fields so that unallowed options are highlighted red
  */
 function updateFields(json) {
-  refreshFields();
+  //refreshFields();
 
   for (param in json) {
     var allowedOptions = json[param].items;
