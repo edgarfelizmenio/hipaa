@@ -12,11 +12,12 @@
 
    <script type="text/javascript">
    $(document).ready(function() {
-       // only fire fieldChanged if there is a prolog box to show the queries
+       // initialize update box if there is a prolog box to use
        if ($('#prolog').length > 0) {
-	 fieldChanged(null);
+	 initUpdate();
        }
+       
+       // style table rows
        $(".striped tr:even").addClass("alt");
-       $('.stripeMe tr').addClass('alt');
      });
    </script>
