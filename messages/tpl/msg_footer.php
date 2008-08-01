@@ -2,7 +2,7 @@
 	<label>Belief:</label>
 	<input 
 	   type="checkbox" 
-	   rel="belief_present" 
+	   rel="beliefs" 
 	   name="msg_belief" 
 	   id="msg_belief"
 	   value="1" 
@@ -10,29 +10,30 @@
 	   <?php if($_POST['msg_belief']=='1') echo 'checked="checked"'; ?> />
       </div>
 
-<div rel="belief_present">
-<div>
-  <label>About</label>
-  <select name="belief_about" id="belief_about" onChange="fieldChanged(this);">
-          <option VALUE="null">-- Choose about whom -- </option>
-	  <?php include ('tpl/belief_about.php'); ?>
-  </select>
+<div id="beliefs" rel="beliefs">
+  <div>
+    <label>About</label>
+    <select name="belief_about" id="belief_about" onChange="fieldChanged(this);">
+      <option VALUE="null">-- Choose about whom -- </option>
+      <?php include ('tpl/belief_about.php'); ?>
+    </select>
+  </div>
 
-</div>
-<div>
-  <label>What Belief</label>
-  <select name="belief_what" id="belief_what" onChange="fieldChanged(this);">
-            <option VALUE="null">-- Choose belief -- </option>
-	  <?php include ('tpl/belief_what.php'); ?>
-  </select>
-</div>
-<div>
-  <label>By/From</label>
-  <select name="belief_by" id="belief_by" onChange="fieldChanged(this);">
-          <option VALUE="null">-- Choose whose belief -- </option>
-	  <?php include ('tpl/belief_by.php'); ?>
-  </select>
-</div>
+  <div>
+    <label>What Belief</label>
+    <select name="belief_what" id="belief_what" onChange="fieldChanged(this);">
+      <option VALUE="null">-- Choose belief -- </option>
+      <?php include ('tpl/belief_what.php'); ?>
+    </select>
+  </div>
+
+  <div>
+    <label>By/From</label>
+    <select name="belief_by" id="belief_by" onChange="fieldChanged(this);">
+      <option VALUE="null">-- Choose whose belief -- </option>
+      <?php include ('tpl/belief_by.php'); ?>
+    </select>
+  </div>
 </div>
 
 
@@ -54,7 +55,7 @@
 
       </div>
 
-      <div rel="permission">
+      <div id="permission" rel="permission">
 	<label>Consented by:</label>
 		<select name="msg_consent" id="msg_consent"
 	    onChange="fieldChanged(this);">
