@@ -49,9 +49,9 @@ function fieldChanged(select) {
 	type: 'GET',
 	data: args,
 	dataType: 'json',
-	timeout: 7000,
+	timeout: 10000,
 	error: function() {
-	alert('error loading json, maybe timeout?');
+	//alert('error loading json, maybe timeout?');
       },
 	success: updateFields
 	});
