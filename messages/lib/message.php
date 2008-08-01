@@ -116,7 +116,7 @@ class Message {
     
     
     $idtree = array();
-    $idtree[] = $message_id;
+    //    $idtree[] = $message_id; // include the first message
     while (true) {
       $query = "SELECT parent_id, replyto_id 
               FROM " . MSG_DB . "
