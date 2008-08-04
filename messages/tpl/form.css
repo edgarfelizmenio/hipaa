@@ -14,7 +14,12 @@ form div label {
     clear: left;
 }
 
+form option { 
+              font-weight: 900
+ }
+
 .invalid {
     color: red;
     background-color: pink;
+           font-weight: normal;
 }
