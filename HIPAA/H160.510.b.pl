@@ -1,4 +1,4 @@
-%Uses and disclosures for involvement in the individual's care and notification purposes 
+;%Uses and disclosures for involvement in the individual's care and notification purposes 
 
 permitted_by_164_510_b(A) :-
 (permitted_by_164_510_b_1(A),
