@@ -18,7 +18,8 @@
     <label>To:</label>
     <select name="msg_to"
 	    id="msg_to"
-	    onChange="fieldChanged(this);"
+	    onChange="fieldChanged();"
+            onClick="fieldChanged('msg_to');"
 	    name="First Name">
       <option value="null"> -- To -- </option>
       <?php include ('tpl/to.php'); ?>
@@ -29,7 +30,8 @@
     <label>From:</label>
     <select id="msg_from"
 	    name="msg_from"
-	    onChange="fieldChanged(this);"
+	    onChange="fieldChanged();"
+            onClick="fieldChanged('msg_from');"
 	    autocomplete="false">
       <option value="null"> -- From -- </option>
       <?php include ('tpl/from.php'); ?>
@@ -40,7 +42,8 @@
     <label>About:</label>
     <select name="msg_about"
 	    id="msg_about"
-	    onChange="fieldChanged(this);">
+	    onChange="fieldChanged();"
+            onClick="fieldChanged('msg_about');">
       <option value="null"> -- About -- </option>
       <?php include ('tpl/about.php'); ?>
     </select>
@@ -58,7 +61,8 @@
     <label>Purpose:</label>
     <select id="msg_purpose"
 	    name="msg_purpose"
-	    onChange="fieldChanged(this);"   >
+	    onChange="fieldChanged();"   
+            onClick="fieldChanged('msg_purpose');">
       <option value="null"> -- Purpose -- </option>
       <?php include ('tpl/purpose.php');
 	    ?>
