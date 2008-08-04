@@ -17,12 +17,14 @@ function initUpdate() {
 
 /**
  * Pulls all the values from the form fields to be passed to the ajax call
+ * @param excludedField field name of field to be excluded from args passed in
  */
-function fieldChanged(select) {
+function fieldChanged(excludedField) {
   var args = new Object();
   
 
   for ( var i in formFields ) {
+      if (formFields[i] == excludedField)  continue;
     // get each element of the form field
     var str = 'input_' + formFields[i] + ' = document.getElementById("' + formFields[i] + '")';
     eval(str);
@@ -166,7 +168,7 @@ function rebootFields(removeSelected) {
  * the form fields so that unallowed options are highlighted red
  */
 function updateFields(json) {
-  //refreshFields();
+  refreshFields();
 
   for (param in json) {
     var allowedOptions = json[param].items;
