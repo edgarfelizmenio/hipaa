@@ -13,7 +13,11 @@
 <div id="beliefs" rel="beliefs">
   <div>
     <label>About</label>
-    <select name="belief_about" id="belief_about" onChange="fieldChanged(this);">
+    <select 
+       name="belief_about" 
+       id="belief_about" 
+       onChange="fieldChanged(this);"
+       onClick="fieldChanged('belief_about');">
       <option VALUE="null">-- Choose about whom -- </option>
       <?php include ('tpl/belief_about.php'); ?>
     </select>
@@ -21,7 +25,11 @@
 
   <div>
     <label>What Belief</label>
-    <select name="belief_what" id="belief_what" onChange="fieldChanged(this);">
+    <select 
+       name="belief_what" 
+       id="belief_what" 
+       onChange="fieldChanged(this);"
+       onClick="fieldChanged('belief_what');">
       <option VALUE="null">-- Choose belief -- </option>
       <?php include ('tpl/belief_what.php'); ?>
     </select>
@@ -29,7 +37,11 @@
 
   <div>
     <label>By/From</label>
-    <select name="belief_by" id="belief_by" onChange="fieldChanged(this);">
+    <select 
+       name="belief_by" 
+       id="belief_by" 
+       onChange="fieldChanged(this);"
+       onClick="fieldChanged('belief_by');">
       <option VALUE="null">-- Choose whose belief -- </option>
       <?php include ('tpl/belief_by.php'); ?>
     </select>
@@ -57,8 +69,10 @@
 
       <div id="permission" rel="permission">
 	<label>Consented by:</label>
-		<select name="msg_consent" id="msg_consent"
-	    onChange="fieldChanged(this);">
+		<select name="msg_consent" 
+			id="msg_consent"
+			onChange="fieldChanged(this);"
+			onClick="fieldChanged('msg_consent');">
           <option VALUE="null">-- Choose consent -- </option>
 	  <?php include ('tpl/consents.php'); ?>
 	</select>
