@@ -51,7 +51,7 @@
 
       <div>
 	<label>Message:</label>
-	<textarea name="msg_message"></textarea>
+	<textarea cols="50" rows="10" name="msg_message"></textarea>
       </div>
 
       <div>
