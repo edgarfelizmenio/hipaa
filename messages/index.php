@@ -1,10 +1,10 @@
 <?php include_once('lib/common.php'); ?>
 <?php include('tpl/header_top.php'); ?>
 <title>Messaging Demo</title>
-<?php include('tpl/header_bot.php'); ?>
+<?php include('tpl/header_bot.php'); requireLogin(false);?>
 
 <h2>Simple hospital messaging + Prolog</h2>
-<div class="body">
+<div id="content">
 <p>Welcome to the HIPAA Compliance Checker Demo site</p>
 <p>
 The demo shows how the HIPAA Compliance checker can be integrated into
