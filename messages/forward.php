@@ -25,12 +25,10 @@ if(empty($_POST['msg_purpose'])) {
     $_POST['msg_purpose'] = $msg->purpose;
   }
 ?>
-<div id="prolog">
-  <h3>Prolog calls</h3>
-    <div id="prologquery"></div>
 
-    <div id="prologanswer"></div>
-</div>
+<table>
+<tr>
+<td width="50%">
 
 <form method="post" action="">
   <div>
@@ -133,6 +131,17 @@ if ($mailbag) {
 
 ?>
 
+</td>
+<td>
+<div id="prolog">
+  <h3>Prolog calls</h3>
+    <div id="prologquery"></div>
+
+    <div id="prologanswer"></div>
+</div>
+</td>
+</tr>
+</table>
 
 
 <?php include('tpl/footer.php'); ?>
