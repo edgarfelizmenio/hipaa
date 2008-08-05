@@ -4,24 +4,11 @@
 <?php include('tpl/header_bot.php'); ?>
 
 <h2>Inbox</h2>
-    <label>Check which person's mail</label>
-    <form method="get" action="">
-      <select name="recipient">
-	<?php
-	   $recipients = $hmsg->getRecipients();
-
-	   echo '<option> -- select mailbox -- </option>';
-	   foreach ($recipients as $recipient) {
-	     echo '<option value="' . $recipient->name . '">' . $recipient->name . '</option>';
-	   }
-	?>
-      </select>
-      <input type="submit" value="Read Mail" />
-    </form>
 
 <?php
-   $recipient = htmlspecialchars($_GET['recipient']);
-   echo "<h1>" . $recipient . " mailbox</h1>";
+   requireLogin(true);
+   $recipient = $_SESSION['username'];
+   echo "<h3>" . $recipient . " mailbox</h3>";
    $mailbag = $hmsg->getRecipientMail($recipient);
 
 if ($mailbag) {
@@ -63,7 +50,7 @@ if ($mailbag) {
   }
   echo "</table>";
 } else {
-  echo 'Sorry, no individual mailbox selected';
+  echo 'Sorry, no mail found';
 }
 
 ?> 
