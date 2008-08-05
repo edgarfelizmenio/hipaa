@@ -4,12 +4,17 @@ body,h1 {
 }
 
 body {
+    background: url('image001.jpg');
     background-color: #EFEBDE;
-
+    
 }
+#content {
+    background-color: #D0E0FF;
 
+ }
 #head {
-    background-color: #990000;
+    background: url('image001.jpg');
+    background-color: #d0e0ff;
     padding: 10px 1em 0px;
 
 
@@ -19,7 +24,9 @@ body {
     padding: 1em;
 }
 
-
+table td {
+    vertical-align: top;
+}
 div.confirmed { 
   background-color: rgb(221,255,221);
   border: 1px solid #000000; 
@@ -87,11 +94,9 @@ border: 1px solid #000000;
 
 
 #prolog {
-    float: right;
-    width: 50%;
     background-color: #E7D19A;
     border: 1px solid #3C3623;
-
+    padding-left: 1em;
 }
 #prolog h3 {
     text-align: center;
@@ -168,4 +173,35 @@ tr.alt {
     color: #fff;
     background-color: #369;
     text-decoration: none;
+}
+
+/*  */
+form label {
+    font-weight: 900;
+}
+
+
+/* Login Form styling */
+#loginBox {
+    color:#333333;
+    font-family:verdana,geneva,sans-serif;
+
+}
+
+#loginDropdown { 
+    padding: 1em;
+
+    cursor:pointer;
+
+    position:absolute;
+    right:15px;
+    top:8px;
+    width:16.2em;
+    z-index:1000;
+
+ }
+
+.expanded {
+    background-color: rgb(250,250,255);
+    border:1px solid #333333;
 }
