@@ -30,18 +30,18 @@ if(empty($_POST['msg_purpose'])) {
   }
 
 ?>
-<div id="prolog">
-  <h3>Prolog calls</h3>
-    <div id="prologquery"></div>
 
-    <div id="prologanswer"></div>
-</div>
+<table>
+<tr>
+<td width="50%">
 
 <form method="post" action="">
   <div>
-  <label>From:</label>
-    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->to ?>" />
-  </div>
+
+    <input type="hidden"
+	   name="msg_from"
+	   id="msg_from"
+	   value="<?php echo $_SESSION['username']; ?>" />
 
   <div>
     <label>To:</label>
@@ -96,7 +96,6 @@ if(empty($_POST['msg_purpose'])) {
    
 </form>
 
-
 <h2>History</h2>
 
 <?php
@@ -136,6 +135,19 @@ if ($mailbag) {
  }
 
 ?>
+
+</td>
+<td>
+<div id="prolog">
+  <h3>Prolog calls</h3>
+    <div id="prologquery"></div>
+
+    <div id="prologanswer"></div>
+</div>
+</td>
+</tr>
+</table>
+
 
 
 <?php include('tpl/footer.php'); ?>
