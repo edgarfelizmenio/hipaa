@@ -3,15 +3,14 @@
 <title>Compose Message</title>
 <?php include('tpl/header_bot.php'); ?>
 
+<?php requireLogin(true); ?>
+
 <div id="notice"></div>
-<h2>Write Message</h2>
+<h2>Compose Message</h2>
 
-<div id="prolog">
-  <h3>Prolog calls</h3>
-  <div id="prologquery"></div>  
-  <div id="prologanswer"></div>
-</div>
-
+<table>
+<tr>
+<td width="50%">
 <form method="post" action="#">
   
   <div>
@@ -26,18 +25,12 @@
     </select>
   </div>
 
-  <div>
-    <label>From:</label>
-    <select id="msg_from"
-	    name="msg_from"
-	    onChange="fieldChanged();"
-            onClick="fieldChanged('msg_from');"
-	    autocomplete="false">
-      <option value="null"> -- From -- </option>
-      <?php include ('tpl/from.php'); ?>
-    </select>    
-  </div>
-  
+
+    <input type="hidden"
+	   name="msg_from"
+	   id="msg_from"
+	   value="<?php echo $_SESSION['username']; ?>" />
+    
   <div>
     <label>About:</label>
     <select name="msg_about"
@@ -74,26 +67,16 @@
   <div>
     <input type="hidden" name="action" value="process" />
     <input type="submit"  value="Send message" />
-    <input type="reset" value="Reset" onclick="rebootFields(true);" />
+<!--    <input type="reset" value="Reset" onclick="rebootFields(true);" />-->
+<a href="write.php">
+Reset
+</a>
+
   </div>
 
 </form>
+
 <hr />
-
-<?php
-$action = $_POST['action'];
-
-if($action == 'process') {  
-    if ($hmsg->addMessage($_POST['consent_required'])) {
-	echo "<p>Message added successfully</p>";
-	echo '<a href="viewmsg.php">View messages</a>';
-    } else {
-      echo '<div class="warning"><p>The query was not allowed.  Prolog could not find a matching rule</p></div>';
-    }
-} 
-?>
-
-
 <button id="consent_query" onclick=" 
 rebootFields(true);
 $('#msg_to').val('doctor');
@@ -114,7 +97,7 @@ fieldChanged(null);
 
 <button id="consent_query" onclick=" 
 rebootFields(true);
-$('#msg_to').val('nurse');
+$('#msg_to').val('sacred_heart_hospital');
 $('#msg_from').val('nurse');
 $('#msg_about').val('patient');
 $('#msg_purpose').val('null');
@@ -136,10 +119,10 @@ fieldChanged(null);
 ">Sample Consent Query</button>
 
 
-<button id="consent_query" onclick=" 
+<button id="belief_query" onclick=" 
 rebootFields(true);
 $('#msg_to').val('pha');
-$('#msg_from').val('carla');
+$('#msg_from').val('dr_kelso');
 $('#msg_about').val('kid');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
@@ -162,7 +145,35 @@ fieldChanged(null);
 
 
 <br />
-<button id="showinfo" onclick="$('.info').toggle(); ">What's going on here?</button>
+<button id="showinfo" onclick="$('.info').toggle();   $('#prologquery').empty();
+  $('#prologanswer').empty();
+">What's going on here?</button>
+
+
+</td>
+<td width="50%">
+<div id="prolog">
+  <h3>Prolog calls</h3>
+  <div id="prologquery"></div>  
+  <div id="prologanswer"></div>
+</div>
+
+</td>
+</table>
+
+<?php
+$action = $_POST['action'];
+
+if($action == 'process') {  
+    if ($hmsg->addMessage($_POST['consent_required'])) {
+	echo "<p>Message added successfully</p>";
+	echo '<a href="viewmsg.php">View messages</a>';
+    } else {
+      echo '<div class="warning"><p>The query was not allowed.  Prolog could not find a matching rule</p></div>';
+    }
+} 
+?>
+
 <div class="info" style="display:none;">
   <p>
     Each time a selection is chosen in the form, a query is sent to prolog
@@ -190,6 +201,8 @@ fieldChanged(null);
 
     </xmp>
   </div>
+
 </div>
+
 
 <?php include('tpl/footer.php'); ?>
