@@ -1,4 +1,35 @@
 <?php
+function isLoggedIn() {
+  return (isset($_SESSION['username']) && 
+	  !empty($_SESSION['username']));
+
+  }
+
+
+function requireLogin($force) {
+  if (!isLoggedIn()) {
+    echo <<< SCRIPT
+<script>
+         $(document).ready(function() {
+	     $('#loginForm').show().parent().addClass('expanded');
+	   });
+</script>
+
+SCRIPT;
+
+    if ($force) {
+    echo <<< END
+<p>This page requires you to login, please login in the login
+  form at the top right</p>
+
+END;
+      exit;
+    }
+
+  }
+
+}
+
 function map_addslashes($var) {
   if ( !get_magic_quotes_gpc() ) {
     if ( is_array($var) ) {
