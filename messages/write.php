@@ -76,89 +76,14 @@ Reset
 
 </form>
 
-<hr />
-<button id="consent_query" onclick=" 
-rebootFields(true);
-$('#msg_to').val('doctor');
-$('#msg_from').val('nurse');
-$('#msg_about').val('patient');
-$('#msg_purpose').val('null');
-$('#consent_required').removeAttr('checked');
-$('#msg_belief').removeAttr('checked');
-$('#errors').hide();
-$('div.warning').hide();
-prepareForm();
-$('form div').css('background-color', 'transparent');
-$('#notice').html('<p>When sending messages, only certain purposes are allowed.  Check what options are available under <em>Purpose</em></p>'); 
 
-fieldChanged(null);
-">Sample Query</button>
-
-
-<button id="consent_query" onclick=" 
-rebootFields(true);
-$('#msg_to').val('sacred_heart_hospital');
-$('#msg_from').val('nurse');
-$('#msg_about').val('patient');
-$('#msg_purpose').val('null');
-$('#consent_required').removeAttr('checked');
-$('#msg_belief').removeAttr('checked');
-$('form div').css('background-color', 'transparent');
-$('#errors').hide();
-$('div.warning').hide();
-prepareForm();
-
-$('#notice').html('<p>Notice how in the <em>Purpose</em> option field that healthcare operations is highlighted red.' +  
-'<ul><li>' + 
-'Click the <em>Requires Consent</em> checkbox.  Notice how healthCare_operations is now allowed in <em>Purpose</em>.' +
-'</li><li>' + 
-'Select healthCare_operations.  Notice how the <em>Consented by</em> option only allows the option patient now' + 
-'</li></ul></p>'); 
-
-fieldChanged(null);
-">Sample Consent Query</button>
-
-
-<button id="belief_query" onclick=" 
-rebootFields(true);
-$('#msg_to').val('pha');
-$('#msg_from').val('dr_kelso');
-$('#msg_about').val('kid');
-$('#msg_purpose').val('null');
-$('#consent_required').removeAttr('checked');
-$('#msg_belief').removeAttr('checked');
-$('form div').css('background-color', 'transparent');
-$('#errors').hide();
-$('div.warning').hide();
-prepareForm();
-
-$('#notice').html('<p>Notice how in the <em>Purpose</em> option field investigate is now allowed' +  
-'<ul><li>' + 
-'Click the <em>Belief</em> checkbox.  Notice how investigate is now allowed in <em>Purpose</em>.' +
-'</li><li>' + 
-'Select investigate.  Notice how the <em>belief fields</em> show the only possible <em>belief fields</em> that are allowed' + 
-'</li></ul></p>'); 
-
-fieldChanged(null);
-">Sample Belief Query</button>
-
-
-
-<br />
 <button id="showinfo" onclick="$('.info').toggle();   $('#prologquery').empty();
   $('#prologanswer').empty();
 ">What's going on here?</button>
 
 
 </td>
-<td width="50%">
-<div id="prolog">
-  <h3>Prolog calls</h3>
-  <div id="prologquery"></div>  
-  <div id="prologanswer"></div>
-</div>
-
-</td>
+</tr>
 </table>
 
 <?php
