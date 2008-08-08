@@ -37,7 +37,7 @@ is_role_leaf(Role) :-
 %   Adds each rule from the Rule_list into Prolog Database
 assert_each([]).    
 assert_each([H|T]) :-
-	writeln(H),
+%	writeln(H),
 	assert(H),
 	assert_each(T).
 
