@@ -1,0 +1,4 @@
+:- import odbc_open/3 from odbc_call.
+% Fill in below with appropriate database information
+% :- odbc_open(data_source_name, username, passwd).
+
