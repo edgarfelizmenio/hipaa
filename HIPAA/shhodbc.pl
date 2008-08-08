@@ -1,6 +1,6 @@
 %%Example system
 :- ['HIPAA.pl'].
-:- ['myfunc.pl].
+:- ['myfunc.pl'].
 
 %% inRole predicates
 :- assert_in_role(_).
