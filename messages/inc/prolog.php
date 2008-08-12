@@ -64,7 +64,7 @@ class Prolog {
     
     $queries[] = $this->pStartMark;
     $filterQueries[] = $this->pEndMark;
-    $prologQuery = implode(    array_merge($queries, $filterQueries), ',');
+    $prologQuery = implode(    array_merge($queries, $filterQueries), ',') . '.';
     $results = $this->ask($prologQuery);
     $startIndex = strrpos($results, STARTMARK);
     echo substr($results, $startIndex);
