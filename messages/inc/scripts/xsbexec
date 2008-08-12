@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cd ../../../HIPAA
-
-str=`echo $1 | ../XSB/bin/xsb -e "['shh.pl']." 2>&1`
-echo $str
