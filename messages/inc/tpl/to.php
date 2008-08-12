@@ -1,5 +1,5 @@
 <?php
-$filename = 'lib/scripts/allpossiblesserialized.php';
+$filename = CACHE_PATH . 'allpossiblesserialized.php';
 $fh = fopen($filename, 'r');
 $string = fread($fh, filesize($filename));
 $options = unserialize($string);

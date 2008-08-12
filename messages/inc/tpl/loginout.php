@@ -1,8 +1,8 @@
 <?php
 if (isLoggedIn()) {
-  include ('logother_form.php');
+  include (TPL_PATH . 'logother_form.php');
  } else {
-  include ('login_form.php');
+  include (TPL_PATH . 'login_form.php');
  }
 
 ?>

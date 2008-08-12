@@ -45,9 +45,10 @@ function fieldChanged(excludedField) {
   args.consent_required = $('#consent_required').attr('checked');
   args.msg_belief = $('#msg_belief').attr('checked');
   updatePrologQuery(args);
-
+  // msg_json.php
+  args.action = 'msg_json.php';
   $.ajax({
-    url: 'lib/scripts/msg_json.php',
+    url: 'json.php', 
 	type: 'GET',
 	data: args,
 	dataType: 'json',

@@ -1,7 +1,7 @@
-<?php include_once('lib/common.php');?>
-<?php include('tpl/header_top.php'); ?>
+<?php include_once('common.php');?>
+<?php include(TPL_PATH . 'header_top.php'); ?>
 <title>Compose Message</title>
-<?php include('tpl/header_bot.php'); ?>
+<?php include(TPL_PATH . 'header_bot.php'); ?>
 
 <?php requireLogin(true); ?>
 
@@ -21,7 +21,7 @@
             onClick="fieldChanged('msg_to');"
 	    name="First Name">
       <option value="null"> -- To -- </option>
-      <?php include ('tpl/to.php'); ?>
+      <?php include (TPL_PATH . 'to.php'); ?>
     </select>
   </div>
 
@@ -38,7 +38,7 @@
 	    onChange="fieldChanged();"
             onClick="fieldChanged('msg_about');">
       <option value="null"> -- About -- </option>
-      <?php include ('tpl/about.php'); ?>
+      <?php include (TPL_PATH . 'about.php'); ?>
     </select>
   </div>
   
@@ -57,12 +57,12 @@
 	    onChange="fieldChanged();"   
             onClick="fieldChanged('msg_purpose');">
       <option value="null"> -- Purpose -- </option>
-      <?php include ('tpl/purpose.php');
+      <?php include (TPL_PATH . 'purpose.php');
 	    ?>
     </select>
   </div>
 
-  <?php include ('tpl/msg_footer.php');  ?>
+  <?php include (TPL_PATH . 'msg_footer.php');  ?>
 
   <div>
     <input type="hidden" name="action" value="process" />
@@ -130,4 +130,4 @@ if($action == 'process') {
 </div>
 
 
-<?php include('tpl/footer.php'); ?>
+<?php include(TPL_PATH . 'footer.php'); ?>

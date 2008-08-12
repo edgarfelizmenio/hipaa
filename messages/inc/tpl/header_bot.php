@@ -1,7 +1,7 @@
  </head>
  <body>
-   <?php include('tpl/msg_mast.php'); ?>
-   <?php include('tpl/loginout.php'); ?>
+   <?php include(TPL_PATH . 'msg_mast.php'); ?>
+   <?php include(TPL_PATH . 'loginout.php'); ?>
 
 <?php 
    if (isLoggedIn()) {

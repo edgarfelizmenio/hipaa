@@ -1,7 +1,7 @@
-<?php include_once('lib/common.php'); ?>
-<?php include('tpl/header_top.php'); ?>
+<?php include_once('common.php'); ?>
+<?php include(TPL_PATH . 'header_top.php'); ?>
 <title>Messaging Demo</title>
-<?php include('tpl/header_bot.php'); ?>
+<?php include(TPL_PATH . 'header_bot.php'); ?>
 
 <h2>View All Messages</h2>
 
@@ -13,4 +13,4 @@ $hmsg->getAllMessages();
 
 ?>
 
-<?php include('tpl/footer.php'); ?>
+<?php include(TPL_PATH . 'footer.php'); ?>

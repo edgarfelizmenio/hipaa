@@ -1,16 +1,16 @@
 <?php
-include_once ('db.php');
+  /*include_once ('db.php');
 include_once ('functions.php');
 require_once ('xsbprolog.php');
 
-define('MSG_DB', 'hipaa_message');
+define('MSG_DB', 'hipaa_message');*/
 
 class Message {
 
   private $db;
   function __construct() {
     $this->db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
-    $this->prolog = new Xsbprolog();
+    $this->prolog = new Prolog();
   }
 
   /**

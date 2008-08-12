@@ -7,28 +7,7 @@
 
 // get variables passed in, otherwise, place as variable for prolog to
 // fill in
-  //sleep(rand(1,3));
-  /*echo '{Msg_to: {identifier: "name", items: [ {name: "intern"}, {name:
-"nurse"}, {name: "carla"}, {name: "j"
 
-}, {name: "seattle_grace_hospital"}, {name: "healthCare_clearing_house"},
-{name: "dr_cox"}, {name: "hcp"
-
-}, {name: "surgeon"}, {name: "healthCare_plan"}, {name: "dr_jd"}, {name:
-"lavern"}, {name: "kid"}, {name
-
-: "dr_elliot"}, {name: "dad"}, {name: "dr_kelso"}, {name: "hcch"}, {name:
-"dr_turk"}, {name: "jordon"
-
-}, {name: "healthCare_provider"}, {name: "mom"}, {name:
-"sacred_heart_hospital"}, {name: "doctor"}, 
-
-{name: "ted"}, {name: "chief_of_medicine"} ]} }';
-exit;
-echo '{Msg_to:{identifier: "name", items:[ {name: "anything"} ]}, Msg_purpose:{identifier: "name", items:[{name:"anything"} ]}, Msg_about: {identifier: "name", items:[{name:"anything"}]}}';
-exit;
-
-*/
 $evalVars = array();
 if (isset($_GET['msg_to']) && $_GET['msg_to'] != 'null') {
   $mTo = $_GET['msg_to'];
@@ -55,16 +34,59 @@ if (isset($_GET['msg_about']) && $_GET['msg_about'] != 'null') {
   $evalVars[] = $mAbout;
  }
 
+if (isset($_GET['consent_required']) && $_GET['consent_required'] == 'true') {
+  if (isset($_GET['msg_consent']) && $_GET['msg_consent'] != 'null') {
+    $mConsent = "(${_GET['msg_consent']},consented)";
+  } else {
+    $mConsent = '(Msg_consent,consented)';
+    $evalVars[] = 'Msg_consent';    
+  }
+} else {
+  $mConsent = 'null';  
+}
+
+
+if (isset($_GET['msg_belief']) && $_GET['msg_belief'] == 'true') {
+  if (isset($_GET['belief_about']) && $_GET['belief_about'] != 'null') {
+    $belief_about = $_GET['belief_about']; 
+  } else {
+    $belief_about = 'Belief_about';
+    $evalVars[] = $belief_about;    
+  }
+
+  if (isset($_GET['belief_what']) && $_GET['belief_what'] != 'null') {
+    $belief_what = $_GET['belief_what']; 
+  } else {
+    $belief_what = 'Belief_what';
+    $evalVars[] = $belief_what;    
+  }
+
+  if (isset($_GET['belief_by']) && $_GET['belief_by'] != 'null') {
+    $belief_by = $_GET['belief_by']; 
+  } else {
+    $belief_by = 'Belief_by';
+    $evalVars[] = $belief_by;    
+  }
+
+  $mBelief = "b($belief_about,$belief_what,$belief_by)";
+
+} else {
+  $mBelief = 'null';  
+}
+
+
+
 $toEvaluate = implode(',',$evalVars);
 
-
-$prologCall = "\"setof(t($toEvaluate), pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)),L).\"";
-echo $prologCall;
+$query = "pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,$mBelief))";
+$prolog->getPossibleVals($evalVars, $query);
 exit;
+
+$prologCall = "\"setof(t($toEvaluate), $query, L).\"";
 // results will return properly formatted return value for use
 
 $results = shell_exec("sh ./getJSON $prologCall");
-
+//$prolog->ask
 // give the JSON values back to caller
 echo $results;
 

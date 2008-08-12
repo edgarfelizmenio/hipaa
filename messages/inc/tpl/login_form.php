@@ -13,7 +13,7 @@
 	<select id="username"
 		name="username"
 		autocomplete="off">
-	<?php include ('tpl/from.php'); ?>
+	<?php include (TPL_PATH . 'from.php'); ?>
 	</select>
       </div>
       <div>

@@ -1,7 +1,7 @@
-<?php include_once('lib/common.php'); ?>
-<?php include('tpl/header_top.php'); ?>
+<?php include_once('common.php'); ?>
+<?php include(TPL_PATH . 'header_top.php'); ?>
 <title>Read Message</title>
-<?php include('tpl/header_bot.php'); ?>
+<?php include(TPL_PATH . 'header_bot.php'); ?>
 
 <?php
 if (!isset($_GET['message_id']) || empty($_GET['message_id']))
@@ -96,4 +96,4 @@ echo "<td colspan='2'><a href='reply.php?message_id=" . $msg->message_id
  }
 ?>
 </div>
-<?php include('tpl/footer.php'); ?>
+<?php include(TPL_PATH . 'footer.php'); ?>

@@ -1,14 +1,14 @@
-<?php include_once('lib/common.php'); ?>
-<?php include('tpl/header_top.php'); ?>
+<?php include_once('common.php'); ?>
+<?php include(TPL_PATH . 'header_top.php'); ?>
 <title>Forward Message</title>
-<?php include('tpl/header_bot.php'); ?>
+<?php include(TPL_PATH . 'header_bot.php'); ?>
 <?php
 $action = $_POST['action'];
 
 if($action == 'process') {  
   if ($hmsg->addMessage($_POST['message_id'])) {
     echo "<p>Forwarded message successfully</p>";
-    include('tpl/footer.php');
+    include(TPL_PATH . 'footer.php');
     exit;
   } 
   echo '<div class="warning"><p>The query was not allowed</p></div>';
@@ -41,7 +41,7 @@ if(empty($_POST['msg_purpose'])) {
     <label>To:</label>
     <select name="msg_to" id="msg_to" onChange="fieldChanged(this);">
       <option value="null"> -- To -- </option>
-      <?php	     include ('tpl/to.php');	     ?>
+      <?php	     include (TPL_PATH . 'to.php');	     ?>
     </select>
     
   </div>
@@ -51,7 +51,7 @@ if(empty($_POST['msg_purpose'])) {
     <select name="msg_about" id="msg_about" onChange="fieldChanged(this);">
       <option value="null"> -- About -- </option>
     <?php
-      include ('tpl/about.php');
+      include (TPL_PATH . 'about.php');
     ?>
     </select>
 
@@ -69,7 +69,7 @@ if(empty($_POST['msg_purpose'])) {
    <select name="msg_purpose" onChange="fieldChanged(this);" id="msg_purpose">
       <option value="null"> -- Purpose -- </option>
     <?php
-      include ('tpl/purpose.php');
+      include (TPL_PATH . 'purpose.php');
     ?>
     </select>
 
@@ -81,7 +81,7 @@ if(empty($_POST['msg_purpose'])) {
     <input type="text" name="replyto" id="replyto">
 -->
 <?php
-   include ('tpl/msg_footer.php');
+   include (TPL_PATH . 'msg_footer.php');
 ?>
 
   <div>
@@ -144,4 +144,4 @@ if ($mailbag) {
 </table>
 
 
-<?php include('tpl/footer.php'); ?>
+<?php include(TPL_PATH . 'footer.php'); ?>
