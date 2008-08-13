@@ -172,7 +172,7 @@ function updateFields(json) {
   refreshFields();
 
   for (param in json) {
-    var allowedOptions = json[param].items;
+    var allowedOptions = json[param];
     var allowedLen = allowedOptions.length;
 
     param = param.toLowerCase();
@@ -186,7 +186,7 @@ function updateFields(json) {
     
     // fill set with allowed values
     for (var i =0; i< allowedLen; i++) {
-      eval(param + '_set["' + allowedOptions[i].name + '"] = 1');
+      eval(param + '_set["' + allowedOptions[i] + '"] = 1');
     }
 
     // put the allowed values into an array
@@ -198,12 +198,6 @@ function updateFields(json) {
     // update display for the allowed values for that param
     updatePrologAnswer(param, keys);
 
-    var anything = false;
-    // if anything is allowed, skip the highlight phase below
-    if (allowedLen == 1 && allowedOptions[0].name == 'anything') {
-      anything = true;
-    }    
-    
     // go through the form field options, highlighting values that aren't allowed
     var curOptions = document.getElementById(param).options;
     if (curOptions == undefined) continue; // skip fields that aren't select/options
@@ -211,11 +205,9 @@ function updateFields(json) {
     for (var j = 0; j<curLen; j++) {
       curOption = curOptions[j].value;
       eval('var allowed = typeof(' + param + '_set[curOption]) != "undefined"');
-      if (anything) {
-	$(curOptions[j]).removeClass();
-      } else if (!allowed) {
-	$(curOptions[j]).removeClass();
-	$(curOptions[j]).addClass('invalid');
+      if (!allowed) {
+	  $(curOptions[j]).removeClass();
+	  $(curOptions[j]).addClass('invalid');
       }
     }
 
