@@ -54,16 +54,12 @@ class Prolog {
    * @param vars array of variables that need to be evaluated
    * @param query the existing prolog query
    */
-  public function getPossibleVals($vars, $query, $allow_any) {
+  public function getPossibleVals($vars, $query, $filterFn) {
     $queries = $this->getPossibleQueries($vars, $query, array(), 0);
     
     $filterQueries = array();
     foreach($vars as $var) {
-	if ($allow_any) {
-	    $filterQueries[] =  "filter_list_any({$var}List,{$var}CleanList)";
-	} else {
-	    $filterQueries[] =  "filter_list({$var}List,{$var}CleanList)";
-	}
+      $filterQueries[] = "$filterFn({$var}List,{$var}CleanList)";
     }  
     $queries[] = $this->pStartMark;
     $filterQueries[] = $this->pEndMark;
