@@ -1,4 +1,4 @@
-
+<?php include_once('common.php');?>
 <html>
 <head>
 </head>
@@ -17,32 +17,45 @@
 $action = $_GET['action'];
 switch ($action) {
  case 'refresh':
-   $filepath = 'lib/scripts/';
-   $filename = 'allpossibles';
-
    // remove the file that currently holds old possible values
-   shell_exec("rm -rf $filename"); // JSON
-   shell_exec("rm -rf $filename.php"); // PHP serialized
+   shell_exec("rm -rf " . CACHE_PATH . CACHE_FILE); // PHP serialized file
 
-   $query = "pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by)))";
-   $evalVars = array('Msg_to','Msg_from','Msg_about','Msg_purpose','Belief_about','Belief_what','Belief_by');
-   echo $prolog->getPossibleVals($evalVars, $query, true);
-   exit;
+   // get the leaf nodes of Msg_(to,from,about)
+   $evalVars = array('Msg_to','Msg_from','Msg_about');
+   $query = "Msg_purpose^Belief_about^Belief_what^Belief_by^pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by)))";
+   $poss_json1 = $prolog->getPossibleVals($evalVars, $query, 'filter_inner_role_nodes');
 
-   // generate a new one
-   $prologCall = "setof(t(Msg_to,Msg_from,Msg_about,Msg_purpose,Belief_about,Belief_what,Belief_by),pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by))),L).";        
-   //$prologCall = "setof(t(Msg_to,Msg_from,Msg_about,Msg_purpose), pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,null)),L).";        
-   // perl processes into JSON
-   shell_exec("cd lib/scripts/; ./xsbexec '" . $prologCall . "' | perl  msg_possibles.pl > " . $filename);
+   // get the rest of the possible values
+   $query = "Msg_to^Msg_from^Msg_about^pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by)))";
+   $evalVars = array('Msg_purpose','Belief_about','Belief_what','Belief_by');
+   $poss_json2 = $prolog->getPossibleVals($evalVars, $query, 'filter_vars');
 
-   $fh = fopen($filepath . $filename, 'r');
-   $string = fread($fh, filesize($filepath . $filename));
-   fclose($fh);
-   
+
+
+
+   $poss_php1 = json_decode($poss_json1);
+   $poss_php2 = json_decode($poss_json2);
+
+
+   // construct Msg_consent set (set join of Msg_to, Msg_from, and Msg_about)
+   $msg_consent = array();
+   foreach($poss_php1 as $key => $arr) {
+     for($i = 0; $i < count($arr); $i++) {
+	 $value = $arr[$i];
+	 $msg_consent[$value] = 1;
+     }
+   }
+   $msg_consent = array_keys($msg_consent);
+
+   // combine the two and add Msg_consent (set join of Msg_to, Msg_from, and Msg_about)
+   foreach($poss_php2 as $key => $value) {
+     $poss_php1->{$key} = $value;
+   }
+   $poss_php1->Msg_consent = $msg_consent;
+
    // save a PHP serialized version
-   $fh = fopen($filepath . $filename . 'serialized.php', 'w');
-   
-   fwrite($fh, serialize(json_decode($string)));
+   $fh = fopen(CACHE_PATH . CACHE_FILE, 'w+');
+   fwrite($fh, serialize($poss_php1));
    fclose($fh);
 
    break;
@@ -59,7 +72,9 @@ switch ($action) {
 </form>
 <?php
    echo "<pre>";
-   echo shell_exec("cd lib/scripts; cat allpossibles");
+$fh = fopen(CACHE_PATH . CACHE_FILE, 'r');
+$contents = fread($fh, filesize(CACHE_PATH . CACHE_FILE));
+print_r(unserialize($contents));
    echo "</pre>";
 
 
