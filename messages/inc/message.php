@@ -1,10 +1,4 @@
 <?php
-  /*include_once ('db.php');
-include_once ('functions.php');
-require_once ('xsbprolog.php');
-
-define('MSG_DB', 'hipaa_message');*/
-
 class Message {
 
   private $db;
