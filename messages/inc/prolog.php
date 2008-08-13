@@ -77,7 +77,7 @@ class Prolog {
     $endIndex = strrpos($response, $endMark) - 1;
     $results = substr($response, $startIndex , $endIndex - strlen($response));
     
-    echo $this->prologToJson($results);
+    return $this->prologToJson($results);
   }
   
 
