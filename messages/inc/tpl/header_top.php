@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <?php include(TPL_PATH . 'header.php'); ?>
     <link rel="stylesheet" href="<?php echo CSS_URL;?>site.css" />
     <link rel="stylesheet" href="<?php echo CSS_URL;?>form.css" />
     <script type="text/javascript" src="<?php echo JS_URL;?>jquery-1.2.6.js"> </script>          
