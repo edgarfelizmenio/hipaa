@@ -35,10 +35,5 @@ filter_leaves([H|T], [X|Y]) :-
 filter_leaves([_|T], L) :-
 	filter_leaves(T, L).
 
-% is_role_leaf(Role)
-%   Success if the role given is a leaf node
-%   In other words, noone else is inRole of this Role.
-is_role_leaf(Role) :- 
-	not(inRole(_,Role)). /* Node grounded */
 
 
