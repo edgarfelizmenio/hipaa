@@ -187,6 +187,8 @@ function updateFields(json) {
     // fill set with allowed values
     for (var i =0; i< allowedLen; i++) {
       eval(param + '_set["' + allowedOptions[i] + '"] = 1');
+      if (allowedOptions[i] == 'anything')
+	break;  
     }
 
     // put the allowed values into an array
