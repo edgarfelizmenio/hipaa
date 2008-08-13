@@ -19,7 +19,7 @@
        onChange="fieldChanged(this);"
        onClick="fieldChanged('belief_about');">
       <option VALUE="null">-- Choose about whom -- </option>
-      <?php include ('tpl/belief_about.php'); ?>
+      <?php include (TPL_PATH . 'belief_about.php'); ?>
     </select>
   </div>
 
@@ -31,7 +31,7 @@
        onChange="fieldChanged(this);"
        onClick="fieldChanged('belief_what');">
       <option VALUE="null">-- Choose belief -- </option>
-      <?php include ('tpl/belief_what.php'); ?>
+      <?php include (TPL_PATH . 'belief_what.php'); ?>
     </select>
   </div>
 
@@ -43,7 +43,7 @@
        onChange="fieldChanged(this);"
        onClick="fieldChanged('belief_by');">
       <option VALUE="null">-- Choose whose belief -- </option>
-      <?php include ('tpl/belief_by.php'); ?>
+      <?php include (TPL_PATH . 'belief_by.php'); ?>
     </select>
   </div>
 </div>
@@ -74,7 +74,7 @@
 			onChange="fieldChanged(this);"
 			onClick="fieldChanged('msg_consent');">
           <option VALUE="null">-- Choose consent -- </option>
-	  <?php include ('tpl/consents.php'); ?>
+	  <?php include (TPL_PATH . 'consents.php'); ?>
 	</select>
 
       </div>
