@@ -19,8 +19,8 @@ class Prolog {
   private $pStartMark;
   private $pEndMark;
 
-  function  __construct($systemPath="/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/HIPAA",$xsbBinary="/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/XSB/bin/xsb",$ruleSet="shh.pl") {
-    //  function  __construct($systemPath="/var/www/HIPAA",$xsbBinary="/var/www/XSB/bin/xsb",$ruleSet="shh.pl") {
+//  function  __construct($systemPath="/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/HIPAA",$xsbBinary="/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/XSB/bin/xsb",$ruleSet="shh.pl") {
+      function  __construct($systemPath="/var/www/HIPAA",$xsbBinary="/var/www/XSB/bin/xsb",$ruleSet="shh.pl") {
     if(!is_dir($systemPath))
       die('Error in system path');
     if(!is_file($xsbBinary))
@@ -65,11 +65,41 @@ class Prolog {
     $queries[] = $this->pStartMark;
     $filterQueries[] = $this->pEndMark;
     $prologQuery = implode(    array_merge($queries, $filterQueries), ',') . '.';
-    $results = $this->ask($prologQuery);
-    $startIndex = strrpos($results, STARTMARK);
-    echo substr($results, $startIndex);
+    $response = $this->ask($prologQuery);
 
+    $startIndex = strrpos($response, STARTMARK) + strlen(STARTMARK) + 1;
+
+    $endMark = $this->pEndMark;
+    $endMark = str_replace("'", '', $endMark); 
+    $endIndex = strrpos($response, $endMark) - 1;
+    $results = substr($response, $startIndex , $endIndex - strlen($response));
+    
+    echo $this->prologToJson($results);
   }
+
+
+    /**
+     * Converts the prolog output
+     *   Msg_toCleanList = [carla,chief_of_medicine,dad] 
+     *   Msg_purposeCleanList = [obtaining_authorization,payment,treatment] 
+     *   Msg_aboutCleanList = [carla,dad,dead]
+     * Into JSON formatted string
+     *   {"Msg_to":["carla","chief_of_medicine","dad"],
+     *    "Msg_purpose":["obtaining_authorization","payment","treatment"],
+     *    "Msg_about":["carla","dad","dead"]}
+     */
+  private function prologToJson($prolog) {
+
+      $prolog = str_replace('CleanList', '', $prolog);
+      $prolog = str_replace('[', '["', $prolog);
+      $prolog = str_replace(']', '"]', $prolog);
+      $prolog = str_replace(',', '","', $prolog);
+      $prolog = str_replace(' = ', '":', $prolog);
+      $prolog = str_replace("\n", ',"', $prolog);
+
+      $json = '{"' . $prolog . '}';
+      return $json;
+  } 
 
   private function getPossibleQueries($vars, $query, $queries, $i) {
     if (count($vars) == $i) return $queries; // reached the end of the array
@@ -77,9 +107,10 @@ class Prolog {
 
     $curValue = $vars[$i];
     array_splice($vars, $i, 1); // splice out that value
+    $vars[] = $query;
     $existsVars = implode('^', $vars);
     
-    $queries[] = "setof($curValue, $existsVars^$query, {$curValue}List)";
+    $queries[] = "setof($curValue, $existsVars, {$curValue}List)";
     return $queries;
   }
 
