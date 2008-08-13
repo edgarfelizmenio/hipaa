@@ -24,6 +24,11 @@ switch ($action) {
    shell_exec("rm -rf $filename"); // JSON
    shell_exec("rm -rf $filename.php"); // PHP serialized
 
+   $query = "pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by)))";
+   $evalVars = array('Msg_to','Msg_from','Msg_about','Msg_purpose','Belief_about','Belief_what','Belief_by');
+   echo $prolog->getPossibleVals($evalVars, $query, true);
+   exit;
+
    // generate a new one
    $prologCall = "setof(t(Msg_to,Msg_from,Msg_about,Msg_purpose,Belief_about,Belief_what,Belief_by),pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,b(Belief_about,Belief_what,Belief_by))),L).";        
    //$prologCall = "setof(t(Msg_to,Msg_from,Msg_about,Msg_purpose), pbh(a(Msg_to,Msg_from,Msg_about,phi,Msg_purpose,null,null,null)),L).";        
