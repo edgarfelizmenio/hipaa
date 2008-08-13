@@ -79,7 +79,7 @@ if (isset($_GET['msg_belief']) && $_GET['msg_belief'] == 'true') {
 $toEvaluate = implode(',',$evalVars);
 
 $query = "pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,$mBelief))";
-$prolog->getPossibleVals($evalVars, $query, true);
+echo $prolog->getPossibleVals($evalVars, $query, true);
 exit;
 
 $prologCall = "\"setof(t($toEvaluate), $query, L).\"";
