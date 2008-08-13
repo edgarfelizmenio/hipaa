@@ -84,8 +84,8 @@ Reset
 <hr />
 <button id="consent_query" onclick=" 
 rebootFields(true);
-$('#msg_to').val('doctor');
-$('#msg_from').val('nurse');
+$('#msg_to').val('dr_cox');
+$('#msg_from').val('carla');
 $('#msg_about').val('patient');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
@@ -103,7 +103,7 @@ fieldChanged(null);
 <button id="consent_query" onclick=" 
 rebootFields(true);
 $('#msg_to').val('sacred_heart_hospital');
-$('#msg_from').val('nurse');
+$('#msg_from').val('carla');
 $('#msg_about').val('patient');
 $('#msg_purpose').val('null');
 $('#consent_required').removeAttr('checked');
