@@ -201,7 +201,7 @@ function updateFields(json) {
 
     var anything = false;
     // if anything is allowed, skip the highlight phase below
-    if (jQuery.inArray('anything', allowedOptions)) {
+    if (jQuery.inArray('anything', allowedOptions) != -1) {
       anything = true;
     }
 
