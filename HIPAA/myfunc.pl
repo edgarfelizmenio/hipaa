@@ -8,9 +8,9 @@ filter_list([H|T], [X|Y]) :-
 	atom(H),
 	H=X,
 	filter_list(T,Y).
-filter_list([H|T], [X|Y]) :-
+filter_list(_, [X|Y]) :-
         X='anything',
-	filter_list(T, Y).
+	Y = [].
 
 
 
