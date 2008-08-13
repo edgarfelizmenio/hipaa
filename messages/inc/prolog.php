@@ -54,14 +54,17 @@ class Prolog {
    * @param vars array of variables that need to be evaluated
    * @param query the existing prolog query
    */
-  public function getPossibleVals($vars, $query) {
+  public function getPossibleVals($vars, $query, $allow_any) {
     $queries = $this->getPossibleQueries($vars, $query, array(), 0);
     
     $filterQueries = array();
     foreach($vars as $var) {
-      $filterQueries[] =  "filter_list({$var}List,{$var}CleanList)";
-    }
-    
+	if ($allow_any) {
+	    $filterQueries[] =  "filter_list_any({$var}List,{$var}CleanList)";
+	} else {
+	    $filterQueries[] =  "filter_list({$var}List,{$var}CleanList)";
+	}
+    }  
     $queries[] = $this->pStartMark;
     $filterQueries[] = $this->pEndMark;
     $prologQuery = implode(    array_merge($queries, $filterQueries), ',') . '.';
@@ -76,7 +79,7 @@ class Prolog {
     
     echo $this->prologToJson($results);
   }
-
+  
 
     /**
      * Converts the prolog output
