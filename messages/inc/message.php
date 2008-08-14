@@ -1,7 +1,16 @@
 <?php
+  /**
+   * Provides methods for implementing a basic messaging system with HIPAA
+   * compliance
+   */
 class Message {
 
   private $db;
+  private $prolog;
+
+  /**
+   * Sets up the database library and prolog interface
+   */
   function __construct() {
     $this->db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
     $this->prolog = new Prolog();
@@ -22,51 +31,12 @@ class Message {
   }
 
   /**
-   * Retrieves the consents that the consenter needs to consent
-   */
-  function getConsents($consenter) {
-    if(empty($consenter))
-      return null;
-    $consenter = addslashes($consenter);
-
-    $query = "SELECT * FROM " . MSG_DB . "
-              WHERE consent='" . $consenter . "'
-             ";
-    return $this->db->get_results($query);
-  }
-  
-
-  /**
-   * Sets the consented value for a message
-   */
-  function setConsent($message_id, $consented='1') {
-    $message_id = intval($message_id);
-    $consented = addslashes($consented);
-
-    $query = "UPDATE " . MSG_DB . "
-              SET consented='" . $consented . "'
-              WHERE message_id='" . $message_id . "'
-             ";
-
-    $this->db->query($query);
-  }
-
-  /**
    * Retrieve all recipients of mail
    */
   function getRecipients() {
     $query = "SELECT DISTINCT `to` AS name from " . MSG_DB;
     return $this->db->get_results($query);
   }
-
-  /**
-   * Retrieves all people who need to consent
-   */
-  function getConsenters() {
-    $query = "SELECT DISTINCT consent AS name from " . MSG_DB . " WHERE consented='0'";
-    return $this->db->get_results($query);
-  }
-
 
   function getMessage($message_id) {
     $message_id = intval($message_id);
@@ -77,6 +47,9 @@ class Message {
     return $results;
   }
 
+  /**
+   * Debug method dumps all messages from the db
+   */
   function getAllMessages() {
     $query = "SELECT *
               FROM " . MSG_DB;
@@ -84,14 +57,13 @@ class Message {
     $this->db->query($query);
     
     $this->db->debug();
-
   }
 
 
   /**
    * Retrieves the history of a message
    */
-  function getHistory($message_id) {
+  public function getHistory($message_id) {
     $message_id = intval($message_id);
     $ancestors = $this->getAncestors($message_id);
 
@@ -105,12 +77,10 @@ class Message {
    * Retrieves all ancestors of this message
    * first go up tree by replyto_id and secondary by parent_id
    */
-  function getAncestors($message_id) {
+  private function getAncestors($message_id) {
     $message_id = intval($message_id);
     
-    
     $idtree = array();
-    //    $idtree[] = $message_id; // include the first message
     while (true) {
       $query = "SELECT parent_id, replyto_id 
               FROM " . MSG_DB . "
@@ -189,7 +159,6 @@ class Message {
     $mBelief = 'null';
     // if they believe something, make sure they fill out all belief fields
     if ($msg_belief == '1') {
-      echo "<h1 > all hell</h1>";
       $b_about = $_POST['belief_about'];
       $b_what = $_POST['belief_what'];
       $b_by = $_POST['belief_by'];
@@ -250,7 +219,7 @@ class Message {
     $mPurpose = $msg_purpose;
 
 
-    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief)).";
+    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,$mReplyto,$mConsent,$mBelief))";
     return $query;
 
   }
@@ -276,7 +245,6 @@ class Message {
       $replyto_field = ', `replyto_id`';
       $replyto_id = ",'" . intval($_POST['replyto_id']) . "'";
     }
-
 
     $sqlquery = "INSERT INTO " . MSG_DB . " 
                 ( `to` 
