@@ -5,8 +5,8 @@ define('EZSQL_PATH', INC_PATH . 'ezsql/'); // /var/www/messages/inc/ezsql/
 define('TPL_PATH' , INC_PATH . 'tpl/'); // /var/www/messages/inc/tpl/
 define('CACHE_PATH', INC_PATH . 'cache/'); // /var/www/messages/inc/cache
 define('JSON_PATH', INC_PATH . 'json/'); // /var/www/messages/inc/json/
-define('HIPAA_PATH', '/var/www/HIPAA/');
-define('XSB_PATH', '/var/www/XSB/bin/xsb');
+define('HIPAA_PATH', '/var/www/HIPAA/'); // path to HIPAA/policy files
+
 
 define('SITE_PATH', dirname($_SERVER['SCRIPT_NAME']) . '/'); // /messages/
 define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] .  SITE_PATH); // http://crypto.stanford.edu/messages/
@@ -20,6 +20,7 @@ define('DB_HOST', 'mysql-user.stanford.edu');
 
 define('POLICY_FILE', 'shh.pl');
 define('CACHE_FILE', 'allposscache.php');
+define('XSB_BIN', '/var/www/XSB/bin/xsb'); // XSB binary file
 
 define('MSG_DB', 'hipaa_message');
 
@@ -31,6 +32,6 @@ include_once(INC_PATH . 'functions.php');
 
 $hmsg = new Message();
 $db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
-$prolog = new Prolog(HIPAA_PATH, XSB_PATH, POLICY_FILE);
+$prolog = new Prolog(HIPAA_PATH, XSB_BIN, POLICY_FILE);
 //$prolog = new Prolog("/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/HIPAA/", "/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/XSB/bin/xsb", "shh.pl");
 ?>
