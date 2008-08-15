@@ -81,6 +81,7 @@ class Message {
     $message_id = intval($message_id);
     
     $idtree = array();
+    $idtree[] = $message_id;
     while (true) {
       $query = "SELECT parent_id, replyto_id 
               FROM " . MSG_DB . "
@@ -117,8 +118,8 @@ class Message {
     $response = $this->prolog->askHIPAA($query);
 
     // print out the query and response for debugging purposes
-    echo '<div class="confirmed"><p>' . $response . '</p><p>Prolog query:
-    ' . $query . '</p></div>';
+    echo '<div class="confirmed"><p>' . $response . '</p><pre>Prolog query:
+    ' . $query . '</pre></div>';
 
     
     if ($this->allowed($response)) {
