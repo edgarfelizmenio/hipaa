@@ -1,0 +1,34 @@
+--
+-- Table structure for table 'hipaa_message'
+--
+
+CREATE TABLE hipaa_message (
+  message_id int(10) unsigned NOT NULL auto_increment,
+  `to` varchar(90) NOT NULL,
+  `from` varchar(90) NOT NULL,
+  about varchar(90) NOT NULL,
+  `type` varchar(90) NOT NULL,
+  purpose varchar(90) NOT NULL,
+  consent_by varchar(90) default NULL,
+  consent_type varchar(90) default NULL,
+  belief_about varchar(90) default NULL,
+  belief_what varchar(90) default NULL,
+  belief_by varchar(90) default NULL,
+  message text NOT NULL,
+  parent_id int(11) NOT NULL default '-1',
+  replyto_id int(11) NOT NULL default '-1',
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (message_id)
+)
+
+--
+-- Table structure for table `in_role`
+--
+
+CREATE TABLE `in_role` (
+  `in_role_id` int(10) unsigned NOT NULL auto_increment,
+  `role` char(45) NOT NULL,
+  `person` char(45) NOT NULL,
+  PRIMARY KEY  (`in_role_id`),
+  UNIQUE KEY `role` (`role`,`person`)
+)
