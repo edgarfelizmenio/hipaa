@@ -1,5 +1,5 @@
 :- import odbc_open/3 from odbc_call.
-:- odbc_open('MySQL-test', root, www). 
+:- odbc_open('MySQL-test', root, user). 
 
 % assert_in_role(MySQL_tuples)
 %
