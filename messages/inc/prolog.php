@@ -50,6 +50,7 @@ class Prolog {
     $command = "";
     $command .= "cd $this->systemPath;";
     $command .= "echo \"$query.\" | $this->xsb -e \"['$this->ruleSet'].\" 2>&1";
+
     return shell_exec($command);
   }
 
@@ -62,20 +63,46 @@ class Prolog {
    *                 clauses satisfied (if yes)
    */
   public function askHIPAA($query) {
-    // chokes on new lines for some reason
     $query = str_replace("\n", "", $query); 
-    $cmd = 'cd ' . $this->systemPath . '; ../prolog "' . $query . '"';
-    return shell_exec($cmd);
-  }
-
-  public function askHIPAAtemp($query) {
-    $query = str_replace("\n", "", $query); 
-    $query = $this->pStartMark . $query . $this->pEndMark . '.';
-
+    
     $response = $this->ask($query);
 
-    echo $response;
+    $passed = '';
+    $endLoc = strrpos($response, '|') - 1;
+    $offset = $endLoc - strlen($response) -1;
+    $startLoc = strrpos($response, "\n",$offset) + 1;
+    $passed = substr($response, $startLoc, $endLoc-$startLoc);
 
+    switch($passed) {
+    case 'no':
+	$result = 'HIPAA says no';
+	break;
+    case 'yes':
+	$start = 0;
+	$marker = 'HIPAA rule ';
+
+	while(($startLoc = strpos($response, $marker, $start)) !== false) {
+	    $endLoc = strpos($response, ';', $startLoc);
+	    $startLoc += strlen($marker);
+	    $rules[] = substr($response, $startLoc, $endLoc - $startLoc);
+	    $start = $startLoc + 1;
+	}
+
+	$result = 'HIPAA says yes <br />';
+	if ($rules) {
+	    foreach($rules as $rule) {
+		$result .=  'Rule: ' . $rule . '<br />';
+	    }
+	}
+	
+	break;
+
+    default:
+	die('Error in parsing answer or in the query given');
+    }
+
+
+    return $result;
   }
 
   /**
