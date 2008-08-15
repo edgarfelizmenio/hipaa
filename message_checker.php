@@ -1,3 +1,6 @@
+<?php include('messages/common.php'); 
+?>
+
 <html>
 
 <head>
@@ -124,7 +127,7 @@ style='color:black'><o:p></o:p></span></h2>
 <?php
 
 function validate_ip() {
-  global $login_error;
+  global $login_error, $prolog;
   $mTo = htmlspecialchars($_REQUEST['msg_to']);
   $mFrom = htmlspecialchars($_REQUEST['msg_from']);
   $mAbout = htmlspecialchars($_REQUEST['msg_about']);
@@ -139,18 +142,15 @@ function validate_ip() {
     $login_error = "You must supply the purpose";
   else
   {
-    $STR="\"pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null)).\"";
-    //$STR="\"pbh(a(patient, ce, patient, phi, null, null, null,null)).\"";
-    $crap = shell_exec("sh prolog $STR");
-    $crap = trim($crap);
-    echo $crap;
-    
+    $query="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null))";
+
+    $result = $prolog->askHIPAA($query);
+    echo $result;
     $myFile = "./log/log.txt";
     $fh = fopen($myFile, 'a') or die("cant open file");
-    fwrite($fh, $STR.$crap."\n");
+    fwrite($fh, $query.$result."\n");
     fclose($fh);
     
-    //$login_error = $crap;
   }
 }
 
