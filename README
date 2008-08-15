@@ -1,0 +1,21 @@
+unixodbc-dev
+libmysqlclient15-dev
+./configure --with-odbc -with-db-drivers -with-odbc-libdir=/usr/lib -with-odbc-incdir=/usr/include/ -with-mysql-libdir=/usr/lib/mysql -with-mysql-incdir=/usr/include/mysql
+libmyodbc
+to test if odbc is setup correctly, run 
+may have to chown -R www-data:users /var/www
+isql -v MySQL-test 
+odbc.ini
+[MySQL-test]
+Description	= MySQL database test
+Driver		= MySQL
+Server		= localhost
+Database	= test
+Port		= 3306
+UserName	= root
+Password	= user
+odbcinst.ini
+[MySQL]
+Description	= ODBC Driver for MySQL
+Driver		= /usr/lib/odbc/libmyodbc.so
+UsageCount	= 1
