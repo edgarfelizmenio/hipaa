@@ -13,10 +13,10 @@ define('SITE_URL', 'http://' . $_SERVER['HTTP_HOST'] .  SITE_PATH); // http://cr
 define('JS_URL' ,  SITE_PATH . 'inc/js/'); // /messages/inc/js/
 define('CSS_URL' , SITE_PATH . 'inc/tpl/'); // /messages/inc/tpl/
 
-define('DB_USER', 'gAASAmain');
-define('DB_PASS', 'hieshoon' );
-define('DB_NAME', 'g_AASA_main' );
-define('DB_HOST', 'mysql-user.stanford.edu');
+define('DB_USER', 'user');
+define('DB_PASS', 'user' );
+define('DB_NAME', 'test' );
+define('DB_HOST', 'localhost');
 
 define('POLICY_FILE', 'shh.pl');
 define('CACHE_FILE', 'allposscache.php');
