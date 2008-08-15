@@ -118,7 +118,7 @@ class Message {
     $response = $this->prolog->askHIPAA($query);
 
     // print out the query and response for debugging purposes
-    echo '<div class="confirmed"><p>' . htmlspecialchars($response) . '</p><pre>Prolog query:
+    echo '<div class="confirmed"><p>' . $response . '</p><pre>Prolog query:
     ' . $query . '</pre></div>';
 
     
