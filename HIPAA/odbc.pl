@@ -1,4 +1,5 @@
-:- import odbc_open/3 from odbc_call.
+% Make sure that the file including odbc.pl has loaded the odbc_call
+% with :- [odbc_call].
 :- odbc_open('MySQL-test', root, user). 
 
 % assert_in_role(MySQL_tuples)

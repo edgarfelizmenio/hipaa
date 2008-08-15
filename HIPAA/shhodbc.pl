@@ -1,6 +1,8 @@
 %%Example system
 :- ['HIPAA.pl'].
 :- ['myfunc.pl'].
+:- [odbc_call].
+:- ['odbc.pl'].
 
 %% inRole predicates
 :- assert_in_role(_).

@@ -1,5 +1,3 @@
-%:- ['odbc.pl'].
-
 
 % filter_var_any(Unfiltered, Filtered)
 %  filters and replaces _h2345 type vars with anything
