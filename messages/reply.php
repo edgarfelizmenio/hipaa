@@ -23,10 +23,10 @@ $msg = $hmsg->getMessage($message_id);
 
 // to set default values
 if(empty($_POST['msg_about'])) {
-    $_POST['msg_about'] = $msg->about;
+  $_POST['msg_about'] = htmlspecialchars($msg->about);
   }
 if(empty($_POST['msg_purpose'])) {
-    $_POST['msg_purpose'] = $msg->purpose;
+  $_POST['msg_purpose'] = htmlspecialchars($msg->purpose);
   }
 
 ?>
@@ -41,11 +41,11 @@ if(empty($_POST['msg_purpose'])) {
     <input type="hidden"
 	   name="msg_from"
 	   id="msg_from"
-	   value="<?php echo $_SESSION['username']; ?>" />
+	   value="<?php echo htmlspecialchars($_SESSION['username']); ?>" />
 
   <div>
     <label>To:</label>
-    <input type="text" name="msg_to" id="msg_to" readonly="readonly" value="<?php echo $msg->from ?>" />
+    <input type="text" name="msg_to" id="msg_to" readonly="readonly" value="<?php echo htmlspecialchars($msg->from); ?>" />
   </div>
 
   <div>
@@ -61,7 +61,7 @@ if(empty($_POST['msg_purpose'])) {
   
   <div>
     <label>Type:</label>
-    <input type="text" name="msg_type" id="msg_type" value="<?php echo $msg->type ?>"
+    <input type="text" name="msg_type" id="msg_type" value="<?php echo htmlspecialchars($msg->type) ?>"
     readonly="readonly" />
   </div>
 
@@ -89,8 +89,8 @@ if(empty($_POST['msg_purpose'])) {
   <div>
     <input type="hidden" name="msg_reply" value="1" />
     <input type="hidden" name="action" value="process" />
-    <input type="hidden" name="replyto_id" value="<?php echo $replyto_id;?>"/>
-  <input type="hidden" name="message_id" value="<?php echo $message_id; ?>"/>
+    <input type="hidden" name="replyto_id" value="<?php echo htmlspecialchars($replyto_id);?>"/>
+  <input type="hidden" name="message_id" value="<?php echo htmlspecialchars($message_id); ?>"/>
     <input type="submit"  value="Send Reply" />
   </div>
    
@@ -121,14 +121,14 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo "<td>" . $msg->to . "</td>";
-     echo "<td>" . $msg->from . "</td>";
-     echo "<td>" . $msg->about . "</td>";
-     echo "<td>" . $msg->type . "</td>";
-     echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->consent . "</td>";
-     echo "<td>" . $msg->consented . "</td>";
-     echo "<td>" . $msg->message . "</td>";
+     echo "<td>" . htmlspecialchars($msg->to) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->from) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->about) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->type) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->purpose) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->consent) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->consented) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->message) . "</td>";
      echo "</tr>";
   }
   echo "</table>";

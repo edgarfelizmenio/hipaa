@@ -14,8 +14,8 @@ class Prolog {
   private $xsb; // path to XSB binary
   private $ruleSet; // specific company rule file
 
-  private $pStartMark; // prolog trivial goal used to delineate start and end
-  private $pEndMark;
+  private $pStartMark; // prolog trivial goal used to delineate the 
+  private $pEndMark;   // start and end of output we're interested in
 
   /**
    * Initializes variables necessary to execute XSB Prolog

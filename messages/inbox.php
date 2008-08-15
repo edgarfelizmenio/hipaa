@@ -8,7 +8,7 @@
 <?php
    requireLogin(true);
    $recipient = $_SESSION['username'];
-   echo "<h3>" . $recipient . " mailbox</h3>";
+   echo "<h3>" . htmlspecialchars($recipient) . " mailbox</h3>";
    $mailbag = $hmsg->getRecipientMail($recipient);
 
 if ($mailbag) {
@@ -35,17 +35,17 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo '<td><a href="read.php?message_id=' . $msg->message_id . '">Read</a></td>';
-     echo "<td>" . $msg->to . "</td>";
-     echo "<td>" . $msg->from . "</td>";
-     echo "<td>" . $msg->about . "</td>";
-     echo "<td>" . $msg->type . "</td>";
-     echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->consent . "</td>";
-     echo "<td>" . $msg->consented . "</td>";
-     echo "<td>" . $msg->message . "</td>";
-     echo '<td><a href="forward.php?message_id=' . $msg->message_id . '">Forward</a></td>';
-     echo '<td><a href="reply.php?message_id=' . $msg->message_id . '">Reply</a></td>';
+     echo '<td><a href="read.php?message_id=' . htmlspecialchars($msg->message_id) . '">Read</a></td>';
+     echo "<td>" . htmlspecialchars($msg->to) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->from) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->about) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->type) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->purpose) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->consent) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->consented) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->message) . "</td>";
+     echo '<td><a href="forward.php?message_id=' . htmlspecialchars($msg->message_id) . '">Forward</a></td>';
+     echo '<td><a href="reply.php?message_id=' . htmlspecialchars($msg->message_id) . '">Reply</a></td>';
      echo "</tr>";
   }
   echo "</table>";

@@ -74,7 +74,7 @@ switch ($action) {
    echo "<pre>";
 $fh = fopen(CACHE_PATH . CACHE_FILE, 'r');
 $contents = fread($fh, filesize(CACHE_PATH . CACHE_FILE));
-print_r(unserialize($contents));
+echo htmlspecialchars(print_r(unserialize($contents), true));
    echo "</pre>";
 
 

@@ -92,10 +92,10 @@ class Message {
       $parent_id = $results->parent_id;
       $replyto_id = $results->replyto_id;
       if ($replyto_id != -1) {
-	$idtree[] = $replyto_id;
+	$idtree[] = intval($replyto_id);
 	$message_id = $replyto_id;
       } else if ($parent_id != -1) {
-	$idtree[] = $parent_id;
+	$idtree[] = intval($parent_id);
 	$message_id = $parent_id;
       } else {
 	break;
@@ -118,7 +118,7 @@ class Message {
     $response = $this->prolog->askHIPAA($query);
 
     // print out the query and response for debugging purposes
-    echo '<div class="confirmed"><p>' . $response . '</p><pre>Prolog query:
+    echo '<div class="confirmed"><p>' . htmlspecialchars($response) . '</p><pre>Prolog query:
     ' . $query . '</pre></div>';
 
     
@@ -196,7 +196,7 @@ class Message {
       echo "<h4>Please fill in the following:</h4>\n";
       echo '<ul>' . "\n";
       foreach ($errors as $error) {
-	echo "<li>$error</li>\n";
+	echo "<li>" . htmlspecialchars($error) . "</li>\n";
       }
       echo '</ul>' . "\n";
       echo '</div>';
@@ -263,19 +263,19 @@ class Message {
               " . $replyto_field . "
                 )
               VALUES 
-                ( '" . $msg_to . "'
-                , '" . $msg_from . "'
-                , '" . $msg_about . "'
-                , '" . $msg_type . "'
-                , '" . $msg_purpose . "'
-                , '" . $msg_consent . "'
+                ( '" . addslashes($msg_to) . "'
+                , '" . addslashes($msg_from) . "'
+                , '" . addslashes($msg_about) . "'
+                , '" . addslashes($msg_type) . "'
+                , '" . addslashes($msg_purpose) . "'
+                , '" . addslashes($msg_consent) . "'
                 , '" . 'consented' . "'
-                , '" . $belief_about . "'
-                , '" . $belief_what . "'
-                , '" . $belief_by . "'
-                , '" . $msg_message . "'
-                , '" . $parent_id . "'
-              " . $replyto_id . "
+                , '" . addslashes($belief_about) . "'
+                , '" . addslashes($belief_what) . "'
+                , '" . addslashes($belief_by) . "'
+                , '" . addslashes($msg_message) . "'
+                , '" . addslashes($parent_id) . "'
+              " . addslashes($replyto_id) . "
                 )";
 
     return $sqlquery;

@@ -33,7 +33,7 @@ if(empty($_POST['msg_purpose'])) {
 <form method="post" action="">
   <div>
   <label>From:</label>
-    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo $msg->to ?>" />
+    <input type="text" name="msg_from" id="msg_from" readonly="readonly" value="<?php echo htmlspecialchars($msg->to); ?>" />
 
   </div>
 
@@ -60,7 +60,7 @@ if(empty($_POST['msg_purpose'])) {
   <div>
     <label>Type:</label>
     <input type="text" name="msg_type" id="msg_type"
-    onChange="fieldChanged(this);" value="<?php echo $msg->type ?>"
+    onChange="fieldChanged(this);" value="<?php echo htmlspecialchars($msg->type); ?>"
     readonly="readonly" />
   </div>
 
@@ -86,7 +86,7 @@ if(empty($_POST['msg_purpose'])) {
 
   <div>
     <input type="hidden" name="action" value="process" />
-    <input type="hidden" name="message_id" value="<?php echo $message_id; ?>"/>
+    <input type="hidden" name="message_id" value="<?php echo htmlspecialchars($message_id); ?>"/>
     <input type="submit"  value="Forward Message" />
   </div>
   
@@ -117,12 +117,12 @@ if ($mailbag) {
      $msg->consent = (empty($msg->consent)) ? 'N/A' : $msg->consent;
 
      echo "<tr>";
-     echo "<td>" . $msg->to . "</td>";
-     echo "<td>" . $msg->from . "</td>";
-     echo "<td>" . $msg->about . "</td>";
-     echo "<td>" . $msg->type . "</td>";
-     echo "<td>" . $msg->purpose . "</td>";
-     echo "<td>" . $msg->message . "</td>";
+     echo "<td>" . htmlspecialchars($msg->to) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->from) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->about) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->type) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->purpose) . "</td>";
+     echo "<td>" . htmlspecialchars($msg->message) . "</td>";
      echo "</tr>";
   }
   echo "</table>";

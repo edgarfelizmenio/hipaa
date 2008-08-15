@@ -29,7 +29,7 @@
     <input type="hidden"
 	   name="msg_from"
 	   id="msg_from"
-	   value="<?php echo $_SESSION['username']; ?>" />
+	   value="<?php echo htmlspecialchars($_SESSION['username']); ?>" />
     
   <div>
     <label>About:</label>

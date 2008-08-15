@@ -33,5 +33,5 @@ include_once(INC_PATH . 'functions.php');
 $hmsg = new Message();
 $db = new ezSQL_mysql(DB_USER,DB_PASS,DB_NAME, DB_HOST);
 $prolog = new Prolog(HIPAA_PATH, XSB_BIN, POLICY_FILE);
-//$prolog = new Prolog("/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/HIPAA/", "/afs/ir.stanford.edu/users/s/t/stevetan/cgi-bin/hipaa/XSB/bin/xsb", "shh.pl");
+
 ?>
