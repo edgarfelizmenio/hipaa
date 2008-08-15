@@ -80,34 +80,6 @@ $toEvaluate = implode(',',$evalVars);
 
 $query = "pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,$mConsent,$mBelief))";
 echo $prolog->getPossibleVals($evalVars, $query, 'filter_var_any');
-exit;
 
-$prologCall = "\"setof(t($toEvaluate), $query, L).\"";
-// results will return properly formatted return value for use
-
-$results = shell_exec("sh ./getJSON $prologCall");
-//$prolog->ask
-// give the JSON values back to caller
-echo $results;
-
-
-/*
-Sample JSON results if they had provided a value for msg_to
-Thus they will get results for Mfrom and Mpurpose
-
-{Mfrom: {identifier: "name",
-	    items: [{name: "doctor"},
-		    {name: "nurse"},
-		    {name: "police"}]
-	 },
- Mpurpose: {identifier: "name",
-	     items: [{name: "create_deidentified_info"},
-		     {name: "healthCare_operations"},
-		     {name: "determine_legal_options"}]
-            }
-}
-
-
-*/
 
 ?>
