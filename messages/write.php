@@ -104,7 +104,8 @@ if($action == 'process') {
     Each time a selection is chosen in the form, a query is sent to prolog
     to determine the allowable values for each unselected item.  The items
     that aren't allowed are then highlighted red to indicate that choosing
-    them would violate HIPAA in some way.
+    them would violate HIPAA in some way.  Try filling out the 'To' and
+    'About' fields and see what fields are available in the 'Purpose' field
   </p>
 
   <p>
