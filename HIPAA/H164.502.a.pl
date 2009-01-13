@@ -73,4 +73,5 @@ required_by_164_502_a_2_ii(A):-
    permitted_by_160_C(A),
    writeln('HIPAA rule 164_502_a_2_ii;').
 
-
+forbidden_by_164_502_a(A) :-
+ fail.

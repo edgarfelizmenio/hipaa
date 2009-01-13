@@ -257,6 +257,14 @@ is_consentedby_about(A) :-
   is_msg_consented(A,X).
 
 %%%%%%%%%%%%% BELIEF
+is_belief_from_lawfulBusinessAssociate(A, Y) :-
+  msg_from(A, X),
+  has_msg_belief(A, Y, lawful_business_associate, X).
+
+is_belief_to_lawfulBusinessAssociate(A, Y) :-
+  msg_to(A, X),
+  has_msg_belief(A, Y, lawful_business_associate, X).
+
 is_belief_from_unlawfulCoveredEntity(A, Y) :-
   msg_from(A, X),
   has_msg_belief(A, Y, unlawful_covered_entity, X).

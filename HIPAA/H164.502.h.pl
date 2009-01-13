@@ -11,4 +11,6 @@ permitted_by_164_502_h(A) :-
   writeln('HIPAA rule 164_502_h;').
 
 
+forbidden_by_164_502_h(A) :-
+  fail.
 

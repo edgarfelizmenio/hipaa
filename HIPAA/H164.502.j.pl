@@ -55,3 +55,5 @@ permitted_by_164_502_j_2_i(A) :-
 permitted_by_164_502_j_2_ii(A) :-
   permitted_by_164_512_f_2_i(A).
 
+forbidden_by_164_502_j(A) :-
+  fail.

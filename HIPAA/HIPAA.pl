@@ -64,12 +64,27 @@
 %% There is just this one Covered Entity!
 
 %%permitted_by_HIPAA(A):-
+
 pbh(A):-
+  cwh(A).
+  %per(A).
+
+per(A):-
   (permitted_by_164_502(A);
    permitted_by_164_506(A);
    permitted_by_164_510(A);
   %permitted_by_self(A);
   fail).
+
+cwh(A):-
+  (permitted_by_164_502(A);
+   permitted_by_164_506(A);
+   permitted_by_164_510(A);
+  %permitted_by_self(A);
+  fail),
+  \+ (forbidden_by_164_502(A);
+   forbidden_by_164_506(A);
+   forbidden_by_164_510(A)).
 
 permitted_by_self(A) :- 
   msg_from(A, X),

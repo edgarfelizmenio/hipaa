@@ -18,13 +18,14 @@ permitted_by_164_502_e(A):-
 permitted_by_164_502_e_1_i(A) :-
   is_phi(A),
   ( (is_from_coveredEntity(A),
-     is_to_businessAssociateOf(A));
+     is_to_businessAssociateOf(A),
+     is_belief_to_lawfulBusinessAssociate(A, X));
     (is_to_coveredEntity(A),
-     is_from_businessAssociateOf(A))
+     is_from_businessAssociateOf(A),
+     is_belief_from_lawfulBusinessAssociate(A, X))
   ),
   (is_for_createProtectedHealthInfo(A);
    is_for_receiveProtectedHealthInfo(A)),
-  %is_belief_lawfulBusinessAssociate(A),
   writeln('HIPAA rule 164_502_e_1_i;').
 
 excluded_164_502_e_1_ii(A):-
@@ -53,4 +54,5 @@ excluded_164_502_e_1_ii_c(A) :-
   is_from_governmentAgencyHealthPlan(A),
   writeln('HIPAA rule 164_502_e_1_ii_c;').
 
-  
+forbidden_by_164_502_e(A) :-
+  fail.

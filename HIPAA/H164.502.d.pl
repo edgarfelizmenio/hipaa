@@ -27,3 +27,5 @@ permitted_by_164_502_d_2_ii(A) :-
 % verify that the de-indentified information is not re-identified 
   fail.
 
+forbidden_by_164_502_d(A) :-
+ fail.

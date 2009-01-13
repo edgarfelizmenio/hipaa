@@ -17,10 +17,22 @@ permitted_by_164_502(A):-
   permitted_by_164_502_b(A);	%must satisfy
   permitted_by_164_502_c(A);
   permitted_by_164_502_d(A);
-  permitted_by_164_502_e(A);
+  permitted_by_164_502_e(A);	%must satisfy
   permitted_by_164_502_f(A);
   permitted_by_164_502_g(A);
   permitted_by_164_502_h(A);
   permitted_by_164_502_i(A);
   permitted_by_164_502_j(A).
+
+forbidden_by_164_502(A):-                
+  forbidden_by_164_502_a(A);
+  forbidden_by_164_502_b(A);
+  forbidden_by_164_502_c(A);
+  forbidden_by_164_502_d(A);
+  forbidden_by_164_502_e(A);
+  forbidden_by_164_502_f(A);
+  forbidden_by_164_502_g(A);
+  forbidden_by_164_502_h(A);
+  forbidden_by_164_502_i(A);
+  forbidden_by_164_502_j(A).
 

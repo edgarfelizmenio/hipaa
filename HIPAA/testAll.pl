@@ -39,7 +39,7 @@ business_associate(ba, ce).
 
 in_relation(patient, ce3).
 
-
+relationship(mom,x,y).
 
 
 t :-
@@ -166,7 +166,9 @@ t_164_502_b_1 :-
 
 t_164_502_b_2_ia :-
    pbh(a(hcp, null, null, null, treatment,null, null,null)),
+   writeln('t_164_502_b_2_ia passed'),
    not(pbh(a(hcp, null, null, null, null,null, null,null))),
+   writeln('t_164_502_b_2_ia passed'),
    not(pbh(a(null, null, kid, null, treatment,null, null,null))),
    writeln('t_164_502_b_2_ia passed').
 
@@ -204,7 +206,8 @@ t_164_502_d_1 :-
    not(pbh(a(patient, ce, null, phi, create_deidentified_info, null, null, null))),
    not(pbh(a(ba, patient, null, phi, create_deidentified_info, null, null, null))),
    not(pbh(a(ba, ce, null, null, create_deidentified_info, null, null, null))),
-   not(pbh(a(ba, ce, null, phi, null, null, null, null))).
+   not(pbh(a(ba, ce, null, phi, null, null, null, null))),
+  writeln('t_164_502_d_1 passed').
 
 
 
@@ -214,7 +217,7 @@ t_164_502_d_2 :-
 
 
 t_164_502_e_ia :-
-  pbh(a(ba, ce, null, phi, create_protected_health_info, null, null, null)),
+  pbh(a(ba, ce, null, phi, create_protected_health_info, null, null, b(ce, lawful_business_associate, ba))),
   not(pbh(a(lawyer, ce, null, phi, create_protected_health_info, null, null, null))),
   not(pbh(a(ba, lawyer, null, phi, create_protected_health_info, null, null, null))),
   not(pbh(a(ba, ce, null, null, create_protected_health_info, null, null, null))),
@@ -223,7 +226,7 @@ t_164_502_e_ia :-
  
 
 t_164_502_e_ib :-
-  pbh(a(ce, ba, null, phi, create_protected_health_info, null, null, null)),
+  pbh(a(ce, ba, null, phi, create_protected_health_info, null, null, b(ce, lawful_business_associate, ba))),
   not(pbh(a(lawyer, ba, null, phi, create_protected_health_info, null, null, null))),
   not(pbh(a(ce, lawyer, null, phi, create_protected_health_info, null, null, null))),
   not(pbh(a(ce, ba, null, null, create_protected_health_info, null, null, null))),
@@ -231,23 +234,24 @@ t_164_502_e_ib :-
   writeln('164_502_e_ib passed').
 
 t_164_502_e_ic :-
-  pbh(a(ba, ce, null, phi, receive_protected_health_info, null, null, null)),
+  pbh(a(ba, ce, null, phi, receive_protected_health_info, null, null, b(ce, lawful_business_associate, ba))),
   not(pbh(a(lawyer, ce, null, phi, receive_protected_health_info, null, null, null))),
   not(pbh(a(ba, lawyer, null, phi, receive_protected_health_info, null, null, null))),
   not(pbh(a(ba, ce, null, null, receive_protected_health_info, null, null, null))),
   writeln('164_502_e_ic passed').
 
 t_164_502_e_id :-
-  pbh(a(ce, ba, null, phi, receive_protected_health_info, null, null, null)),
+  pbh(a(ce, ba, null, phi, receive_protected_health_info, null, null, b(ce, lawful_business_associate, ba))),
   not(pbh(a(lawyer, ba, null, phi, receive_protected_health_info, null, null, null))),
   not(pbh(a(ce, lawyer, null, phi, receive_protected_health_info, null, null, null))),
-  not(pbh(a(ce, ba, null, null, receive_protected_health_info, null, null, null))).
+  not(pbh(a(ce, ba, null, null, receive_protected_health_info, null, null, null))),
+  writeln('164_502_e_id passed').
 
 
 
 
 t_164_502_e_ii_a :-
-  pbh(a(hcp, ce, patient, phi, treatment, null, null,null)),
+  pbh(a(hcp, ce, patient, phi, treatment, null, null, null)),
   writeln('t_164_502_e_ii_a passed').
 
 t_164_502_e_ii_b :-  
@@ -275,7 +279,8 @@ t_164_502_g_2 :-
   pbh(a(null,elder, patient, null, null, null, null, null)),
   not(pbh(a(null,null, patient, null, null, null, null, null))),
   not(pbh(a(null,elder, null, null, null, null, null, null))),
-  not(pbh(a(minors_rep, null, minor, null, null, null, null, null))).
+  not(pbh(a(minors_rep, null, minor, null, null, null, null, null))),
+  writeln('t_164_502_g_2 passed').
 
 
 t_164_502_g_3_ia :- 
@@ -304,7 +309,8 @@ t_164_502_g_4 :-
   pbh(a(null, executor, dead, null, null, null, null, null)),
   not(pbh(a(null, patient, dead, null, null, null, null, null))),
   not(pbh(a(null, executor, patient, null, null, null, null, null))),
-  not(pbh(a(alives_rep, null, alive, null, null, null, null, null))).
+  not(pbh(a(alives_rep, null, alive, null, null, null, null, null))),
+  writeln('t_164_502_g_4 passed').
 
 
 t_164_502_g_5 :- 
@@ -333,80 +339,52 @@ true.
 
 
 t_164_502_j_1_ii_Aa :- 
-
-pbh(a(hoa, ba, null, null, null, null, null, 	b(ce,unlawful_covered_entity,ba))),
-
-not(pbh(a(null, ba, null, null, null, null, null, 	b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(null, nurse, null, null, null, null, null, 	b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(hoa, ba, null, null, null, null, null, 	b(null,unlawful_covered_entity,ba)))),
-
-not(pbh(a(hoa, ba, null, null, null, null, null, 	b(ce,unlawful_covered_entity,null)))).
+  pbh(a(hoa, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba))),
+  not(pbh(a(null, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(null, nurse, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(hoa, ba, null, null, null, null, null, b(null,unlawful_covered_entity,ba)))),
+  not(pbh(a(hoa, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,null)))),
+  writeln('t_164_502_j_1_ii_Aa passed').
 
 
 t_164_502_j_1_ii_Ab :- 
-
-pbh(a(pha, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,ba))),
-
-not(pbh(a(null, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(pha, patient, null, null, investigate, null, null, b(ce,unlawful_covered_entity,patient)))),
-
-not(pbh(a(pha, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce2,unlawful_covered_entity,ba)))),
-
-not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce,null,ba)))),
-
-not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,null)))).
+  pbh(a(pha, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,ba))),
+  not(pbh(a(null, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(pha, patient, null, null, investigate, null, null, b(ce,unlawful_covered_entity,patient)))),
+  not(pbh(a(pha, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce2,unlawful_covered_entity,ba)))),
+  not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce,null,ba)))),
+  not(pbh(a(pha, ba, null, null, investigate, null, null, b(ce,unlawful_covered_entity,null)))),
+  writeln('t_164_502_j_1_ii_Ab passed').
 
 
 
 t_164_502_j_1_ii_Ac :- 
-
-pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,ba))),
-
-not(pbh(a(null, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,ba)))), 
-
-not(pbh(a(hcao, patient, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,patient)))), 
-
-not(pbh(a(hcao, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))), 
-
-not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce2,unlawful_covered_entity,ba)))), 
-
-not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,patient)))), 
-
-not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,null,patient)))).
+  pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,ba))),
+  not(pbh(a(null, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,ba)))), 
+  not(pbh(a(hcao, patient, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,patient)))), 
+  not(pbh(a(hcao, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))), 
+  not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce2,unlawful_covered_entity,ba)))), 
+  not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,unlawful_covered_entity,patient)))), 
+  not(pbh(a(hcao, ba, null, null, standards_failure_misconduct, null, null, b(ce,null,patient)))),
+  writeln('t_164_502_j_1_ii_Ac passed').
 
 
 t_164_502_j_1_ii_B :- 
-
-pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,ba))),
-
-not(pbh(a(null, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(lawyer, patient, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,patient)))),
-
-not(pbh(a(lawyer, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
-
-not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,patient)))),
-
-not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce2,unlawful_covered_entity,ba)))),
-
-not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,null,ba)))).
+  pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,ba))),
+  not(pbh(a(null, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(lawyer, patient, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,patient)))),
+  not(pbh(a(lawyer, ba, null, null, null, null, null, b(ce,unlawful_covered_entity,ba)))),
+  not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,unlawful_covered_entity,patient)))),
+  not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce2,unlawful_covered_entity,ba)))),
+  not(pbh(a(lawyer, ba, null, null, determining_legal_options, null, null, b(ce,null,ba)))),
+  writeln('t_164_502_j_1_ii_B passed').
 
 
 t_164_502_j_2 :- 
   %pbh(a(cop, doctor, thief, phi, null, null, null)).
   true.
    %512 not implemented
-
-
-
-
-
-
 
 t_164_506_ac1a :-
   %pbh(a(nurse, doctor, patient, phi, payment, null, null)).
@@ -450,41 +428,39 @@ t_164_506_c_1a :-
   pbh(a(doctor, nurse, patient, phi, treatment, null, null,null)),
   not(pbh(a(secr, nurse, patient, null, treatment, null, null,null))),
   not(pbh(a(secr, nurse, patient, phi, null, null, null,null))),
-  not(pbh(a(secr, lawyer, patient, phi, treatment, null, null,null))).
-
-
-
+  not(pbh(a(secr, lawyer, patient, phi, treatment, null, null,null))),
+  writeln('t_164_502_c_1a passed').
 
 t_164_506_c_1b :-
   pbh(a(doctor, nurse, patient, phi, payment, null, null,null)),
   not(pbh(a(secr, nurse, patient, null, payment, null, null,null))),
-  not(pbh(a(secr, lawyer, patient, phi,payment, null, null,null))).
+  not(pbh(a(secr, lawyer, patient, phi,payment, null, null,null))),
+  writeln('t_164_502_c_1b passed').
 
 t_164_506_c_1c :-
   pbh(a(doctor, nurse, patient, phi, healthCare_operations, null, null,null)),
   not(pbh(a(secr, nurse, patient, null, healthCare_operations, null, null,null))),
-  not(pbh(a(secr, lawyer, patient, phi,healthCare_operations, null, null,null))).
+  not(pbh(a(secr, lawyer, patient, phi,healthCare_operations, null, null,null))),
+  writeln('t_164_502_c_1c passed').
 
 t_164_506_c_2 :-
   pbh(a(hcp, null, patient, phi, treatment, null, null,null)),
   not(pbh(a(hcp, null, patient, phi, null, null, null,null))),
-  not(pbh(a(secr, null, patient, phi, treatment, null, null,null))).
+  not(pbh(a(secr, null, patient, phi, treatment, null, null,null))),
+  writeln('t_164_502_c_2 passed').
 
 t_164_506_c_3a :-
   pbh(a(hcp, null, null, phi, payment, null, null, null)),
   not(pbh(a(hcp, null, null, phi, null, null, null, null))),
-  not(pbh(a(lawyer, null, patient, phi, payment, null, null, null))).
-
-
-
-
-
+  not(pbh(a(lawyer, null, patient, phi, payment, null, null, null))),
+  writeln('t_164_502_3_3a passed').
 
 t_164_506_c_3b :-
   pbh(a(ce2, null, patient, phi, payment, null, null,null)),
   not(pbh(a(ce2, null, patient, null, payment, null, null,null))),
   not(pbh(a(ce2, null, patient, phi, null, null, null,null))),
-  not(pbh(a(assistant, null, patient, phi, payment, null, null,null))).
+  not(pbh(a(assistant, null, patient, phi, payment, null, null,null))),
+  writeln('t_164_506_c_3b passed').
 
 
 % c4 currently not working since you need a list of purposes. Right now it's just one purpose.

@@ -77,3 +77,5 @@ permitted_by_164_506_c_4_ii(A) :-
 permitted_by_164_506_c_5(A) :-
   debug('164.506_c_5: Not Implemented yet;').
 
+forbidden_by_164_506(A) :-
+  fail.
