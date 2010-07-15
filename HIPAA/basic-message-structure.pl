@@ -69,4 +69,7 @@ is_msg_about_to_inRelation(a(Y,_,X,_,_,_,_,_)):-
   in_relation(X, Y).
 
 
+%is_msg_minimum_necessary(A, B) :-
+%msg_from(A),
+%consent_from_covered_entity(B).
   

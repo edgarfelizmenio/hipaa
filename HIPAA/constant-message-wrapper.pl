@@ -373,3 +373,8 @@ in_role_closures(X, Y) :-
 
 
 
+is_minimum_necessary(A) :-
+  is_msg_minimum_necessary(A, yes).
+
+is_for_health_record_sale(A) :-
+  has_msg_purpose(A, health_record_sale).

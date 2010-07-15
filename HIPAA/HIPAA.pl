@@ -3,6 +3,7 @@
 :- ['H164.502.pl'].
 :- ['H164.506.pl'].
 :- ['H164.510.pl'].
+:- ['H1305.pl'].
 
 %%% HIPAA
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -66,6 +67,7 @@
 %%permitted_by_HIPAA(A):-
 
 pbh(A):-
+  %forbidden_by_13405_d(A).
   cwh(A).
   %per(A).
 
@@ -73,6 +75,7 @@ per(A):-
   (permitted_by_164_502(A);
    permitted_by_164_506(A);
    permitted_by_164_510(A);
+   permitted_by_13405_b(A);
   %permitted_by_self(A);
   fail).
 
@@ -84,7 +87,8 @@ cwh(A):-
   fail),
   \+ (forbidden_by_164_502(A);
    forbidden_by_164_506(A);
-   forbidden_by_164_510(A)).
+   forbidden_by_164_510(A);
+   forbidden_by_13405_d(A)).
 
 permitted_by_self(A) :- 
   msg_from(A, X),

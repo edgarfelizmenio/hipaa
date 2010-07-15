@@ -111,9 +111,13 @@ involved(dad,payment,kid).
 
 
 test :-
-  pbh(a(seattle_grace_hospital,sacred_heart_hospital,patient,phi,null,null,null,b(null,minimum_necessary_to_purpose,sacred_heart_hospital))).
+  writeln('First test;'),
+  pbh(a(seattle_grace_hospital,null,patient,phi,health_record_sale,null,null,b(null,minimum_necessary_to_purpose,sacred_heart_hospital))).
 test :-
+  writeln('Second test;'),
   pbh(a(ted,lavern,patient,phi,determining_legal_options,null,null,b(sacred_heart_hospital,unlawful_covered_entity,lavern))).
+test :-
+  pbh(a(seattle_grace_hospital,sacred_heart_hospital,patient,phi,null,null,null,b(null,minimum_necessary_to_purpose,sacred_heart_hospital))).
 test :-
   pbh(a(dr_jd,dr_elliot,patient,phi,treatment,null,null,null)).
 test :-
