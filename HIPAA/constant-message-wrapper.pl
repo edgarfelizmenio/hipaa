@@ -169,6 +169,8 @@ is_about_present(A):- fail.
 is_about_in_capac_to_make_dec(A):- fail.
 %msg_about(A,Y), curr_state(Y, in_capac_to_make_decisions).
 
+is_for_health_record_sale(A) :-
+  has_msg_purpose(A, health_record_sale).
 
 
 
@@ -372,9 +374,7 @@ in_role_closures(X, Y) :-
   %in_relation(Z, Y).
 
 
+%%%%%%%%%%%%%%%%%MISC
 
 is_minimum_necessary(A) :-
   is_msg_minimum_necessary(A, yes).
-
-is_for_health_record_sale(A) :-
-  has_msg_purpose(A, health_record_sale).

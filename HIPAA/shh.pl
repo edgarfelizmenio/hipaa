@@ -2,6 +2,7 @@
 :- ['HIPAA.pl'].
 :- ['myfunc.pl'].
 inRole(sacred_heart_hospital, covered_entity).
+inRole(business_associate, covered_entity).
 
 inRole(chief_of_medicine, healthCare_provider).
 inRole(doctor, healthCare_provider).
