@@ -6,3 +6,6 @@ permitted_by_13405_b(A) :-
 forbidden_by_13405_d(A) :- 
   is_for_health_record_sale(A),
   writeln('HITECH rule 13405 forbids;').
+
+permitted_by_13405_e(A) :-
+  permitted_by_self(A).

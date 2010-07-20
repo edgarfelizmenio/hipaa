@@ -9,6 +9,8 @@ inRole(doctor, healthCare_provider).
 inRole(surgeon, healthCare_provider).
 inRole(intern, healthCare_provider).
 inRole(nurse, healthCare_provider).
+inRole(volunteer, healthCare_provider).
+inRole(trainee, healthCare_provider).
 
 inRole(dr_cox, doctor).
 inRole(dr_kelso, chief_of_medicine).
@@ -94,6 +96,12 @@ purpose( surgery, treatment).
 
 %business_assocate(X,Y):  Y is a business associate of X.
 business_associate(the_office, sacred_heart_hospital).
+business_associate(patient_safety_organization, sacred_heart_hospital).
+business_associate(subcontractor, business_associate).
+business_associate(health_information_exchange_organization, sacred_heart_hospital).
+business_associate(E-prescribing_gateway, sacred_heart_hospital).
+business_associate(regional_health_information_organization, sacred_heart_hospital).
+
 
 in_relation(mom, seattle_grace_hospital).
 

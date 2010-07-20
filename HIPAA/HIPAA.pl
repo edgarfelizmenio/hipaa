@@ -83,6 +83,7 @@ cwh(A):-
   (permitted_by_164_502(A);
    permitted_by_164_506(A);
    permitted_by_164_510(A);
+   permitted_by_13405_e(A);
   %permitted_by_self(A);
   fail),
   \+ (forbidden_by_164_502(A);
