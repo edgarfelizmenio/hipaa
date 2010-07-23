@@ -1,5 +1,5 @@
 %%Example system
-:- ['HIPAA.pl'].
+:- ['pbh.pl'].
 :- ['myfunc.pl'].
 inRole(sacred_heart_hospital, covered_entity).
 inRole(business_associate, covered_entity).
@@ -120,6 +120,8 @@ involved(dad,payment,kid).
 
 
 test :-
+  pbh(a(dr_jd,dr_elliot,patient,phi,treatment,null,null,null)).
+test :-
   writeln('First test;'),
   pbh(a(seattle_grace_hospital,null,patient,phi,health_record_sale,null,null,b(null,minimum_necessary_to_purpose,sacred_heart_hospital))).
 test :-
@@ -127,8 +129,6 @@ test :-
   pbh(a(ted,lavern,patient,phi,determining_legal_options,null,null,b(sacred_heart_hospital,unlawful_covered_entity,lavern))).
 test :-
   pbh(a(seattle_grace_hospital,sacred_heart_hospital,patient,phi,null,null,null,b(null,minimum_necessary_to_purpose,sacred_heart_hospital))).
-test :-
-  pbh(a(dr_jd,dr_elliot,patient,phi,treatment,null,null,null)).
 test :-
   pbh(a(mom,carla,kid,phi,null,null,null,null)).
 test :-

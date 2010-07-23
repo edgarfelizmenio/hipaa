@@ -1,9 +1,7 @@
 :- ['constant-message-wrapper.pl'].
 :- ['debug.pl'].
-:- ['H164.502.pl'].
-:- ['H164.506.pl'].
-:- ['H164.510.pl'].
-:- ['H1305.pl'].
+:- ['HIPAA/HIPAA.pl'].
+:- ['HITECH/HITECH.pl'].
 
 %%% HIPAA
 %%%%%%%%%%%%%%%%%%%%%%%% 
@@ -67,7 +65,6 @@
 %%permitted_by_HIPAA(A):-
 
 pbh(A):-
-  %forbidden_by_13405_d(A).
   cwh(A).
   %per(A).
 
@@ -75,7 +72,6 @@ per(A):-
   (permitted_by_164_502(A);
    permitted_by_164_506(A);
    permitted_by_164_510(A);
-   permitted_by_13405_b(A);
   %permitted_by_self(A);
   fail).
 
@@ -95,5 +91,3 @@ permitted_by_self(A) :-
   msg_from(A, X),
   msg_about(A, Y),
   X = Y.
-
-
