@@ -1,0 +1,19 @@
+#!/bin/bash
+
+time 
+mTo="doctor"
+mFrom="nurse"
+mAbout="kid"
+mPurpose="healthCare_operations"
+
+STR="pbh(a($mTo,$mFrom,$mAbout,phi,$mPurpose,null,null,null))."
+echo Running $STR
+echo $STR | ../XSB/bin/xsb -e "['shh.pl']."
+#echo Running $STR >> out
+#echo $STR | ~/bin/XSB/bin/xsb -e "['testCases.pl']." >> out
+
+#grep -B1 -w 'Running' out > outBasic 
+#grep -w 'yes' -B2 outBasic > outYes
+#grep -v 'payment' outYes > outNonPayment
+#grep -B1 -w 'Running' outNonPayment > outNoPayment
+
