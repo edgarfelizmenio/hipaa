@@ -1,0 +1,25 @@
+form div div { 
+    padding-left: 20px;
+    
+}
+
+form div { 
+    clear: left;
+}
+
+form div label { 
+    display: block;
+    float: left;
+    width: 150px;
+    clear: left;
+}
+
+form option { 
+              font-weight: 900
+ }
+
+.invalid {
+    color: red;
+    background-color: pink;
+           font-weight: normal;
+}
