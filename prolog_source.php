@@ -24,27 +24,35 @@
 
 		<div class="post">
 			<h1 class="title">Source Code</h1>
+			<h2 class="title">HIPAA</h2>
 			<div class="entry">
-				<p>&#167 <b><a href="display.php?fname=H164.502">164.502 <i>Uses and
+				<p>&#167 <b><a href="display.php?fname=HIPAA/H164.502">164.502 <i>Uses and
 				disclosure of protected health information</i></a></b>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.a"><b>164.502.a </b><i>Standard</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.b"><b>164.502.b </b><i>Standard: Minimum necessary</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.c"><b>164.502.c </b><i>Standard: Uses and disclosure of
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.a"><b>164.502.a </b><i>Standard</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.b"><b>164.502.b </b><i>Standard: Minimum necessary</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.c"><b>164.502.c </b><i>Standard: Uses and disclosure of
 				protected health information subject to an agreed upon restriction</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.d"><b>164.502.d </b><i>Standard: Uses and disclosures of
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.d"><b>164.502.d </b><i>Standard: Uses and disclosures of
 				de-identified protected health information</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.e"><b>164.502.e </b><i>Standard: disclosure to business
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.e"><b>164.502.e </b><i>Standard: disclosure to business
 				associates</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.f"><b>164.502.f </b><i>Standard: Deceased individuals</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.g"><b>164.502.g </b><i>Standard: Personal representatives</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.h"><b>164.502.h </b><i>Standard: Confidential communication</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.i"><b>164.502.i </b><i>Standard: Uses and disclosure consistent
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.f"><b>164.502.f </b><i>Standard: Deceased individuals</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.g"><b>164.502.g </b><i>Standard: Personal representatives</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.h"><b>164.502.h </b><i>Standard: Confidential communication</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.i"><b>164.502.i </b><i>Standard: Uses and disclosure consistent
 				with notice</i></a></blockquote>
-				<blockquote>&#167 <a href="display.php?fname=H164.502.j"><b>164.502.j </b><i>Standard: Disclosures by whistleblowers
+				<blockquote>&#167 <a href="display.php?fname=HIPAA/H164.502.j"><b>164.502.j </b><i>Standard: Disclosures by whistleblowers
 				and workforce member crime victims</i></a></blockquote>
 				</p>
-				<p>&#167 <b><a href="display.php?fname=H164.506">164.506 <i>Uses and
+				<p>&#167 <b><a href="display.php?fname=HIPAA/H164.506">164.506 <i>Uses and
 				disclosure to carry out treatment, payment, or health care operations. </i></a></b></p>
+			</div>
+			<h2 class="title">HITECH</h2>
+			<div class="entry">
+				<p>&#167 <b><a href="display.php?fname=HITECH/H1305">1305 <i></i></a></b>
+				<blockquote>&#167 <a href="display.php?fname=HITECH/H1305.b"><b>1305.b </b><i>Standard</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HITECH/H1305.d"><b>1305.d </b><i>Standard</i></a></blockquote>
+				<blockquote>&#167 <a href="display.php?fname=HITECH/H1305.e"><b>1305.e </b><i>Standard</i></a></blockquote>
 			</div>
 		</div>
 </div>	

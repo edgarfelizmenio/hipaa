@@ -4,7 +4,7 @@
    	<?php 
       $fn = $_GET['fname'];
       $fLaw = "./Law/" . $fn . ".txt";
-      $fPL = "./formalization/HIPAA/" . $fn . ".pl"; 
+      $fPL = "./formalization/" . $fn . ".pl"; 
 	  ini_set('auto_detect_line_endings', true);
    	?>
 	</form>
