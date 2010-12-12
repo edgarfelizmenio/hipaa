@@ -16,11 +16,14 @@
 	<div class="entry"> 
 	<?php 
 		ini_set('auto_detect_line_endings', true);
-      	$fp = fopen($fPL, "r");
-		while(!feof($fp))
+		if (file_exists($fPL))
+		{
+      $fp = fopen($fPL, "r");
+		  while(!feof($fp))
 	    {
         	echo fgets($fp, 4096) . "<br /> "; 
-      	}
+     	}
+		}
      ?>
      </div>
 
