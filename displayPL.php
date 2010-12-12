@@ -2,7 +2,7 @@
 
 	<form name=fileform method=GET action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
    	<?php 
-      $fn = $_GET['fname'];
+      $fn = htmlspecialchars($_GET['fname']);
       $fPL = "./formalization/" . $fn . ".pl"; 
    	?>
 	</form>

@@ -118,6 +118,8 @@ loco_parentis(null, null).
 relationship(mom, relative, teen).
 involved(dad,payment,kid). 
 
+test :-
+  pbh(a(dr_cox,carla,carla,phi,create_deidentified_info,null,null,null)).
 
 test :-
   pbh(a(dr_jd,dr_elliot,patient,phi,treatment,null,null,null)).

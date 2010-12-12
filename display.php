@@ -2,7 +2,7 @@
 
 	<form name=fileform method=GET action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>">
    	<?php 
-      $fn = $_GET['fname'];
+      $fn = htmlspecialchars($_GET['fname']);
       $fLaw = "./Law/" . $fn . ".txt";
       $fPL = "./formalization/" . $fn . ".pl"; 
 	  ini_set('auto_detect_line_endings', true);
