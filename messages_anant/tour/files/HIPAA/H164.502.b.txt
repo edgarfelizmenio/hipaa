@@ -1,0 +1,26 @@
+
+(b) Standard: Minimum necessary
+    (1) Minimum necessary applies. When using or
+disclosing protected health information or when
+requesting protected health information from another
+covered entity, a covered entity must make reasonable
+efforts to limit protected health information to the
+minimum necessary to accomplish the intended
+purpose of the use, disclosure, or request.
+    (2) Minimum necessary does not apply. This
+requirement does not apply to:
+        (i) Disclosures to or requests by a health care
+provider for treatment;
+        (ii) Uses or disclosures made to the individual, as
+permitted under paragraph (a)(1)(i) of this section or
+as required by paragraph (a)(2)(i) of this section;
+        (iii) Uses or disclosures made pursuant to an
+authorization under §164.508;
+        (iv) Disclosures made to the Secretary in
+accordance with subpart C of part 160 of this
+subchapter;
+        (v) Uses or disclosures that are required by law, as
+described by §164.512(a); and
+        (vi) Uses or disclosures that are required for
+compliance with applicable requirements of this
+subchapter.

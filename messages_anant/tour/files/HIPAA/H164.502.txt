@@ -1,0 +1,28 @@
+
+164.502 Uses and disclosures of protected health information: general rules.
+   (a) Standard. A covered entity may not use or
+       disclose protected health information, except as
+       permitted or required by this subpart or by subpart C
+       of part 160 of this subchapter.
+   (b) Standard: Minimum necessary
+   (c) Standard: Uses and disclosures of protected
+       health information subject to an agreed upon
+       restriction. 
+   (d) Standard: Uses and disclosures of
+       de-identified protected health information.
+   (e)(1) Standard: Disclosures to business
+          associates.
+      (2) Implementation specification: documentation.
+   (f) Standard: Deceased individuals. 
+   (g)(1) Standard: Personal representatives.
+      (2) Implementation specification: adults and
+          emancipated minors.
+   (h) Standard: Confidential communications.
+   (i) Standard: Uses and disclosures consistent with
+       notice.
+   (j) Standard: Disclosures by whistleblowers and
+       workforce member crime victims
+
+
+[65 FR 82802, Dec. 28, 2000, as amended at 67 FR
+53267, Aug. 14, 2002]

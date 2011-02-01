@@ -1,0 +1,29 @@
+
+(d) Standard: Uses and disclosures of
+de-identified protected health information.
+    (1) Uses and disclosures to create de-identified
+information. A covered entity may use protected
+health information to create information that is not
+individually identifiable health information or
+disclose protected health information only to a
+business associate for such purpose, whether or not
+the de-identified information is to be used by the
+covered entity.
+    (2) Uses and disclosures of de-identified
+information. Health information that meets the
+standard and implementation specifications for
+de-identification under §164.514(a) and (b) is
+considered not to be individually identifiable health
+information, i.e., de-identified. The requirements of
+this subpart do not apply to information that has been
+de-identified in accordance with the applicable
+requirements of §164.514, provided that:
+        (i) Disclosure of a code or other means of record
+identification designed to enable coded or otherwise
+de-identified information to be re-identified
+constitutes disclosure of protected health information;
+and
+        (ii) If de-identified information is re-identified, a
+covered entity may use or disclose such re-identified
+information only as permitted or required by this
+subpart.

@@ -1,0 +1,35 @@
+
+(e)(1) Standard: Disclosures to business
+associates.
+        (i) A covered entity may disclose protected health
+information to a business associate and may allow a
+business associate to create or receive protected
+health information on its behalf, if the covered entity
+obtains satisfactory assurance that the business
+associate will appropriately safeguard the
+information.
+        (ii) This standard does not apply:
+            (A) With respect to disclosures by a covered
+entity to a health care provider concerning the
+treatment of the individual;
+            (B) With respect to disclosures by a group health
+plan or a health insurance issuer or HMO with respect
+to a group health plan to the plan sponsor, to the
+extent that the requirements of §164.504(f) apply and
+are met; or
+            (C) With respect to uses or disclosures by a health
+plan that is a government program providing public
+benefits, if eligibility for, or enrollment in, the health
+plan is determined by an agency other than the agency
+administering the health plan, or if the protected
+health information used to determine enrollment or
+eligibility in the health plan is collected by an agency
+other than the agency administering the health plan,
+and such activity is authorized by law, with respect to
+the collection and sharing of individually identifiable
+health information for the performance of such
+functions by the health plan and the agency other than
+the agency administering the health plan.
+        (iii) A covered entity that violates the satisfactory
+assurances it provided as a business associate of
+another covered entity will be in noncom
