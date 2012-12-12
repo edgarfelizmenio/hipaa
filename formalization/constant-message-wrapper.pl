@@ -338,7 +338,7 @@ in_type(name, phi).
 in_type(loc,phi).
 in_type(cond,phi).
 in_type(relig,phi).
-in_tyoe(pres_medsupp_xray_etc,phi).
+in_type(pres_medsupp_xray_etc,phi).
 
 
 in_type_closures(X,X).
