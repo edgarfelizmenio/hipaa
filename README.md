@@ -12,5 +12,5 @@ We translate the HIPAA regulation into Prolog one statement at a time. You can v
 
 ## Academic Papers
 
-* Privacy and Utility in Business Processes. Adam Barth, Anupam Datta, John C. Mitchell, and Sharada Sundaram. In Proc. of the 20th IEEE Computer Security Foundations Symposium (CSF 2007)
-* Privacy and Contextual Integrity: Framework and Applications. Adam Barth, Anupam Datta, John C. Mitchell, and Helen Nissenbaum. In Proc. of the 27th IEEE Symposium on Security and Privacy (Oakland 2006)
+* [Privacy and Utility in Business Processes](http://ieeexplore.ieee.org/document/4271655/). Adam Barth, Anupam Datta, John C. Mitchell, and Sharada Sundaram. In Proc. of the 20th IEEE Computer Security Foundations Symposium (CSF 2007)
+* [Privacy and Contextual Integrity: Framework and Applications](http://ieeexplore.ieee.org/document/1624011/). Adam Barth, Anupam Datta, John C. Mitchell, and Helen Nissenbaum. In Proc. of the 27th IEEE Symposium on Security and Privacy (Oakland 2006)
